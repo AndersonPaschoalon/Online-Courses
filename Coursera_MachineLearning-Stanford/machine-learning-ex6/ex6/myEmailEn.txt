@@ -1,0 +1,26 @@
+Hi!
+
+I've checked the latest Tempest logs from os-odl_l2-nofeature-ha scenario on ericsson-pod2:
+
+Tempest environment:
+Installer: fuel
+Scenario: os-odl_l2-nofeature-ha
+Node: ericsson-pod2
+Date: Mon Feb 15 02:55:57 UTC 2016
+
+(http://artifacts.opnfv.org/logs/functest/ericsson-pod2/brahmaputra/2016-02-15_05-12-19/brahmaputra/tempest/tempest.log)
+
+There seems to be only one common reason for all the 12 failed test cases: there is no enough available floating IP addresses in the used external (public) network (the network with UUID 10c5376f-ef57-4aa2-8a53-c29d7057646d):
+
+======
+Totals
+======
+Ran: 195 tests in 300.0000 sec.
+
+    Passed: 180
+    Skipped: 3
+    Expected Fail: 0
+    Unexpected Success: 0
+    Failed: 12
+    Sum of execute time for each test: 979.4469 sec.
+
