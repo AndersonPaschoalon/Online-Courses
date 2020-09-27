@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+// hide and show
+$(document).ready(function(){
+
+    console.log("I'm here!")
+    console.log("$(#hide-div).att(style)="+
+        $("#hide-checkbox").attr("style"));
+    console.log("$(#hide-checkbox).att(style)="+
+        $("#hhide-checkbox").attr("checked"));  
+    $("#hide-checkbox").click(function(){
+        if ( $(this).is(':checked') )
+            $("#hide-div").show()
+        else
+            $("#hide-div").hide()
+    });
+    // prop vs attr
+    $("#checkbox-1").click( function(){ 
+    $("#debug1").html("DEFATULT VALUE");
+        if($("#checkbox-1").prop("checked"))
+            $("#debug1").html("checked is TRUE");
+        else
+            $("#debug1").html("checked is FLASE");
+    });
+});
+
+</script>
+</head>
+<body>
+
+<!--hide and show-->
+<div id ="hide-div" style="display:visible">
+Div to hide -> afdsafasfgasagaggfdagfda
+</div>
+hide: <input type="checkbox" id="hide-checkbox" />
+
+
+<!--prop vs attr-->
+<br>--------<br><br>
+prop vs attr: <input type="checkbox" id="checkbox-1" />
+<p id="debug1"></p>
+</body>
+</html>
