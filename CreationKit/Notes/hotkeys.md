@@ -7,8 +7,9 @@
 |Ctrl D     | Duplicar Objeto   
 |F          | Objeto vai até o chão
 |Ctrl F     | Search and replace object   
-|           | 
-|           |   
+|11         | Esconde objetos selecionados 
+|Alt 1      | traz de volta objetos selecionados  
+| 0          |   Visão ortografica
 
 
 

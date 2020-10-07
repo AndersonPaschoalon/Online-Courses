@@ -1,1 +1,0 @@
-Escala de objetos: Nunca usar uma escala maior que 1.5 e menor que 0.5 para não causar degradação nas texturas. 
