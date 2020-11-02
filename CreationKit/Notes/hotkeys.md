@@ -37,31 +37,27 @@ w:  Navegar entre os modos de visualização da navmesh
 
 ## Comandos Uteis
 
-tim     Modo imortal, nenhum dano
+* Page Up and Page Down keys can be used to scroll up or down the Console gui
 
-tmg     God mode, status infinitos
-
-Useful Console Commands - These are indispensable for testing a custom quest to ensure it is functioning properly since almost all of what a quest does is behind the scenes.
-Open the console with the tildé (~)
-Commands contained in <brackets> indicates a variable that must be specified.
-Page Up and Page Down keys can be used to scroll up or down the Console gui
-
-getstage <quest ID> - returns the current stage of the quest
-movetoqt <quest ID> - moves you to the location of the current target of the quest, eg. where the map marker is pointing.
-setstage <quest ID> <stage #> - manually sets the stage of a quest. Won't help much if the quest hasn't yet begun.
-sqs <quest ID> - Shows quest stages in a quest and if a stage has been achieved.
-sqo - Shows a human friendly list of active and completed quest objectives for currently active quests.
-resetquest <questid> - Sets all quest stages in a quest to 0.
-coc <cell ID> - teleports the player to the cell specified.
-player.moveto <reference ID> - teleports the player to the reference specified, eg. an NPC or unique item.
-
+|Command                              | Description 
+|-------------------------------------|---------------------
+| `tim`                               | Modo imortal, nenhum dano
+|`tmg`                                |    God mode, status infinitos
+|`getstage <quest ID>`                | returns the current stage of the quest
+|`movetoqt <quest ID>`                | moves you to the location of the current target of the quest, eg. where the map marker is pointing.
+|`setstage <quest ID> <stage #>`      | manually sets the stage of a quest. Won't help much if the quest hasn't yet begun.
+|`sqs <quest ID>`                     | Shows quest stages in a quest and if a stage has been achieved.
+|`sqo`                                | Shows a human friendly list of active and completed quest objectives for currently active quests.
+|`resetquest <questid>`               | Sets all quest stages in a quest to 0.
+|`coc <cell ID>`                      | teleports the player to the cell specified.
+|`player.moveto <reference ID>`       | teleports the player to the reference specified, eg. an NPC or unique item.
+| `ShowQuestAliases <quest ID>`       | Show quest aliases
 
 
 ##  Items
+
 WorldObjects > Furniture
-
 TreasDraugrChest    Chest
-
 
 ImpTowerInHallDoor
 ImpHallWay01

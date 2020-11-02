@@ -1,8 +1,9 @@
+# 01. INTODUCTION 
+
 ## Tutorial Bethesda
 
 * Creation Kit Tutorial Series - Episode 1: Introduction to the Kit  
 https://www.youtube.com/watch?v=gDKivlGmia4&t=8s&ab_channel=BethesdaGameStudios
-
 
 * Creation Kit Tutorial Series - Episode 2: Basic Layout  
 https://www.youtube.com/watch?v=SO-OMWk0mQs&ab_channel=BethesdaGameStudios
@@ -143,25 +144,20 @@ https://www.youtube.com/watch?v=2H9FU-vM-DU&ab_channel=ArronDominion
 * [] Skyrim Creation Kit Scripting Series: Papyrus Tutorials - Events/Functions Part 15 - FuncArray Param
 https://www.youtube.com/watch?v=TdV2Z082O-A&t=12s&ab_channel=ArronDominion
 
-
 * [] Skyrim Creation Kit Scripting Series: Papyrus Tutorials - Events/Functions Part 16 - FuncArray Ret  
 https://www.youtube.com/watch?v=2P9qPYHmnR0&t=8s&ab_channel=ArronDominion
 
 * [] Skyrim Creation Kit Scripting Series: Papyrus Tutorials - Events/Functions Part 17 - Array Recurs  
 https://www.youtube.com/watch?v=7YafdpxJe6E&ab_channel=ArronDominion
 
-
 * [] Skyrim Creation Kit Scripting Series: Papyrus Tutorials - Events/Functions Part 18 - Funcs DefParam  
 https://www.youtube.com/watch?v=LKoxRzjdLho&t=13s&ab_channel=ArronDominion
-
 
 * [] Skyrim Creation Kit Tutorials - Overview  
 https://www.youtube.com/watch?v=57sjsF9XWvo&t=14s&ab_channel=ArronDominion
 
-
 * [] Skyrim Creation Kit Tutorials - Uploading Mods  
 https://www.youtube.com/watch?v=5j1NBDt2OzY&t=16s&ab_channel=ArronDominion
-
 
 * [] Skyrim Creation Kit Tutorials - Creating a Basic Ghost Follower  
 https://www.youtube.com/watch?v=HzVIamIAR0E&t=10s&ab_channel=ArronDominion
@@ -196,10 +192,8 @@ https://www.youtube.com/watch?v=F4psFXABBK0&ab_channel=ArronDominion
 * [] Additional Download Platform - Mod-Drop - New Upload Location  
 https://www.youtube.com/watch?v=On0kOeHCcaU&ab_channel=ArronDominion
 
-
 * [] Modding Update 3-27-2018 - Additional Platforms and Pneuma Manor Updates  
 https://www.youtube.com/watch?v=9CbuzOfkKiA&ab_channel=ArronDominion
-
 
 * [] Modding Update - 7-20-2018 - Current Progress and Other Updates  
 https://www.youtube.com/watch?v=Bey0TbXfOcU&ab_channel=ArronDominion
@@ -210,9 +204,31 @@ https://www.youtube.com/watch?v=L8yMAMbfm1o&ab_channel=ArronDominion
 
 ## TutorialsForSkyrim
 
-
 Skyrim Creation Kit Tutorial - Creating A Custom Quest  
 https://www.youtube.com/watch?v=4kXJ7BWQl-c&ab_channel=TutorialsForSkyrim
+
+# 02. THEMES
+
+## AI Packages
+
+* [OK] Skyrim Creation Kit Tutorial - Custom NPCs and AI Packages
+https://www.youtube.com/watch?v=gZHKyxzVvHo&ab_channel=TutorialsForSkyrim
+
+* [] Creation Kit Tutorial (AI Packages)
+https://www.youtube.com/watch?v=E3Nd8LXYRA0&t=1s&ab_channel=Darkfox127
+
+
+## NPCs
+
+* [] Creation Kit Tutorial (Custom NPC Dialogue)
+https://www.youtube.com/watch?v=XQMkVcekHUk&ab_channel=Darkfox127
+
+* [] Creation Kit (Detailed Followers Tutorial)
+https://www.youtube.com/watch?v=tLgSYzOaTnA&ab_channel=Darkfox127
+
+* [] Creation Kit (Followers Tutorial Advanced)
+https://www.youtube.com/watch?v=j4HkKToVtMc&ab_channel=Darkfox127
+
 
 
 
