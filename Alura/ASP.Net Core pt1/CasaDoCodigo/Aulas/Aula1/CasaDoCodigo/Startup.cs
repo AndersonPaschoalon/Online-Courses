@@ -13,10 +13,18 @@ namespace CasaDoCodigo
 {
     public class Startup
     {
-        public const bool USE_MIGRATIONS = true;
+        public enum DB_CREATION
+        {
+            USE_MIGRATIONS,
+            APPLICATION_CONTEXT,
+            DATA_SERVICE
+        }
+
+        private readonly DB_CREATION db_usage = DB_CREATION.DATA_SERVICE;
 
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 
@@ -28,6 +36,7 @@ namespace CasaDoCodigo
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddMvc();
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,14 +61,32 @@ namespace CasaDoCodigo
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
 
-            if (USE_MIGRATIONS)
+            switch (this.db_usage)
             {
-                serviceProvider.GetService<ApplicationContext>().Database.Migrate();
+                case DB_CREATION.USE_MIGRATIONS:
+                    {
+                        serviceProvider.GetService<ApplicationContext>().Database.Migrate();
+                        break;
+                    }
+                case DB_CREATION.APPLICATION_CONTEXT:
+                    {
+                        serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+                        break;
+                    }
+                case DB_CREATION.DATA_SERVICE:
+                    {
+                        //serviceProvider.GetService<DataService>().InitializeDB();
+                        serviceProvider.GetService<IDataService>().InitializeDB();
+                        break;
+                    }
+                default:
+                    {
+                        serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+                        break;
+                    }
+                
             }
-            else
-            {
-                serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
-            }
+
             
         }
     }
