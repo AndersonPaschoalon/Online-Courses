@@ -1,0 +1,4 @@
+﻿  utils.cpp
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anachronism used: qualifiers on reference are ignored
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anachronism used: qualifiers on reference are ignored
+  common.vcxproj -> C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\common.lib

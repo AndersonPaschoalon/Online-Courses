@@ -1,0 +1,2 @@
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\common.pdb
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\x64\Debug\common.pdb
