@@ -1,0 +1,22 @@
+﻿<Window x:Class="LabelDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LabelDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+
+        <Label Margin="16, 16, 16, 0" 
+               BorderThickness="1"
+               BorderBrush="Black">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="50" Source="https://raw.githubusercontent.com/AndersonPaschoalon/Wallpapers/master/Wilderness/mix1/2bfe9a4e72c787f17812dc49bb926f38ba3d20ccaad47c7422198e97fbdeaade.jpg"/>
+                <AccessText FontSize="32" Text="message"></AccessText>
+            </StackPanel>
+        </Label>
+        <TextBox   FontSize="32"></TextBox>
+
+    </StackPanel>
+</Window>

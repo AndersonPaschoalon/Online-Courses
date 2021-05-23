@@ -1,0 +1,14 @@
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\bin\Debug\GridDemo.exe.config
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\bin\Debug\GridDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\bin\Debug\GridDemo.pdb
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\MainWindow.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\App.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo_MarkupCompile.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo_MarkupCompile.lref
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\MainWindow.baml
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.g.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.Properties.Resources.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.csproj.GenerateResource.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.csproj.CoreCompileInputs.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\GridDemo\obj\Debug\GridDemo.pdb

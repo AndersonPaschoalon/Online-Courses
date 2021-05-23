@@ -1,0 +1,14 @@
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\bin\Debug\TextBlockDemo.exe.config
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\bin\Debug\TextBlockDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\bin\Debug\TextBlockDemo.pdb
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\MainWindow.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\App.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo_MarkupCompile.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo_MarkupCompile.lref
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\MainWindow.baml
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.g.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.Properties.Resources.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.csproj.GenerateResource.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.csproj.CoreCompileInputs.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\WpfHelloWorld\TextBlockDemo\obj\Debug\TextBlockDemo.pdb
