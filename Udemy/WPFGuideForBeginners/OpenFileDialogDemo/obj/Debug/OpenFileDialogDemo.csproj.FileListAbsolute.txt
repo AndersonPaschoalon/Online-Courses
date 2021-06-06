@@ -1,0 +1,14 @@
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\bin\Debug\OpenFileDialogDemo.exe.config
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\bin\Debug\OpenFileDialogDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\bin\Debug\OpenFileDialogDemo.pdb
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\MainWindow.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\App.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo_MarkupCompile.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo_MarkupCompile.lref
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\MainWindow.baml
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.g.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.Properties.Resources.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.csproj.GenerateResource.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.csproj.CoreCompileInputs.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\OpenFileDialogDemo\obj\Debug\OpenFileDialogDemo.pdb

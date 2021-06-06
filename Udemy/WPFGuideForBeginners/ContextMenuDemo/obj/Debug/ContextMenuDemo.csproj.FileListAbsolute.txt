@@ -1,0 +1,14 @@
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\MainWindow.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\App.g.cs
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo_MarkupCompile.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo_MarkupCompile.lref
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\bin\Debug\ContextMenuDemo.exe.config
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\bin\Debug\ContextMenuDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\bin\Debug\ContextMenuDemo.pdb
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\MainWindow.baml
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.g.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.Properties.Resources.resources
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.csproj.GenerateResource.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.csproj.CoreCompileInputs.cache
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.exe
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\ContextMenuDemo\obj\Debug\ContextMenuDemo.pdb
