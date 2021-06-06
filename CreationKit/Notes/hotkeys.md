@@ -1,4 +1,4 @@
-## Manipular objetos
+## Manipular objetos no creation kit
 |Key        | Descrição 
 |-----------|---------------------
 |T          | Visão Top-Down  
@@ -10,12 +10,6 @@
 |11         | Esconde objetos selecionados 
 |Alt 1      | traz de volta objetos selecionados  
 | 0          |   Visão ortografica
-
-
-
-
-
-
 
 
 ## Célula 
@@ -35,7 +29,7 @@ Static > Dungeons > Nordic > SmRooms > NorRmSm[...]
 w:  Navegar entre os modos de visualização da navmesh
 
 
-## Comandos Uteis
+## Comandos de COnsole Uteis
 
 * Page Up and Page Down keys can be used to scroll up or down the Console gui
 
@@ -52,6 +46,14 @@ w:  Navegar entre os modos de visualização da navmesh
 |`coc <cell ID>`                      | teleports the player to the cell specified.
 |`player.moveto <reference ID>`       | teleports the player to the reference specified, eg. an NPC or unique item.
 | `ShowQuestAliases <quest ID>`       | Show quest aliases
+
+##  Caminhos para Items
+
+Caminho para Quests 
+	Character > Quest
+Caminhos para Triggers
+
+Caminho para XMarkers
 
 
 ##  Items
