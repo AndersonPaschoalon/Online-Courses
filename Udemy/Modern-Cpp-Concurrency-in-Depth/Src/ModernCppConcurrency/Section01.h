@@ -30,6 +30,16 @@ public:
 	// 
 	static void s1_10_how_to_pass_parameters_to_a_thread();
 
+	//
+	static void s1_15_accumulate_explanation();
+
+	// 
+	static void s1_16_accumulate_implementation();
+
+	//
+	static void s1_17_local_storage();
+
+
 private:
 
 	static void printHeader(const char* title);

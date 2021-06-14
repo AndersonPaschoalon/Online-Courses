@@ -11,7 +11,7 @@ int main()
 	bool test03 = false;
 	bool test04 = false;
 	bool test05 = false;
-	bool test06 = true;
+	bool test06 = false;//bool test06 = true;
 	bool test07 = false;
 	bool test08 = false;
 	bool test09 = false;
@@ -26,6 +26,17 @@ int main()
 	if (test04) Section01::s1_07_join_and_detach_functions();
 	if (test05) Section01::s1_08_handle_join_in_exceptions();
 	if (test06) Section01::s1_10_how_to_pass_parameters_to_a_thread();
+
+
+
+	bool testA = false;
+	if (testA) Section01::s1_15_accumulate_explanation();
+	bool testB = false;
+	if (testB) Section01::s1_16_accumulate_implementation();
+
+	bool testC = true;
+	if (testC) Section01::s1_17_local_storage();
+
 
 
 }
