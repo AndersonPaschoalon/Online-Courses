@@ -30,6 +30,15 @@ public:
 	// 
 	static void s1_10_how_to_pass_parameters_to_a_thread();
 
+	//
+	static void s1_12_transfering_ownership_of_a_thread();
+
+	//
+	static void s1_13_usefull_functions();
+
+	// 
+	static void s1_15_parallel_accumulate();
+
 private:
 
 	static void printHeader(const char* title);

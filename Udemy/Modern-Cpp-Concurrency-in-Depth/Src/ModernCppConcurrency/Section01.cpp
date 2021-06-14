@@ -267,8 +267,111 @@ void func2_ref_01_10(int& x)
 	}
 }
 
+//
+// Section 01.12 Transfering ownership of a thread
+//
 
+void run_01_12();
+void foo_01_12();
+void bar_01_12();
 
+void run_01_12()
+{
+	std::thread thread_1(foo_01_12);
+	std::thread thread_2 = std::move(thread_1);
+	printf("Now, the object thread_1  foo_01_12 thread");
+
+	// implicit std::move happens here. it is equivalent to:
+	// thread_1 = std::move(std::thread(bar_01_12));
+	thread_1 = std::thread(bar_01_12);
+	printf("Now, the object thread_1 is managing bar_01_12 thread, and thread_1 is managing foo_01_12 thread");
+
+	thread_1.join();
+	thread_2.join();
+}
+
+void foo_01_12()
+{
+	int i = 0;
+	while (true)
+	{
+		printf("Thread foo_01_12() i:%d\n", i);
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		i++;
+		if (i == 15)
+		{
+			break;
+		}
+	}
+}
+
+void bar_01_12()
+{
+	int i = 0;
+	while (true)
+	{
+		printf("Thread bar_01_12() i:%d\n", i);
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		i++;
+		if (i == 15)
+		{
+			break;
+		}
+	}
+}
+
+//
+// 01.13 Some useful operations on thread
+//
+
+void run_01_13();
+void foo_01_13();
+void get_id_test_01_13();
+void hardware_concurrency_01_13();
+
+void run_01_13()
+{
+	printf("-- get id test\n");
+	get_id_test_01_13();
+
+	printf("\n-- hardware_concurrency test\n");
+	hardware_concurrency_01_13();
+}
+
+void foo_01_13()
+{
+	printf("This thread id:{%d}\n", std::this_thread::get_id());
+}
+
+void get_id_test_01_13()
+{
+	std::thread thread_1(foo_01_13);
+	std::thread thread_2(foo_01_13);
+	std::thread thread_3(foo_01_13);
+	std::thread thread_4;
+
+	printf("Thread 01 id:{%d}  \n", thread_1.get_id());
+	printf("Thread 02 id:{%d}  \n", thread_2.get_id());
+	printf("Thread 03 id:{%d}  \n", thread_3.get_id());
+	printf("Thread 04 id:{%d}  \n", thread_4.get_id());
+
+	thread_1.join();
+	thread_2.join();
+	thread_3.join();
+	printf("Thread 03 id:{%d}  \n", thread_3.get_id());
+}
+
+void hardware_concurrency_01_13()
+{
+	int allowedThreads = std::thread::hardware_concurrency();
+	printf("Allowed threa count in my device: {%d}", allowedThreads);
+}
+
+//
+// 01.15 Parallel accumulate -- algorithm explanation
+//
+ 
+ 
 ///////////////////////////////////////////////////////////////////////////////
 // SECTION 01 - MAIN CLASS
 ///////////////////////////////////////////////////////////////////////////////
@@ -325,5 +428,17 @@ void Section01::s1_10_how_to_pass_parameters_to_a_thread()
 	run_01_10();
 }
 
+void Section01::s1_12_transfering_ownership_of_a_thread()
+{
+	run_01_12();
+}
 
+void Section01::s1_13_usefull_functions()
+{
+	run_01_13();
+}
 
+void Section01::s1_15_parallel_accumulate()
+{
+	run_01_15();
+}
