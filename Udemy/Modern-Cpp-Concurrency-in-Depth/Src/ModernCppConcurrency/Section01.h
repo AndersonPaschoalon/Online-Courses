@@ -36,8 +36,15 @@ public:
 	//
 	static void s1_13_usefull_functions();
 
+	//
+	static void s1_15_accumulate_explanation();
+
 	// 
-	static void s1_15_parallel_accumulate();
+	static void s1_16_accumulate_implementation();
+
+	//
+	static void s1_17_local_storage();
+
 
 private:
 

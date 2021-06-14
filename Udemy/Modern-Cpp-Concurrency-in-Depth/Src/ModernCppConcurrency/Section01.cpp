@@ -1,9 +1,20 @@
 #include <thread>
 #include <iostream>
 #include <chrono>
+#include <string>
+#include <numeric>
+#include <string>
+#include <functional>
+#include<algorithm>
+#include <atomic>
 
 #include "common_objs.h"
 #include "Section01.h"
+
+
+std::atomic<int> iglobal_s1_17 = 0;
+thread_local std::atomic<int> ilocal_s1_17 = 0;
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // SECTION 01 - EXERCISES
@@ -367,9 +378,148 @@ void hardware_concurrency_01_13()
 	printf("Allowed threa count in my device: {%d}", allowedThreads);
 }
 
+// Section 01.15 Parallel Accumulate - algorithm explanation
 //
-// 01.15 Parallel accumulate -- algorithm explanation
+
+void run_01_15();
+
+void run_01_15()
+{
+	std::vector<int> v = { 1, 2, 3, 4, 5 };
+	// lambda expression
+	auto comma_fold = [](std::string a, int b)
+	{
+		return (std::move(a) + "," + std::to_string(b));
+	};
+
+	int sum = std::accumulate(v.begin(), v.end(), 0);
+	int prod = std::accumulate(v.begin(), v.end(), 1, std::multiplies<int>());
+    std::string csv = std::accumulate(std::next(v.begin()), v.end(), std::to_string(v[0]), comma_fold);
+
+	std::cout << "sum  : " << sum << std::endl;
+	std::cout << "prod : " << prod << std::endl;
+	std::cout << "csv  : " << csv << std::endl;
+
+
+}
+
+
 //
+// 01.16. Parallel Accumulate algorithm implementation 
+// 
+void run_01_16();
+
+template<typename iterator, typename T>
+void accumulateStdWrapper(iterator start, iterator end, T& ref);
+
+template<typename iterator, typename T>
+void parallel_accumulate(iterator start, iterator end, T& ref);
+
+template<typename iterator, typename T>
+void accumulateStdWrapper(iterator first, iterator last, T& val)
+{
+	val = std::accumulate(first, last, val);
+}
+
+template<typename iterator, typename T>
+void parallel_accumulate(iterator start, iterator end, T& ref)
+{
+	unsigned MIN_BLOCK_SIZE = 1000;
+	unsigned inputSize = (int)std::distance(start, end);
+	unsigned allowedThreadByElements = (int)(inputSize) / MIN_BLOCK_SIZE;
+	unsigned allowerdThreadByHardware = (int)std::thread::hardware_concurrency();
+
+	if (allowerdThreadByHardware < 1)
+		allowerdThreadByHardware = 2;
+	unsigned numThread = (int)std::min(allowedThreadByElements, allowerdThreadByHardware);
+
+	unsigned blockSize = (inputSize + 1) / numThread;
+	std::vector<int> results((int)numThread);
+	std::vector<std::thread> threads(numThread - 1);
+
+	//iterate and craeting new threads to calculate sum for each blocks
+	iterator last;
+	for (unsigned i = 0; i < numThread - 1; i++)
+	{
+		last = start;
+		std::advance(last, blockSize);
+		std::thread threadIter(accumulateStdWrapper<iterator, T>, start, last, std::ref(results[i]));
+		threads[i] = std::move(threadIter);
+		start = last;
+	}
+
+	//final block will be calculated from this thread
+	results[numThread - 1] =
+		std::accumulate(start, end, results[numThread - 1]);
+
+	for_each(threads.begin(), threads.end(), std::mem_fn(&std::thread::join));
+	//std::for_each(threads.begin(), threads.end(), std::mem_fn(&std::thread::join));
+	ref = std::accumulate(results.begin(), results.end(), ref);
+}
+
+void run_01_16()
+{
+	const int size = 8000;
+	int ref = 0;
+	std::vector<int> myArray(10000);
+	// for random values
+	srand(0);
+	for (int i = 0; i < size; i++)
+	{
+		myArray[i] = 1;
+		// for random values on the vector
+		// 	myArray[i] = rand() % 10;
+
+	}
+	//parallel_accumulate<int*, int>(myArray, myArray + size, ref);
+	parallel_accumulate(myArray.begin(), myArray.end(), ref);
+
+	printf("Accumulated values: %d \n", ref);
+}
+
+
+//
+// 17. Thread Local Storage
+//
+
+void run_01_17();
+void foo_s1_17();
+void bar_s1_17();
+
+void foo_s1_17()
+{
+	iglobal_s1_17++;
+	std::cout << iglobal_s1_17;
+}
+
+void bar_s1_17()
+{
+	ilocal_s1_17++;
+	std::cout << ilocal_s1_17;
+}
+
+void run_01_17()
+{
+
+	std::thread t1(foo_s1_17);
+	std::thread t2(foo_s1_17);
+	std::thread t3(foo_s1_17);
+
+	t1.join();
+	t2.join();
+	t3.join();
+
+	std::cout << std::endl;
+
+	std::thread tl1(bar_s1_17);
+	std::thread tl2(bar_s1_17);
+	std::thread tl3(bar_s1_17);
+
+	tl1.join();
+	tl2.join();
+	tl3.join();
+
+}
  
  
 ///////////////////////////////////////////////////////////////////////////////
@@ -438,7 +588,17 @@ void Section01::s1_13_usefull_functions()
 	run_01_13();
 }
 
-void Section01::s1_15_parallel_accumulate()
+void Section01::s1_15_accumulate_explanation()
 {
 	run_01_15();
+}
+
+void Section01::s1_16_accumulate_implementation()
+{
+	run_01_16();
+}
+
+void Section01::s1_17_local_storage()
+{
+	run_01_17();
 }

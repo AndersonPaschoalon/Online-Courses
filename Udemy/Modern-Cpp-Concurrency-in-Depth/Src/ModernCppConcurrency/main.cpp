@@ -14,8 +14,8 @@ int main()
 	bool test06 = false;
 	bool test07 = false;
 	bool test08 = false;
-	bool test09 = true;
-	bool test10 = true;
+	bool test09 = false;
+	bool test10 = false;
 	bool test11 = true;
 	bool test12 = true;
 	bool test13 = true;
@@ -28,8 +28,6 @@ int main()
 	bool test20 = true;
 	bool test21 = true;
 
-
-
 	if (test01) Section01::s1_04_launch_a_thread();
 	if (test02) Section01::s1_05_programming_exercise01();
 	if (test03) Section01::s1_06_joinable_threads();
@@ -38,8 +36,9 @@ int main()
 	if (test06) Section01::s1_10_how_to_pass_parameters_to_a_thread();
 	if (test07) Section01::s1_12_transfering_ownership_of_a_thread();
 	if (test08) Section01::s1_13_usefull_functions();
-	if (test09) Section01::s1_15_parallel_accumulate();
+	if (test09) Section01::s1_15_accumulate_explanation();
+	if (test10) Section01::s1_16_accumulate_implementation();
+	if (test11) Section01::s1_17_local_storage();
 
-
-
+	return 0;
 }
