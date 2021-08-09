@@ -16,7 +16,7 @@ int main()
 	bool test08 = false;
 	bool test09 = false;
 	bool test10 = false;
-	bool test11 = true;
+	bool test11 = false;
 	bool test12 = true;
 	bool test13 = true;
 	bool test14 = true;
@@ -39,6 +39,8 @@ int main()
 	if (test09) Section01::s1_15_accumulate_explanation();
 	if (test10) Section01::s1_16_accumulate_implementation();
 	if (test11) Section01::s1_17_local_storage();
+	if (test12) Section01::s1_18_debuging_an_application_in_visual_studio();
+
 
 	return 0;
 }

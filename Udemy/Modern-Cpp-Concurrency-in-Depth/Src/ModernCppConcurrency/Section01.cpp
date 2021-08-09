@@ -12,8 +12,7 @@
 #include "Section01.h"
 
 
-std::atomic<int> iglobal_s1_17 = 0;
-thread_local std::atomic<int> ilocal_s1_17 = 0;
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -482,6 +481,11 @@ void run_01_16()
 // 17. Thread Local Storage
 //
 
+// #include <atomic>
+
+std::atomic<int> iglobal_s1_17 = 0;
+thread_local std::atomic<int> ilocal_s1_17 = 0;
+
 void run_01_17();
 void foo_s1_17();
 void bar_s1_17();
@@ -521,7 +525,91 @@ void run_01_17()
 
 }
  
- 
+
+//
+// 18. Debugging an applicaion in Visual Studion _s1_18
+//
+
+// #include <iostream>
+// #include <thread>
+// #include <future>
+// #include <chrono>
+// #include <execution>
+// #include <string>
+
+const size_t testSize_s1_18 = 1000;
+
+using std::chrono::duration;
+using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
+using std::milli;
+
+void run_01_18();
+
+void function3_s1_18();
+
+std::string function1_s1_18(int i);
+
+double function2_s1_18(int i);
+
+int init_number_s1_18(int i);
+
+void run_01_18()
+{
+	std::vector<int> ints(testSize_s1_18);
+	for (size_t i = 0; i < testSize_s1_18; i++)
+	{
+		ints[i] = init_number_s1_18(i);
+		std::cout << init_number_s1_18(i) << " " << function1_s1_18(i) << " " << function2_s1_18(i);
+	}
+}
+
+void function3_s1_18()
+{
+	throw;
+}
+
+std::string function1_s1_18(int i)
+{
+	//function3_s1_18();
+
+	if (i < 100)
+	{
+		return std::string("Hello");
+	}
+
+	return std::string("Hi");
+}
+
+double function2_s1_18(int i)
+{
+	std::string str = function1_s1_18(i);
+
+	if (i < 200)
+	{
+		return 3.98;
+	}
+
+	return 9.45;
+}
+
+int init_number_s1_18(int i)
+{
+	//function2_s1_18(i);
+
+	if (i < 1000)
+	{
+		i = i;
+	}
+	else
+	{
+		i = i * 2;
+	}
+
+	return i;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // SECTION 01 - MAIN CLASS
 ///////////////////////////////////////////////////////////////////////////////
@@ -601,4 +689,9 @@ void Section01::s1_16_accumulate_implementation()
 void Section01::s1_17_local_storage()
 {
 	run_01_17();
+}
+
+void Section01::s1_18_debuging_an_application_in_visual_studio()
+{
+	run_01_18();
 }

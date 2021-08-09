@@ -1,1 +1,4 @@
-﻿
+﻿  utils.cpp
+C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+  common.vcxproj -> C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\common.lib

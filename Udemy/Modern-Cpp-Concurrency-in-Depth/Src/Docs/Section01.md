@@ -37,7 +37,7 @@ if any program have std::terminate call we refer such program as unsefe program
 
 ## Section.01.07
 
-- Join bloqueia a thread até a thread que foi chamado o join retornar. 
+- Join bloqueia a thread principal ate a thread filha retornar.
 
 - Detach permite que as thread executem independentemente.
 
