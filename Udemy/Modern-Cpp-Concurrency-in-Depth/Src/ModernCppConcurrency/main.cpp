@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "Section01.h"
+#include "Section02.h"
+#include "Section03.h"
 
 
 int main()
@@ -17,16 +19,20 @@ int main()
 	bool test09 = false;
 	bool test10 = false;
 	bool test11 = false;
-	bool test12 = true;
-	bool test13 = true;
-	bool test14 = true;
-	bool test15 = true;
+	bool test12 = false;
+	bool test13 = false;
+	bool test14 = false;
+	bool test15 = false;
 	bool test16 = true;
 	bool test17 = true;
 	bool test18 = true;
 	bool test19 = true;
 	bool test20 = true;
 	bool test21 = true;
+
+	//
+	// Section 01
+	//
 
 	if (test01) Section01::s1_04_launch_a_thread();
 	if (test02) Section01::s1_05_programming_exercise01();
@@ -41,6 +47,21 @@ int main()
 	if (test11) Section01::s1_17_local_storage();
 	if (test12) Section01::s1_18_debuging_an_application_in_visual_studio();
 
+	//
+	// Section 02
+	//
+
+	if (test13) Section02::s2_21_mutexes();
+
+	//
+	// Section 03
+	//
+
+	if (test14) Section3::s3_28_introduction_to_condition_variables();
+	if (test15) Section3::s3_29_details_about_condition_variables();
+	if (test16) Section3::s3_31_thread_safe_queue_implementation();
+	if (test17) Section3::s3_32_introduction_to_futures_and_async_tasks();
+	if (test18) Section3::s03_33_async_task_details_discussion();
 
 	return 0;
 }

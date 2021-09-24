@@ -1,23 +1,11 @@
-﻿  Section01.cpp
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anacronismo usado: qualificadores na referência são ignorados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anacronismo usado: qualificadores na referência são ignorados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(32,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(41,10): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(48,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(58,10): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(65,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(78,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(83,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(90,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(353,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(363,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(364,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(365,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(366,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(371,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(562,32): warning C4267: 'argumento': conversão de 'size_t' para 'int', possível perda de dados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(563,35): warning C4267: 'argumento': conversão de 'size_t' para 'int', possível perda de dados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(563,64): warning C4267: 'argumento': conversão de 'size_t' para 'int', possível perda de dados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(563,93): warning C4267: 'argumento': conversão de 'size_t' para 'int', possível perda de dados
-C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section01.cpp(642,9): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'std::thread::id'
-  ModernCppConcurrency.vcxproj -> C:\Users\Usuario\Workspace\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\ModernCppConcurrency.exe
+﻿  Section03.cpp
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(160,1): warning C4305: 'return': truncamento de '__int64' para 'int'
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(160,9): warning C4309: 'return': truncamento de valor constante
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(188,14): warning C4244: 'inicializando': conversão de '__int64' para 'long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(182): message : consulte a referência à instanciação 'int s3_temp01_parallel_accumulate<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(iterator,iterator)' do modelo que está sendo compilada
+          with
+          [
+              _Ty=int,
+              iterator=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>
+          ]
+  ModernCppConcurrency.vcxproj -> C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\ModernCppConcurrency.exe

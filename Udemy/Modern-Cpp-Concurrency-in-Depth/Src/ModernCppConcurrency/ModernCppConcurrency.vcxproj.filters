@@ -24,12 +24,36 @@
     <ClCompile Include="Section02.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadSafeStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSafeStack2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section03.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSafeQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Section01.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Section02.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeStack2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section03.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
