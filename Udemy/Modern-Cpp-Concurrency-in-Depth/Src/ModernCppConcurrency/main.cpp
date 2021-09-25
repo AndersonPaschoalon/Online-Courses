@@ -23,12 +23,29 @@ int main()
 	bool test13 = false;
 	bool test14 = false;
 	bool test15 = false;
-	bool test16 = true;
-	bool test17 = true;
-	bool test18 = true;
-	bool test19 = true;
-	bool test20 = true;
-	bool test21 = true;
+	bool test16 = false;
+	bool test17 = false;
+	bool test18 = false;
+	bool test19 = false;
+	bool test20 = false;
+	bool test21 = false;
+	bool test22 = false;
+	bool test23 = true;
+	bool test24 = true;
+	bool test25 = true;
+	bool test26 = true;
+	bool test27 = true;
+	bool test28 = true;
+	bool test29 = true;
+	bool test30 = true;
+	bool test31 = true;
+	bool test32 = true;
+	bool test33 = true;
+	bool test34 = true;
+	bool test35 = true;
+	bool test36 = true;
+	bool test37 = true;
+	bool test38 = true;
 
 	//
 	// Section 01
@@ -62,6 +79,12 @@ int main()
 	if (test16) Section3::s3_31_thread_safe_queue_implementation();
 	if (test17) Section3::s3_32_introduction_to_futures_and_async_tasks();
 	if (test18) Section3::s03_33_async_task_details_discussion();
+	if (test19) Section3::s3_34_parallel_accumulate_algorithm();
+	if (test20) Section3::s3_35_introduction_to_package_tasks();
+	if (test21) Section3::s3_36_communication_between_threads_using_promisses();
+	if (test22) Section3::s3_37_retrieving_exception_using_futures();
+	if (test23) Section3::s3_38_shared_futures();
+
 
 	return 0;
 }

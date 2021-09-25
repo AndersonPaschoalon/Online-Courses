@@ -167,48 +167,12 @@ void s3_32_do_other_calculations()
 	std::cout << "Doing other stuff " << std::endl;
 }
 
-//
-// ----------------------------------------------------
-//
-#include <numeric>
-
-int s3_temp01_MIN_ELEMENT_COUNT = 1000;
-
-void temp01_run();
-template<typename iterator>
-int s3_temp01_parallel_accumulate(iterator begin, iterator end);
-
-void temp01_run()
-{
-	std::vector<int> v(10000, 1);
-	std::cout << "The sum is " << s3_temp01_parallel_accumulate(v.begin(), v.end()) << '\n';
-}
-
-template<typename iterator>
-int s3_temp01_parallel_accumulate(iterator begin, iterator end)
-{
-	long length = std::distance(begin, end);
-
-	//atleast runs 1000 element
-	if (length <= s3_temp01_MIN_ELEMENT_COUNT)
-	{
-		std::cout << std::this_thread::get_id() << std::endl;
-		return std::accumulate(begin, end, 0);
-	}
-
-	iterator mid = begin;
-	std::advance(mid, (length + 1) / 2);
-
-	//recursive all to parallel_accumulate
-	std::future<int> f1 = std::async(std::launch::deferred | std::launch::async,
-		s3_temp01_parallel_accumulate<iterator>, mid, end);
-	auto sum = s3_temp01_parallel_accumulate(begin, mid);
-	return sum + f1.get();
-}
 
 //
 // ----------------------------------------------------
 //
+
+#include <future>
 
 void run_03_33();
 void s03_33_printing();
@@ -220,8 +184,11 @@ void run_03_33()
 	std::cout << "main thread id -" << std::this_thread::get_id() << std::endl;
 	int x = 100;
 	int y = 50;
+	// will run on a different thread
 	std::future<void> f1 = std::async(std::launch::async, s03_33_printing);
+	// will run when .get() is called
 	std::future<int> f2 = std::async(std::launch::deferred, s03_33_addition, x, y);
+	// the compiler will decide
 	std::future<int> f3 = std::async(std::launch::deferred | std::launch::async,
 		s03_33_substract, x, y);
 
@@ -247,6 +214,59 @@ int s03_33_substract(int x, int y)
 	return x - y;
 }
 
+//
+// ----------------------------------------------------
+//
+#include <numeric>
+
+int s3_34_MIN_ELEMENT_COUNT = 1000;
+
+void run_03_34();
+template<typename iterator>
+int s3_34_parallel_accumulate(iterator begin, iterator end);
+
+void run_03_34()
+{
+	std::cout << " -- run_03_34 \n";
+	std::vector<int> v(10000, 1);
+	std::cout << std::this_thread::get_id() << std::endl;
+	int summval = s3_34_parallel_accumulate(v.begin(), v.end());
+	printf("The sum is %d", summval);
+}
+
+template<typename iterator>
+int s3_34_parallel_accumulate(iterator begin, iterator end)
+{
+	//
+	// base case(stop case): len is smaller than s3_34_MIN_ELEMENT_COUNT, so acumullate all
+	//
+
+	long length = std::distance(begin, end);
+	printf("length:%d\n", length);
+	if (length <= s3_34_MIN_ELEMENT_COUNT)
+	{
+		std::cout << std::this_thread::get_id() << std::endl;
+		// returns the summ for the base case
+		return std::accumulate(begin, end, 0);
+	}
+
+	//
+	// recursive case: split the vector in half, than call
+	//
+ 
+	// parallel accumulate for both
+	iterator mid = begin; 
+	std::advance(mid, (length + 1) / 2); // find the iterator for the middle of the vector
+	//recursive all to parallel_accumulate
+	// call s3_34_parallel_accumulate from the second half in another thread  (or in the same, the 
+	// compiler will decide, based on CPU resources)
+	std::future<int> f1 = std::async(std::launch::deferred | std::launch::async,
+		s3_34_parallel_accumulate<iterator>, mid, end);
+	// call s3_34_parallel_accumulate for the first half in the current thread
+	auto sum = s3_34_parallel_accumulate(begin, mid);
+	// returns the summ for the recursive case
+	return sum + f1.get();
+}
 
 //
 // ----------------------------------------------------
@@ -258,28 +278,28 @@ int s03_33_substract(int x, int y)
 #include <thread>
 #include <functional>
 
-void temp03_run();
-int s3_temp03_add(int x, int y);
-void s3_temp03_task_thread();
-void s3_temp03_task_normal();
+void run_03_35();
+int s3_35_add(int x, int y);
+void s3_35_task_thread();
+void s3_35_task_normal();
 
-void temp03_run()
+void run_03_35()
 {
-	s3_temp03_task_thread();
-	s3_temp03_task_normal();
 	std::cout << "main thread id : " << std::this_thread::get_id() << std::endl;
+	s3_35_task_thread();
+	s3_35_task_normal();
 }
 
-int s3_temp03_add(int x, int y)
+int s3_35_add(int x, int y)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cout << "add function runs in : " << std::this_thread::get_id() << std::endl;
 	return x + y;
 }
 
-void s3_temp03_task_thread()
+void s3_35_task_thread()
 {
-	std::packaged_task<int(int, int)> task_1(s3_temp03_add);
+	std::packaged_task<int(int, int)> task_1(s3_35_add);
 	std::future<int> future_1 = task_1.get_future();
 
 	std::thread thread_1(std::move(task_1), 5, 6);
@@ -288,10 +308,12 @@ void s3_temp03_task_thread()
 	std::cout << "task thread - " << future_1.get() << "\n";
 }
 
-void s3_temp03_task_normal()
+void s3_35_task_normal()
 {
-	std::packaged_task<int(int, int)> task_1(s3_temp03_add);
+	std::packaged_task<int(int, int)> task_1(s3_35_add);
+	
 	std::future<int> future_1 = task_1.get_future();
+	// task_1 must be called explicitly, otherwise get will not work
 	task_1(7, 8);
 	std::cout << "task normal - " << future_1.get() << "\n";
 }
@@ -300,35 +322,137 @@ void s3_temp03_task_normal()
 //
 // ----------------------------------------------------
 //
+#include <functional>
+#include <future>
+#include <thread>
+#include <stdexcept>
 
-void temp04_run();
+// promises
+void run_03_36();
+void s3_36_print_int(std::future<int>& fut);
 
-
-void temp04_run()
+void run_03_36()
 {
+	std::cout << "main thread id : " << std::this_thread::get_id() << std::endl;
+	std::promise<int> prom;
+	std::future<int> fut = prom.get_future();
+
+	std::thread print_thread(s3_36_print_int, std::ref(fut));
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	std::cout << "setting the value in main thread \n";
+	prom.set_value(10);
+
+	print_thread.join();
+}
+
+void s3_36_print_int(std::future<int>& fut)
+{
+	std::cout << "thread id : " << std::this_thread::get_id() << std::endl;
+	std::cout << "waiting for the value from print thread \n";
+	// get() blocks and waits for the value to be set on the other thread.
+	// when it is ready, this thread unblocks.
+	std::cout << "value: " << fut.get() << "\n";
+}
+
+
+//
+// ----------------------------------------------------
+//
+
+
+void run_03_37();
+void s3_37_throw_exception();
+void s3_37_calculate_square_root(std::promise<int>& prom);
+void s3_37_print_result(std::future<int>& fut);
+
+void run_03_37()
+{
+	// here a promise is created, and a future is instantiated, so the 
+	// thread may have access of values set in the future
+	std::promise<int> prom;
+	std::future<int> fut = prom.get_future();
+
+	// hre a thread responsible for the display is instantiated, and a reference to the 
+	// future value is passed to it
+	std::thread printing_thread(s3_37_print_result, std::ref(fut));
+
+	// here the function responsible for calculating the future value is instantiated
+	// it takes the promisse object, so it can set the future value
+	std::thread calculation_thread(s3_37_calculate_square_root, std::ref(prom));
+
+	printing_thread.join();
+	calculation_thread.join();
+}
+
+void s3_37_throw_exception()
+{
+	throw std::invalid_argument("input cannot be negative");
+}
+
+void s3_37_calculate_square_root(std::promise<int>& prom)
+{
+	// this thread waits for the user input. When it is received,
+	// it sets the value in the promise class.
+	int x = 1;
+	std::cout << "Please, enter an integer value:";
+	try
+	{
+		std::cin >> x;
+		if (x < 0)
+		{
+			s3_37_throw_exception();
+		}
+		prom.set_value(std::sqrt(x));
+	}
+	catch (std::exception& e)
+	{
+		prom.set_exception(std::current_exception());
+	}
+}
+
+void s3_37_print_result(std::future<int>& fut)
+{
+	try
+	{
+		// it try to get the future value. if it is not set, it blocks, until 
+		// the value is set by another thread.
+		int x = fut.get();
+		std::cout << "value: " << x << "\n";
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "[exception caught: " << e.what() << "]\n";
+	}
 }
 
 //
 // ----------------------------------------------------
 //
 
-void temp05_run();
+void run_03_38();
+void s3_38_print_result(std::shared_future<int>& fut);
 
-
-void temp05_run()
+void s3_38_print_result(std::shared_future<int>& fut)
 {
+	printf("%d - valid future\n", fut.get());
 }
 
-//
-// ----------------------------------------------------
-//
-
-void temp06_run();
-
-
-void temp06_run()
+void run_03_38()
 {
+	std::promise<int> prom;
+	std::shared_future<int> fut(prom.get_future());
+
+	std::thread th1(s3_38_print_result, std::ref(fut));
+	std::thread th2(s3_38_print_result, std::ref(fut));
+
+	prom.set_value(5);
+
+	th1.join();
+	th2.join();
 }
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -355,35 +479,36 @@ void Section3::s3_32_introduction_to_futures_and_async_tasks()
 	run_03_32();
 }
 
-void Section3::s3_00_parallel_accumulate_algorithm()
-{
-	temp01_run();
-}
-
-
 void Section3::s03_33_async_task_details_discussion()
 {
 	run_03_33();
 }
 
-void Section3::s3_00_introduction_to_package_tasks()
+void Section3::s3_34_parallel_accumulate_algorithm()
 {
-	temp03_run();
+	run_03_34();
 }
 
-void Section3::s3_00_shared_futures()
+void Section3::s3_35_introduction_to_package_tasks()
 {
-	temp04_run();
+	run_03_35();
 }
 
-void Section3::s3_00_retrieving_exception_using_futures()
+void Section3::s3_36_communication_between_threads_using_promisses()
 {
-	temp05_run();
+	run_03_36();
 }
 
-void Section3::s3_00_communication_between_threads_using_promisses()
+void Section3::s3_37_retrieving_exception_using_futures()
 {
-	temp06_run();
+	run_03_37();
 }
+void Section3::s3_38_shared_futures()
+{
+	run_03_38();
+}
+
+
+
 
 

@@ -1,11 +1,1 @@
-﻿  Section03.cpp
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(160,1): warning C4305: 'return': truncamento de '__int64' para 'int'
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(160,9): warning C4309: 'return': truncamento de valor constante
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(188,14): warning C4244: 'inicializando': conversão de '__int64' para 'long', possível perda de dados
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section03.cpp(182): message : consulte a referência à instanciação 'int s3_temp01_parallel_accumulate<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(iterator,iterator)' do modelo que está sendo compilada
-          with
-          [
-              _Ty=int,
-              iterator=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>
-          ]
-  ModernCppConcurrency.vcxproj -> C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\ModernCppConcurrency.exe
+﻿
