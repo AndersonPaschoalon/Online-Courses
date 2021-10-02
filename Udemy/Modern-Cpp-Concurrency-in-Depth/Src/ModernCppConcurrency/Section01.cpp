@@ -10,6 +10,7 @@
 
 #include "common_objs.h"
 #include "Section01.h"
+#include "Utils.h"
 
 
 
@@ -612,17 +613,17 @@ int init_number_s1_18(int i)
 // SECTION 01 - MAIN CLASS
 ///////////////////////////////////////////////////////////////////////////////
 
-void Section01::printHeader(const char* title)
-{
-	printf("###################################################################\n");
-	printf("# %s\n", title);
-	printf("###################################################################\n");
-	printf("\n");
-}
+//void Section01::printHeader(const char* title)
+//{
+//	printf("###################################################################\n");
+//	printf("# %s\n", title);
+//	printf("###################################################################\n");
+//	printf("\n");
+//}
 
 void Section01::s1_04_launch_a_thread()
 {
-	Section01::printHeader("s1_04_launch_a_thread()");
+	Utils::printHeader("s1_04_launch_a_thread()");
 	run_01_04();
 }
 
@@ -636,7 +637,7 @@ void Section01::s1_04_launch_a_thread()
 //   order should be the last one to finish. Consider the main thread as well
 void Section01::s1_05_programming_exercise01()
 {
-	Section01::printHeader("s1_05_programming_exercise()");
+	Utils::printHeader("s1_05_programming_exercise()");
 	printf("[%d] s1_05_programming_exercise\n", std::this_thread::get_id());
 	std::thread threadA(functionA);
 	std::thread threadB(functionB);

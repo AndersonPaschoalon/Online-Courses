@@ -76,6 +76,6 @@ public:
 
 private:
 
-	static void printHeader(const char* title);
+	//static void printHeader(const char* title);
 };
 
