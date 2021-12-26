@@ -4,6 +4,7 @@
 #include "Section01.h"
 #include "Section02.h"
 #include "Section03.h"
+#include "Section04.h"
 
 
 int main()
@@ -30,7 +31,7 @@ int main()
 	bool test20 = false;
 	bool test21 = false;
 	bool test22 = false;
-	bool test23 = true;
+	bool test23 = false;
 	bool test24 = true;
 	bool test25 = true;
 	bool test26 = true;
@@ -85,6 +86,12 @@ int main()
 	if (test22) Section3::s3_37_retrieving_exception_using_futures();
 	if (test23) Section3::s3_38_shared_futures();
 
+	//
+	// Section 04
+	//
+
+	if (test24) Section04::s39_introduction_to_lock_based_thread_safe_data_structures_and_algotithms();
+	if (test25) Section04::s41_thread_sage_queue_implementation();
 
 	return 0;
 }

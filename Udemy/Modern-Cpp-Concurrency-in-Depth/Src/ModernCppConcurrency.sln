@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{EE3BD0BB-3
 		ExercisesTodoList.txt = ExercisesTodoList.txt
 		Docs\Section01.md = Docs\Section01.md
 		Docs\Section03.md = Docs\Section03.md
+		Docs\Section04.md = Docs\Section04.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "common\common.vcxproj", "{499B957C-5ABC-4F1B-84D3-F17517591B33}"

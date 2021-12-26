@@ -9,11 +9,11 @@
 
 class Section04
 {
-	//
-	static void s39_introduction_to_lock_based_thread_safe_data_structures_and_algotithms();
+
+public: 
 
 	//
-	static void s40_queue_data_structure_implementation_using_linked_list_data();
+	static void s39_introduction_to_lock_based_thread_safe_data_structures_and_algotithms();
 
 	//
 	static void s41_thread_sage_queue_implementation();
