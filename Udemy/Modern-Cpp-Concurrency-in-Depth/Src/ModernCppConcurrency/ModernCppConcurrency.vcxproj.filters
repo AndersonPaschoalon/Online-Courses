@@ -86,5 +86,8 @@
     <ClInclude Include="s4_thread_safe_queue2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\MasterClass\cpp_concurrency_masterclass\matrix\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@ public:
 	static void s45_parallel_for_each_implementation();
 
 	//
-	static void s46_parallel_fund_algorithm_implementation_with_package_task();
+	static void s46_parallel_find_algorithm_implementation_with_package_task();
 
 	//
 	static void s47_partial_sum_algorithm_introduction();

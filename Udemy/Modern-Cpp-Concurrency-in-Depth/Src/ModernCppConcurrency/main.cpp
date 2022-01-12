@@ -32,13 +32,13 @@ int main()
 	bool test21 = false;
 	bool test22 = false;
 	bool test23 = false;
-	bool test24 = true;
-	bool test25 = true;
-	bool test26 = true;
-	bool test27 = true;
-	bool test28 = true;
-	bool test29 = true;
-	bool test30 = true;
+	bool test24 = false; // init
+	bool test25 = false;
+	bool test26 = false;
+	bool test27 = false;
+	bool test28 = false; // test
+	bool test29 = false;
+	bool test30 = false;
 	bool test31 = true;
 	bool test32 = true;
 	bool test33 = true;
@@ -92,6 +92,13 @@ int main()
 
 	if (test24) Section04::s39_introduction_to_lock_based_thread_safe_data_structures_and_algotithms();
 	if (test25) Section04::s41_thread_sage_queue_implementation();
+	if (test26) Section04::s42_parallel_ste_intruduction();
+	if (test27) Section04::s43_parallel_quick_sort_algorithm_implementation();
+	if (test28) Section04::s44_parallel_for_each_implementation();
+	if (test29) Section04::s45_parallel_for_each_implementation();
+	if (test30) Section04::s46_parallel_find_algorithm_implementation_with_package_task();
+	if (test31) Section04::s47_partial_sum_algorithm_introduction();
+
 
 	return 0;
 }

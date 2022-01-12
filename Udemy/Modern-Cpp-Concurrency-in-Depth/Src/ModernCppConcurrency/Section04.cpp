@@ -164,7 +164,7 @@ template<typename Iterator, typename Func>
 void parallel_for_each_pt(Iterator first, Iterator, Func f);
 template<typename Iterator, typename Func>
 void parallel_for_each_async(Iterator first, Iterator, Func f);
-
+void print_results(const char* msg, std::chrono::steady_clock::time_point start_time, std::chrono::steady_clock::time_point end_time);
 
 void run_04_44()
 {
@@ -187,14 +187,31 @@ void run_04_44()
 	auto startTime = high_resolution_clock::now();
 	std::for_each(ints.cbegin(), ints.cend(), long_function);
 	auto endTime = high_resolution_clock::now();
-	
+	print_results("STL                   ", startTime, endTime);
 
+	startTime = high_resolution_clock::now();
+	for_each(std::execution::seq, ints.cbegin(), ints.cend(), long_function);
+	endTime = high_resolution_clock::now();
+	print_results("STL-seq               ", startTime, endTime);
 
+	startTime = high_resolution_clock::now();
+	for_each(std::execution::par, ints.cbegin(), ints.cend(), long_function);
+	endTime = high_resolution_clock::now();
+	print_results("STL-par               ", startTime, endTime);
 
+	startTime = high_resolution_clock::now();
+	parallel_for_each_pt(ints.cbegin(), ints.cend(), long_function);
+	endTime = high_resolution_clock::now();
+	print_results("Parallel-package task ", startTime, endTime);
+
+	startTime = high_resolution_clock::now();
+	parallel_for_each_async(ints.cbegin(), ints.cend(), long_function);
+	endTime = high_resolution_clock::now();
+	print_results("Parallel-async        ", startTime, endTime);
 }
 
 template<typename Iterator, typename Func>
-void parallel_for_each_pt(Iterator first, Iterator, Func f)
+void parallel_for_each_pt(Iterator first, Iterator last, Func f)
 {
 	unsigned long const length = std::distance(first, last);
 
@@ -204,11 +221,11 @@ void parallel_for_each_pt(Iterator first, Iterator, Func f)
 	}
 
 	// Calculate the optimized number of threads to run the algorithm
-	unsined long const min_per_thread = 25;
-	unsigned long const max_threads = (lenght + min + per_thread - 1) / min_per_thread;
-	unsigned long const hartware_threads = std::thread::hardware_concurrency();
-	unsigned long const num_threads = std::min(hastware_threads != 0 ? hardware_threads : 2, max_threads);
-	unsigned lng const block_size = length / num_threads;
+	unsigned long const min_per_thread = 25;
+	unsigned long const max_threads = (length + min_per_thread - 1) / (min_per_thread);
+	unsigned long const hardware_threads = std::thread::hardware_concurrency();
+	unsigned long const num_threads = std::min(hardware_threads != 0 ? hardware_threads : 2, max_threads);
+	unsigned long const block_size = length / num_threads;
 
 	// declare the needed data structures
 	std::vector<std::future<void>> futures(num_threads - 1);
@@ -217,7 +234,7 @@ void parallel_for_each_pt(Iterator first, Iterator, Func f)
 
 	// divide the workload between threads
 	Iterator block_start = first;
-	for (unsigned long i = 0; i <= (num_threads - 1); i++)
+	for (unsigned long i = 0; i <= (num_threads - 2); i++)
 	{
 		Iterator block_end = block_start;
 		std::advance(block_end, block_size);
@@ -230,7 +247,7 @@ void parallel_for_each_pt(Iterator first, Iterator, Func f)
 		);
 
 		futures[i] = task.get_future();
-		threads[i] std::thread(std::move(task));
+	    threads[i] = std::thread(std::move(task));
 
 		block_start = block_end;
 	}
@@ -246,9 +263,8 @@ void parallel_for_each_pt(Iterator first, Iterator, Func f)
 
 }
 
-
 template<typename Iterator, typename Func>
-void parallel_for_each_async(Iterator first, Iterator, Func f)
+void parallel_for_each_async(Iterator first, Iterator last, Func f)
 {
 	unsigned long const lenght = std::distance(first, last);
 
@@ -267,26 +283,110 @@ void parallel_for_each_async(Iterator first, Iterator, Func f)
 	{
 		Iterator const mid_point = first + lenght / 2;
 		std::future<void> first_half = std::async(&parallel_for_each_async<Iterator, Func>, first, mid_point, f);
-
-		parallel_for_each_async(&parallel_for_each_async<Iterator, Func>, first, mid_point, f);
-
 		parallel_for_each_async(mid_point, last, f);
 		first_half.get();
 	}
 
 }
 
+void print_results(const char* msg, std::chrono::steady_clock::time_point start_time, std::chrono::steady_clock::time_point end_time)
+{
+	std::cout << msg << ":" << std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count() << " microseconds." << std::endl;
+}
 
 //
-// Section 04.45: àrallel find algorithm implementation with package task
+// Section 04.45: prallel find algorithm implementation with package task
 //
 
 void run_04_45();
 
+template<typename Iterator, typename MatchType>
+Iterator parallel_find_pt(Iterator first, Iterator last, MatchType match);
+
 void run_04_45()
 {
+	printf("Implementation using promisses at parallel_find_pt()\n");
 }
 
+template<typename Iterator, typename MatchType>
+Iterator parallel_find_pt(Iterator first, Iterator last, MatchType match)
+{
+	struct find_element
+	{
+		void operator()(Iterator begin, Iterator end,
+			MatchType match,
+			std::promise<Iterator>* result,
+			std::atomic<bool>* done_flag)
+		{
+			try
+			{
+				for (; (begin != end) && !std::atomic_load(done_flag); ++begin)
+				{
+					if (*begin == match)
+					{
+						result->set_value(begin);
+						//done_flag.store(true);
+						std::atomic_store(done_flag, true);
+						return;
+					}
+				}
+			}
+			catch (...)
+			{
+				result->set_exception(std::current_exception());
+				done_flag->store(true);
+			}
+		}
+	};
+
+	unsigned long const length = std::distance(first, last);
+
+	if (!length)
+		return last;
+
+	//	Calculate the optimized number of threads to run the algorithm
+
+	unsigned long const min_per_thread = 25;
+	unsigned long const max_threads = (length + min_per_thread - 1) / min_per_thread;
+
+	unsigned long const hardware_threads = std::thread::hardware_concurrency();
+	unsigned long const num_threads = std::min(hardware_threads != 0 ? hardware_threads : 2, max_threads);
+	unsigned long const block_size = length / num_threads;
+
+	//	Declare the needed data structure
+	std::promise<Iterator> result;
+	// it is a normal boolean value, the only difference is that only one thread will be able to update it.
+	std::atomic<bool> done_flag(false);
+
+	std::vector<std::thread> threads(num_threads - 1);
+
+	{
+		join_threads joiner(threads);
+
+		// task dividing loop
+		Iterator block_start = first;
+		for (unsigned long i = 0; i < (num_threads - 1); i++)
+		{
+			Iterator block_end = block_start;
+			std::advance(block_end, block_size);
+
+			// need to lauch threads with tasks
+			threads[i] = std::thread(find_element(), block_start, block_end, match, &result, &done_flag);
+
+			block_start = block_end;
+		}
+
+		// perform the find operation for final block in this thread.
+		find_element()(block_start, last, match, &result, &done_flag);
+	}
+
+	if (!done_flag.load())
+	{
+		return last;
+	}
+
+	return result.get_future().get();
+}
 
 //
 // Section 04.46: Parallel find algorithm implementation with async 
@@ -294,20 +394,173 @@ void run_04_45()
 
 void run_04_46();
 
+template<typename Iterator, typename MatchType>
+Iterator parallel_find_async(Iterator first, Iterator last, MatchType match, std::atomic<bool>* done_flag);
+
 void run_04_46()
 {
+	printf("Implementation using async tasks on the method parallel_find_async.\n");
+}
+
+template<typename Iterator, typename MatchType>
+Iterator parallel_find_async(Iterator first, Iterator last, MatchType match, std::atomic<bool>* done_flag)
+{
+	// propagate exceptions to the calling thread, in case exceptions happen
+	try
+	{
+		// we need now the lengh of the datachunk to be processed. Therefore, call std::distance
+		unsigned long const length = std::distance(first, last);
+		// minnimum size of the datachunck to be processed by a single thread.
+		unsigned long const min_per_thread = 25;
+
+		// ** BASE CASE**
+		// the datachunk cannot be divided anymore. Therefore we must do the search in this datablock.
+		if (length < 2 * min_per_thread)
+		{
+			// if the current element is not the last and done_flag is not set yet...
+			for (; (first != last) && done_flag; ++first)
+			{
+				if (*first == match)
+				{
+					*done_flag = true;
+					return first;
+				}
+			}
+			return last;
+		}
+		// ** RECUSIVE CALL** 
+		// the datablock is big enough, so it must be divided! Divide and call recursivelly!
+		else
+		{
+			Iterator const mid_point = first + (length / 2);
+
+			// call the method recursively for the SECOND half block!
+			std::future<Iterator> async_result = std::async(
+				&parallel_find_async<Iterator, MatchType>,
+				mid_point,
+				last,
+				match,
+				std::ref(done_flag)
+			);
+			// ... and for the FIRST half
+			std::future<Iterator> direct_result = parallel_find_async(
+				first,
+				mid_point,
+				match,
+				done_flag
+			);
+			// once they are completed, the searching process is DONE!
+			return (direct_result == mid_point) ? async_result.get() : direct_result;
+		}
+	}
+	catch (const std::exception& ex)
+	{
+		*done_flag = true;
+		throw ex;
+	}
 }
 
 //
 // Section 04.47: Partial sum algorithm introduction
 //
 
+// What is prefix sum?
+//   Given a sequence of numbers, x0, ..., xn prefix sum calculate output sequence 
+// y0, ..., yn where yi = y(i-1) + xi.
+//   For example:
+//   y0 = x0
+//   y1 = y0 + x1 = x0 + x1
+//   y2 = y1 + x2 = (y0 + x1) + x2 = ((x0) + x1) + x2 = x0 + x1 + x2
 void run_04_47();
+
+void test_sequential_sum(size_t vecSize);
+
+template<typename Iterator, typename OutIterator>
+void sequential_partial_sum(Iterator first, Iterator last, OutIterator y);
+
 
 void run_04_47()
 {
+	// 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	std::vector<int> ints(10);
+	std::vector<int> outs(10);
+	const char msg_seq_scan[]    = "* sequential scan: ";
+	const char msg_stdpar_scan[] = "* parallel scan  : ";
+	for (size_t i = 0; i < ints.size(); i++)
+	{
+		ints[i] = i;
+	}
+
+	// sequential implementation
+	auto startTime = high_resolution_clock::now();
+	sequential_partial_sum(ints.begin(), ints.end(), outs.begin());
+	auto endtime = high_resolution_clock::now();
+	//print the results...
+	for (size_t i = 0; i < outs.size(); i++)
+	{
+		std::cout << outs[i] << ", ";
+	}
+	printf("\n");
+	print_results(msg_seq_scan, startTime, endtime);
+
+	// std parallel implementation
+	startTime = high_resolution_clock::now();
+	std::inclusive_scan(std::execution::par, ints.begin(), ints.end(), outs.begin());
+	endtime = high_resolution_clock::now();
+	print_results(msg_stdpar_scan, startTime, endtime);
+
+	// expected result for the first test
+	// 0, 1, 3, 6, 10, 15, 21, 28, 36, 45,
+	// * sequential scan: :71 microseconds.
+	// * parallel scan  : :327 microseconds.
+
+	test_sequential_sum(10);
+	test_sequential_sum(1000);
+	test_sequential_sum(100000);
+	test_sequential_sum(10000000);
+
 }
 
+void test_sequential_sum(size_t vecSize)
+{
+	const char msg_seq_scan[] = "* sequential scan: ";
+	const char msg_stdpar_scan[] = "* parallel scan  : ";
+	const size_t TestSize = vecSize;
+	std::vector<int> ints2(TestSize);
+	std::vector<int> outs2(TestSize);
+	for (size_t i = 0; i < ints2.size(); i++)
+	{
+		ints2[i] = i;
+	}
+	printf("\n");
+	std::cout << "Test Vector Size: " << vecSize << std::endl;
+
+	// sequential implementation
+	auto startTime = high_resolution_clock::now();
+	sequential_partial_sum(ints2.begin(), ints2.end(), outs2.begin());
+	auto endtime = high_resolution_clock::now();
+	//print the results...
+	print_results(msg_seq_scan, startTime, endtime);
+
+	// std parallel implementation
+	startTime = high_resolution_clock::now();
+	std::inclusive_scan(std::execution::par, ints2.begin(), ints2.end(), outs2.begin());
+	endtime = high_resolution_clock::now();
+	print_results(msg_stdpar_scan, startTime, endtime);
+	printf("\n");
+}
+
+template<typename Iterator, typename OutIterator>
+void sequential_partial_sum(Iterator first, Iterator last, OutIterator y)
+{
+	unsigned long const length = std::distance(first, last);
+	y[0] = first[0];
+
+	for (size_t i = 1; i < length; i++)
+	{
+		y[i] = first[i] + y[i - 1];
+	}
+}
 
 //
 // Section 04.48: Partial sum algorithm parallel implementation
@@ -315,9 +568,109 @@ void run_04_47()
 
 void run_04_48();
 
+template<typename Iterator>
+void parallel_partial_sum(Iterator first, Iterator last);
+
+
 void run_04_48()
 {
 }
+
+
+template<typename Iterator>
+void parallel_partial_sum(Iterator first, Iterator last)
+{
+	typedef typename Iterator::value_type value_type;
+
+	struct process_chunk
+	{
+		void operator()(Iterator begin, Iterator last,
+			std::future<value_type>* previous_end_value,
+			std::promise<value_type>* end_value)
+		{
+			try
+			{
+				Iterator end = last;
+				++end;
+				std::partial_sum(begin, end, begin);
+				if (previous_end_value)
+				{
+					//this is not the first thread
+					auto addend = previous_end_value->get();
+					*last += addend;
+					if (end_value)
+					{
+						//not the last block
+						end_value->set_value(*last);
+					}
+					std::for_each(begin, last, [addend](value_type& item)
+						{
+							item += addend;
+						});
+				}
+				else if (end_value)
+				{
+					//this is the first thread
+					end_value->set_value(*last);
+				}
+			}
+			catch (...)
+			{
+				if (end_value)
+				{
+					end_value->set_exception(std::current_exception());
+				}
+				else
+				{
+					//final block - main therad is the one process the final block
+					throw;
+				}
+			}
+		}
+	};
+
+	unsigned long const length = std::distance(first, last);
+	if (!length)
+	{
+		return;
+	}
+	unsigned long const min_per_thread = 25;
+	unsigned long const max_threads = (length + min_per_thread - 1) / min_per_thread;
+	unsigned long const hardware_threads  =  std::thread::hardware_concurrency();
+	unsigned long const num_threads = std::min(hardware_threads != 0 ? hardware_threads : 2, max_threads);
+	unsigned long const block_size = length / num_threads;
+
+	std::vector<std::thread> threads(num_threads - 1);
+	std::vector<std::promise<value_type> > end_values(num_threads - 1);
+	std::vector<std::future<value_type> > previous_end_values;
+	previous_end_values.reserve(num_threads - 1);
+
+	join_threads joiner(threads);
+	Iterator block_start = first;
+
+	for (unsigned long i = 0; i < (num_threads - 1); ++i)
+	{
+		Iterator block_last = block_start;
+		std::advance(block_last, block_size - 1);
+		threads[i] = std::thread(process_chunk(), 
+			block_start,
+			block_last,
+			(i != 0) ? &previous_end_values[i - 1] : 0, 
+			&end_values[i]
+		);
+
+		block_start = block_last;
+		++block_start;
+		previous_end_values.push_back(end_values[i].get_future());
+	}
+
+	Iterator final_element = block_start;
+	std::advance(final_element, std::distance(block_start, last) - 1);
+	process_chunk()(block_start, final_element, (num_threads > 1) ? &previous_end_values.back() : 0, 0);
+
+}
+
+
 
 
 //
@@ -404,7 +757,7 @@ void Section04::s45_parallel_for_each_implementation()
 	run_04_45();
 }
 
-void Section04::s46_parallel_fund_algorithm_implementation_with_package_task()
+void Section04::s46_parallel_find_algorithm_implementation_with_package_task()
 {
 	Utils::printHeader("// Section 04.46: Parallel find algorithm implementation with async ");
 	run_04_46();

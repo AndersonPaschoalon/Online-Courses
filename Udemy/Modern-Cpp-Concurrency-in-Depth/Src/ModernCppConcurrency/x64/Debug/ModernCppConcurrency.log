@@ -1,2 +1,41 @@
 ﻿  Section04.cpp
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(491,14): warning C4267: '=': conversão de 'size_t' para '_Ty', possível perda de dados
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(533,15): warning C4267: '=': conversão de 'size_t' para '_Ty', possível perda de dados
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(216,44): warning C4244: 'inicializando': conversão de '__int64' para 'unsigned long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(203): message : consulte a referência à instanciação 'void parallel_for_each_pt<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,run_04_44::<lambda_1>>(Iterator,Iterator,Func)' do modelo que está sendo compilada
+          with
+          [
+              _Ty=int,
+              Iterator=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<int>>>,
+              Func=run_04_44::<lambda_1>
+          ]
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(216,29): warning C4244: 'inicializando': conversão de '__int64' para 'const unsigned long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(269,44): warning C4244: 'inicializando': conversão de '__int64' para 'unsigned long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(208): message : consulte a referência à instanciação 'void parallel_for_each_async<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,run_04_44::<lambda_1>>(Iterator,Iterator,Func)' do modelo que está sendo compilada
+          with
+          [
+              _Ty=int,
+              Iterator=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<int>>>,
+              Func=run_04_44::<lambda_1>
+          ]
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(269,29): warning C4244: 'inicializando': conversão de '__int64' para 'const unsigned long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(556,44): warning C4244: 'inicializando': conversão de '__int64' para 'unsigned long', possível perda de dados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(496): message : consulte a referência à instanciação 'void sequential_partial_sum<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(Iterator,Iterator,OutIterator)' do modelo que está sendo compilada
+          with
+          [
+              _Ty=int,
+              Iterator=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>,
+              OutIterator=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int>>>
+          ]
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section04.cpp(556,29): warning C4244: 'inicializando': conversão de '__int64' para 'const unsigned long', possível perda de dados
   ModernCppConcurrency.vcxproj -> C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\ModernCppConcurrency.exe
