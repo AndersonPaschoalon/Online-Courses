@@ -135,8 +135,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions> /await /await:strict %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,21 +153,34 @@
     <ClCompile Include="Section02.cpp" />
     <ClCompile Include="Section03.cpp" />
     <ClCompile Include="Section04.cpp" />
+    <ClCompile Include="Section05.cpp" />
+    <ClCompile Include="Section06.cpp" />
+    <ClCompile Include="Section07.cpp" />
+    <ClCompile Include="Section08.cpp" />
+    <ClCompile Include="Section09.cpp" />
     <ClCompile Include="sequential_queue.cpp" />
+    <ClCompile Include="SpinlockMutex.cpp" />
     <ClCompile Include="ThreadSafeQueue.cpp" />
     <ClCompile Include="ThreadSafeStack.cpp" />
     <ClCompile Include="ThreadSafeStack2.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\MasterClass\cpp_concurrency_masterclass\matrix\matrix.h" />
+    <ClInclude Include="jthread.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="s4_thread_safe_queue.h" />
     <ClInclude Include="s4_thread_safe_queue2.h" />
     <ClInclude Include="Section01.h" />
     <ClInclude Include="Section02.h" />
     <ClInclude Include="Section03.h" />
     <ClInclude Include="Section04.h" />
+    <ClInclude Include="Section05.h" />
+    <ClInclude Include="Section06.h" />
+    <ClInclude Include="Section07.h" />
+    <ClInclude Include="Section08.h" />
+    <ClInclude Include="Section09.h" />
     <ClInclude Include="sequential_queue.h" />
+    <ClInclude Include="SpinlockMutex.h" />
     <ClInclude Include="ThreadSafeQueue.h" />
     <ClInclude Include="ThreadSafeStack.h" />
     <ClInclude Include="ThreadSafeStack2.h" />

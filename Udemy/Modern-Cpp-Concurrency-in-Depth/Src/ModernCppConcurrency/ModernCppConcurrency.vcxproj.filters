@@ -51,6 +51,24 @@
     <ClCompile Include="s4_thread_safe_queue2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Section05.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section06.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section07.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section08.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section09.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpinlockMutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Section01.h">
@@ -86,7 +104,28 @@
     <ClInclude Include="s4_thread_safe_queue2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\MasterClass\cpp_concurrency_masterclass\matrix\matrix.h">
+    <ClInclude Include="Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section05.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section06.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section07.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section08.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Section09.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpinlockMutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

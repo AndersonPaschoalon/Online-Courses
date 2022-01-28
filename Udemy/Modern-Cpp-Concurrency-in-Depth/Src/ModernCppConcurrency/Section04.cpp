@@ -1,4 +1,5 @@
 #include "Section04.h"
+#include "Matrix.h"
 #include "Utils.h"
 #include "s4_thread_safe_queue.h"
 #include "s4_thread_safe_queue2.h"
@@ -681,6 +682,14 @@ void run_04_49();
 
 void run_04_49()
 {
+	Matrix A(10, 10);
+	Matrix B(10, 10);
+	Matrix results(10, 10);
+	A.set_all(1);
+	B.set_all(1);
+	Matrix::multiply(&A, &B, &results);
+	results.print();
+
 }
 
 
@@ -692,6 +701,29 @@ void run_04_50();
 
 void run_04_50()
 {
+	const char msg_par[] = "Parallel Matrix Multiplication Time  ";
+	const char msg_seq[] = "Sequential Matrix Multiplication Time";
+
+	const int matrix_size = 200;
+
+	Matrix A(matrix_size, matrix_size);
+	Matrix B(matrix_size, matrix_size);
+	Matrix C(matrix_size, matrix_size);
+	Matrix D(matrix_size, matrix_size);
+
+	A.set_all(1);
+	B.set_all(1);
+	
+	auto startTime = high_resolution_clock::now();
+	Matrix::multiply(&A, &B, &C);
+	auto endTime = high_resolution_clock::now();
+	print_results(msg_seq, startTime, endTime);
+
+	startTime = high_resolution_clock::now();
+	Matrix::parallel_multiply(&A, &B, &C);
+	endTime = high_resolution_clock::now();
+	print_results(msg_par, startTime, endTime);
+
 }
 
 
@@ -703,6 +735,27 @@ void run_04_51();
 
 void run_04_51()
 {
+	const char msg_par[] = "Parallel Matrix Transpose Time  ";
+	const char msg_seq[] = "Sequential Matrix Transpose Time";
+
+	const int matrix_size = 10000;
+
+	Matrix A(matrix_size, matrix_size);
+	Matrix B(matrix_size, matrix_size);
+
+
+	A.set_all(1);
+
+
+	auto startTime = high_resolution_clock::now();
+	Matrix::transpose(&A, &B);
+	auto endTime = high_resolution_clock::now();
+	print_results(msg_seq, startTime, endTime);
+
+	startTime = high_resolution_clock::now();
+	Matrix::parallel_transpose(&A, &B);
+	endTime = high_resolution_clock::now();
+	print_results(msg_par, startTime, endTime);
 }
 
 

@@ -5,6 +5,11 @@
 #include "Section02.h"
 #include "Section03.h"
 #include "Section04.h"
+#include "Section05.h"
+#include "Section06.h"
+#include "Section07.h"
+#include "Section08.h"
+#include "Section09.h"
 
 
 int main()
@@ -39,14 +44,22 @@ int main()
 	bool test28 = false; // test
 	bool test29 = false;
 	bool test30 = false;
-	bool test31 = true;
-	bool test32 = true;
-	bool test33 = true;
-	bool test34 = true;
-	bool test35 = true;
-	bool test36 = true;
-	bool test37 = true;
-	bool test38 = true;
+	bool test31 = false;
+	bool test32 = false;
+	bool test33 = false;
+	bool test34 = false;
+	bool test35 = false;
+	bool test36 = false;
+	bool test37 = false;
+	bool test38 = false;
+	bool test39 = false;
+	bool test40 = false;
+	bool test41 = false;
+	bool test42 = false;
+	bool test43 = false;
+	bool test44 = false;
+	bool test45 = false;
+	bool test46 = true;
 
 	//
 	// Section 01
@@ -98,6 +111,30 @@ int main()
 	if (test29) Section04::s45_parallel_for_each_implementation();
 	if (test30) Section04::s46_parallel_find_algorithm_implementation_with_package_task();
 	if (test31) Section04::s47_partial_sum_algorithm_introduction();
+	if (test32) Section04::s48_partial_sum_algorithm_implementation();
+	if (test33) Section04::s49_introduction_to_matrix();
+	if (test34) Section04::s50_parallel_matrix_multiplication();
+	if (test34) Section04::s51_paralle_matrix_transpose();
+
+	//
+	// Section 05
+	//
+	if (test35) Section05::s5_53_Jthread_Introduction();
+	if (test36) Section05::s5_54_Jthread_Our_own_version_implementation();
+	if (test37) Section05::s5_55_Cpp_coroutines_Introduction();
+	if (test38) Section05::s5_56_Cpp_coroutines_resume_functions();
+	if (test39) Section05::s5_57_Cpp_coroutines_Generators();
+	if (test40) Section05::s5_58_Cpp_Barriers();
+
+	//
+	// section 05
+	//
+	if (test41) Section06::s6_60_Functionality_of_stdatomic_flag();
+	if (test42) Section06::s6_61_Functionality_of_stdatomic_bool();
+	if (test43) Section06::s6_62_Explanation_of_compare_exchange_functions();
+	if (test44) Section06::s6_67_Discussion_on_memory_order_seq_cst();
+	if (test45) Section06::s6_69_Discussion_on_memory_order_relaxed();
+	if (test46) Section06::s6_75_Implementation_of_spin_lock_mutex();
 
 
 	return 0;
