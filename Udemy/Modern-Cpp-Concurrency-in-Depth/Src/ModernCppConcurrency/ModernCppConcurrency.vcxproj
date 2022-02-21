@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jthread.h" />
+    <ClInclude Include="lock_free_stack.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="s4_thread_safe_queue.h" />
     <ClInclude Include="s4_thread_safe_queue2.h" />
@@ -180,6 +181,11 @@
     <ClInclude Include="Section08.h" />
     <ClInclude Include="Section09.h" />
     <ClInclude Include="sequential_queue.h" />
+    <ClInclude Include="simple_threadpool_waiting_for_other_tasks.h" />
+    <ClInclude Include="simple_threadpool_with_local_work_queue.h" />
+    <ClInclude Include="simple_threadpool_with_work_stealing.h" />
+    <ClInclude Include="simple_thread_pool.h" />
+    <ClInclude Include="simple_thread_pool_with_waiting.h" />
     <ClInclude Include="SpinlockMutex.h" />
     <ClInclude Include="ThreadSafeQueue.h" />
     <ClInclude Include="ThreadSafeStack.h" />

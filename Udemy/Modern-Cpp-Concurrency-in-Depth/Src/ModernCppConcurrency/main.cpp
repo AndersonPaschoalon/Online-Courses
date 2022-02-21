@@ -59,7 +59,22 @@ int main()
 	bool test43 = false;
 	bool test44 = false;
 	bool test45 = false;
-	bool test46 = true;
+	bool test46 = false;
+	bool test47 = false;
+	bool test48 = false;
+	bool test49 = false;
+	bool test50 = true;
+	bool test51 = true;
+	bool test52 = true;
+	bool test53 = true;
+	bool test54 = true;
+	bool test55 = true;
+	bool test56 = true;
+	bool test57 = true;
+	bool test58 = true;
+	bool test59 = true;
+	bool test60 = true;
+
 
 	//
 	// Section 01
@@ -127,7 +142,7 @@ int main()
 	if (test40) Section05::s5_58_Cpp_Barriers();
 
 	//
-	// section 05
+	// section 06
 	//
 	if (test41) Section06::s6_60_Functionality_of_stdatomic_flag();
 	if (test42) Section06::s6_61_Functionality_of_stdatomic_bool();
@@ -136,6 +151,18 @@ int main()
 	if (test45) Section06::s6_69_Discussion_on_memory_order_relaxed();
 	if (test46) Section06::s6_75_Implementation_of_spin_lock_mutex();
 
+
+	//
+	// Section 07
+	//
+	if (test47) Section07::s7_76_Introduction_and_some_terminology();
+	if (test48) Section07::s7_77_Stack_recap();
+
+	//
+	// Section 08
+	// 
+	if (test49) Section08::s8_82_Simple_thread_pool();
+	if (test50) Section08::s8_83_Thread_pool_which_allowed_to_wait_on_submitted_tasks();
 
 	return 0;
 }

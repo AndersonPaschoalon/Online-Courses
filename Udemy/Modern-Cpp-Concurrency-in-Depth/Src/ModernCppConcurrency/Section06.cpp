@@ -394,7 +394,7 @@ void s6_75_function()
 {
 	std::lock_guard<SpinlockMutex> lg(s6_75_mutex);
 
-	std::cout << std::this_thread::get_id() << "hello " << std::endl;
+	std::cout << std::this_thread::get_id() << ": hello " << std::endl;
 	std::this_thread::sleep_for(std::chrono::microseconds(5000));
 }
 

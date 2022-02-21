@@ -4,6 +4,13 @@
 #include <thread>
 #include <string>
 #include <chrono>
+#include "simple_thread_pool.h"
+#include "simple_thread_pool_with_waiting.h"
+#include "simple_threadpool_waiting_for_other_tasks.h"
+#include "simple_threadpool_with_local_work_queue.h"
+#include "simple_threadpool_with_work_stealing.h"
+#include "common_objs.h"
+//#include "ThreadSafeQueue.h"
 
 class Section08
 {

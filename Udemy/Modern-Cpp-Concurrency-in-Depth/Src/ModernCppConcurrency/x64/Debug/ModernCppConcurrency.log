@@ -1,6 +1,9 @@
 ﻿  main.cpp
-  Section06.cpp
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section06.cpp(3,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
-  SpinlockMutex.cpp
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+  Section08.cpp
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(23,14): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\common\common_objs.h(24,46): warning C4227: anacronismo usado: qualificadores na referência são ignorados
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\ModernCppConcurrency\Section08.cpp(31,13): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 2 tem o tipo 'std::thread::id'
   Gerando Código...
   ModernCppConcurrency.vcxproj -> C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\Modern-Cpp-Concurrency-in-Depth\Src\x64\Debug\ModernCppConcurrency.exe

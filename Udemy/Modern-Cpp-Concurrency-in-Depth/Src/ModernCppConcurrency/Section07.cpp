@@ -1,4 +1,5 @@
 #include "Section07.h"
+#include "lock_free_stack.h"
 #include "Utils.h"
 
 void run_07_76();
@@ -14,16 +15,36 @@ void run_07_81();
 
 void run_07_76()
 {
+
 }
 
 //
 // ----------------------------------------------------
 //
 
+lock_free_stack s_07_77_stk((int)1);
+
+
+void s_07_77_update_lock_free_stack();
 
 void run_07_77()
 {
+	std::thread update1(s_07_77_update_lock_free_stack);
+	std::thread update2(s_07_77_update_lock_free_stack);
+	update1.join();
+	update2.join();
+	s_07_77_stk.showInfo();
 }
+
+
+void s_07_77_update_lock_free_stack()
+{
+	for (int i = 0; i < 500; i++)
+	{
+		s_07_77_stk.push(i);
+	}
+}
+
 
 //
 // ----------------------------------------------------
