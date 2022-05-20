@@ -32,6 +32,6 @@ C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideFo
 C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\UserControls\ProfileCard.g.cs
 C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\UserControls\ProfileCard.baml
-C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\GitSpear.csprojAssemblyReference.cache
 C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\UserControls\TestControl.g.cs
 C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\UserControls\TestControl.baml
+C:\Users\anderson_paschoalon\Workspace\_Personal\Online-Courses\Udemy\WPFGuideForBeginners\GitSpear\obj\Debug\GitSpear.csproj.AssemblyReference.cache

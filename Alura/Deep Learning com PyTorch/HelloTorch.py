@@ -82,6 +82,9 @@ else:
   device = torch.device('cpu')
 print(device)
 
+tsnr1.to(device)
+print(tsnr1)
+
 
 
 

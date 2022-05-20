@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GitSpear.UserControls" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sdk="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-        Background="{DynamicResource MaterialDesignPaper}"
+        Background="{DynamicResource MaterialDesignLightBackground}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"        
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="971" >
