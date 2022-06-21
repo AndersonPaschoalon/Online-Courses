@@ -30,6 +30,10 @@ github_username:  minimal_git
 theme: minima
 plugins:
   - jekyll-feed
+markdown: kramdown # interpretador do markdown
+# permakink: /:categories/:year/:month/:day/:title
+# permalink: /:year/:month/:day/:title
+permalink: /:title
 
 # Exclude from processing.
 # The following items will not be processed, by default.

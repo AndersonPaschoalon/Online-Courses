@@ -1,0 +1,91 @@
+---
+layout: default
+test_var: "Liquid test"
+tags:
+  - liquid
+  - blog
+  - jekyll
+
+complex_object:
+  - obj1:
+      val1: AAAAA  
+      val2: BBBBBB  
+      val3: CCCCC    
+  - obj2:
+      val1: 1111  
+      val2: 2222  
+      val3: 3333      
+show_footer: true
+---
+
+
+<h1>Hello, world! {{ layout.test_var }}</h1>
+
+{%  for tag in layout.tags %}
+<h2> {{ tag }} </h2>
+{%  endfor %}
+
+
+{%  for cobj in layout.complex_object %}
+{% for item in cobj %}
+<h2> {{ item }} </h2>
+<h2> -- {{ item["val1"] }} </h2>
+<h2> -- {{ item.key }} {{ item.value }} {{ item.name }}  </h2>
+<h2> -- {{ item[0] }} | {{ item[1] }} | {{ item[1]["val1"] }}</h2>
+{%  endfor %}
+{%  endfor %}
+
+<h2> Utilizando tipos complexos </h2>
+
+{%  for cobj in layout.complex_object %}
+{% for item in cobj %}
+<h2> {{ item[1]["val1"] }} </h2>
+<h2> {{ item[1]["val2"] }} </h2>
+<h2> {{ item[1]["val3"] }} </h2>
+{%  endfor %}
+{%  endfor %}
+
+
+{% if layout.show_footer == true %}
+<footer>
+  <p>By Anderson Paschoalon</p>
+</footer>
+{%  endif %}
+
+
+
+<!--
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  <p>
+    Este é um exemplo de conteudo adicionado na pagina home.
+  </p>
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    <ul class="post-list">
+      {%- for post in site.posts -%}
+      <li>
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+
+</div>
+-->
