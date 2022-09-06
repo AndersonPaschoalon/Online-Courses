@@ -161,7 +161,7 @@ def main():
     #
     # Step 03 - Train the model
     #
-    n_epochs = 20
+    n_epochs = 10
     output_dir = "24"
     train_the_model(model, x_train, y_train, x_test, y_test, n_epochs, output_dir)
 
