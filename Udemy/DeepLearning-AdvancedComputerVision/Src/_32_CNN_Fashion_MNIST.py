@@ -101,10 +101,11 @@ def plot_loss_and_accurary_per_iteration(r, out_dir=""):
     plt.legend()
     plt.savefig(out_dir + "accuracy_per_iteration")
 
-def plot_confusion_matrix(model, x_test, y_test):
+def plot_confusion_matrix(model, x_test, y_test, out_dir):
+    out_dir += "\\"
     p_test = model.predict(x_test).argmax(axis=1)
     cm = confusion_matrix(y_test, p_test)
-    Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name="CnnFashionMnist_ConfusionMatrix")
+    Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name= out_dir + "CnnFashionMnist_ConfusionMatrix")
 
 
 def main():
@@ -114,7 +115,7 @@ def main():
     model = build_the_model(input_shape=x_train[0].shape, number_of_classes=K)
     r = train_the_model(model, x_train, y_train, x_test, y_test, n_epochs=n_epochs)
     plot_loss_and_accurary_per_iteration(r, out_dir=out_dir)
-    plot_confusion_matrix(model, x_test, y_test)
+    plot_confusion_matrix(model, x_test, y_test, out_dir)
 
 if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
