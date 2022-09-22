@@ -6,6 +6,18 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from Utils import Utils
 
+LABELS = """TShirtTop
+Trouser
+Pullover
+Dress
+Coat
+Sandal
+Shirt
+Sneaker
+Bag
+AnkleBoot
+"""
+
 MNIST_FASHION_LABELS = {
     "0": "TShirtTop",
     "1": "Trouser",
@@ -101,12 +113,25 @@ def plot_loss_and_accurary_per_iteration(r, out_dir=""):
     plt.legend()
     plt.savefig(out_dir + "accuracy_per_iteration")
 
-def plot_confusion_matrix(model, x_test, y_test, out_dir):
+def plot_confusion_matrix(model, x_test, y_test, out_dir, n_miss_examples = 1):
     out_dir += "\\"
     p_test = model.predict(x_test).argmax(axis=1)
     cm = confusion_matrix(y_test, p_test)
     Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name= out_dir + "CnnFashionMnist_ConfusionMatrix")
-
+    # show some missclassified examples
+    the_labels = LABELS.split()
+    misclassified_idx = np.where(p_test != y_test)[0]
+    count = 0
+    while count < n_miss_examples:
+        i = np.random.choice(misclassified_idx)
+        print("Missclassified sample: ", i)
+        the_title = "TrueLabel: " + the_labels[y_test[i]] + ", Predicted:" + the_labels[p_test[i]]
+        print("The Title:", the_title)
+        plt.clf()
+        plt.imshow(x_test[i].reshape(28, 28), cmap='gray')
+        plt.title(the_title)
+        plt.savefig(out_dir + "missclassified_" + str(count))
+        count += 1
 
 def main():
     n_epochs = 2
@@ -115,7 +140,7 @@ def main():
     model = build_the_model(input_shape=x_train[0].shape, number_of_classes=K)
     r = train_the_model(model, x_train, y_train, x_test, y_test, n_epochs=n_epochs)
     plot_loss_and_accurary_per_iteration(r, out_dir=out_dir)
-    plot_confusion_matrix(model, x_test, y_test, out_dir)
+    plot_confusion_matrix(model, x_test, y_test, out_dir, 5)
 
 if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
