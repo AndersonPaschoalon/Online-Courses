@@ -134,7 +134,7 @@ def plot_confusion_matrix(model, x_test, y_test, out_dir, n_miss_examples = 1):
         count += 1
 
 def main():
-    n_epochs = 2
+    n_epochs = 200
     out_dir = "32"
     (x_train, y_train), (x_test, y_test), K = load_fashion_mnist(out_dir)
     model = build_the_model(input_shape=x_train[0].shape, number_of_classes=K)
