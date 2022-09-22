@@ -3,7 +3,8 @@ from tensorflow.keras.layers import Input, Conv2D, Dense, Flatten, Dropout, Glob
 from tensorflow.keras.models import Model
 import numpy as np
 import matplotlib.pyplot as plt
-
+from sklearn.metrics import confusion_matrix
+from Utils import Utils
 
 MNIST_FASHION_LABELS = {
     "0": "TShirtTop",
@@ -62,8 +63,8 @@ def build_the_model(input_shape, number_of_classes):
     actv_function_conv = 'relu'
     actv_function_dense = 'relu'
     actv_function_out = 'softmax'
+    loss_function = 'sparse_categorical_crossentropy'
     optimizer_func = 'adam'
-
     # model build
     i = Input(shape=input_shape)
     x = Conv2D(cl1, kernel_size=kernel_size, strides=strides, activation=actv_function_conv)(i)
@@ -71,14 +72,13 @@ def build_the_model(input_shape, number_of_classes):
     x = Conv2D(cl3, kernel_size=kernel_size, strides=strides, activation=actv_function_conv)(x)
     x = Flatten()(x)
     x = Dropout(0.2)(x)
-    x = Dense(dl1, activation=actv_function_dense)
+    x = Dense(dl1, activation=actv_function_dense)(x)
     x = Dropout(0.2)(x)
-    x = Dense(dl2, activation=actv_function_out)
+    x = Dense(dl2, activation=actv_function_out)(x)
     model = Model(i, x)
-
     # compile
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
+    model.compile(optimizer=optimizer_func,
+                  loss=loss_function,
                   metrics=['accuracy'])
     return model
 
@@ -86,13 +86,35 @@ def train_the_model(model, x_train, y_train, x_test, y_test, n_epochs):
     r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=n_epochs)
     return r
 
+def plot_loss_and_accurary_per_iteration(r, out_dir=""):
+    out_dir += "\\"
+    # plot loss per iteration
+    plt.clf()
+    plt.plot(r.history['loss'], label='loss')
+    plt.plot(r.history['val_loss'], label='val_loss')
+    plt.legend()
+    plt.savefig(out_dir + "loss_per_iteration")
+    # plot accuracy per iteration
+    plt.clf()
+    plt.plot(r.history['accuracy'], label='acc')
+    plt.plot(r.history['val_accuracy'], label='val_acc')
+    plt.legend()
+    plt.savefig(out_dir + "accuracy_per_iteration")
+
+def plot_confusion_matrix(model, x_test, y_test):
+    p_test = model.predict(x_test).argmax(axis=1)
+    cm = confusion_matrix(y_test, p_test)
+    Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name="CnnFashionMnist_ConfusionMatrix")
 
 
 def main():
-    n_epochs=2
-    (x_train, y_train), (x_test, y_test), K = load_fashion_mnist("32")
+    n_epochs = 2
+    out_dir = "32"
+    (x_train, y_train), (x_test, y_test), K = load_fashion_mnist(out_dir)
     model = build_the_model(input_shape=x_train[0].shape, number_of_classes=K)
-    r = train_the_model(model, x_train, y_train, x_test, y_test, n_epochs=n_epochs )
+    r = train_the_model(model, x_train, y_train, x_test, y_test, n_epochs=n_epochs)
+    plot_loss_and_accurary_per_iteration(r, out_dir=out_dir)
+    plot_confusion_matrix(model, x_test, y_test)
 
 if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
