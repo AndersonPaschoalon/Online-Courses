@@ -2,3 +2,10 @@ https://lazyprogrammer.me/
 
 https://github.com/lazyprogrammer/machine_learning_examples
 
+Imagem de frutas:
+https://www.kaggle.com/datasets/moltean/fruits
+
+
+
+
+
