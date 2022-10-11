@@ -1,5 +1,5 @@
 import subprocess
-
+import zipfile
 import numpy as np
 import wget
 import os
@@ -17,8 +17,20 @@ class Utils:
             print("File ", output_file_path, " already exist!")
         else:
             print("Downloading file ", output_file_path, " from url:" + url)
-            wget.download(url, output_file_path)
+            wget.download(url, out=output_file_path)
             print("Download complete.")
+
+    @staticmethod
+    def unzip(zip_file, dst_dir = ""):
+        if not os.path.exists(zip_file):
+            print("Error: ZIP file ", zip_file, " does not exist!")
+            return False
+        zip_no_ext = os.path.basename(os.path.splitext(zip_file)[0])
+        if dst_dir == "":
+            dst_dir = zip_no_ext
+        with zipfile.ZipFile(zip_no_ext, 'r') as zip_ref:
+            zip_ref.extractall(dst_dir)
+        return True
 
     @staticmethod
     def plot_confusion_matrix(cm,
@@ -56,6 +68,8 @@ class Utils:
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
         plt.savefig(out_file_name)
+
+
 
     @staticmethod
     def mkdir(p):

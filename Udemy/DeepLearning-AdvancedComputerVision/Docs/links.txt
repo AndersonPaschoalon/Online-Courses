@@ -5,6 +5,11 @@ https://github.com/lazyprogrammer/machine_learning_examples
 Imagem de frutas:
 https://www.kaggle.com/datasets/moltean/fruits
 
+Blood Cell Images
+https://www.kaggle.com/paultimothymooney/blood-cells
+
+
+
 
 
 
