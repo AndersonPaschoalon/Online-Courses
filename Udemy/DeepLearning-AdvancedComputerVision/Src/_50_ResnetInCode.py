@@ -13,13 +13,14 @@ from tensorflow.keras.optimizers import Adam
 
 from sklearn.metrics import confusion_matrix
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 
 from glob import glob
 
 
 def load_the_data(out_dir, train_path, valid_path, debug=False):
-    out_dir += "\\"
+    out_dir += os.sep
     # useful for getting number of files
     image_files = glob(train_path + '/*/*.jp*g')
     valid_image_files = glob(valid_path + '/*/*.jp*g')
@@ -136,7 +137,7 @@ def build_the_model(out_dir,
                     epochs,
                     image_files,
                     valid_image_files):
-    out_dir += "\\"
+    out_dir += os.sep
     # our custom resnet
     i = Input(shape=image_size + [3])
     x = ZeroPadding2D(padding=(3, 3))(i)
@@ -194,6 +195,9 @@ def train_the_model(model,
                     train_path,
                     image_files,
                     valid_image_files):
+    # update dirs
+    out_dir = out_dir + os.sep
+    checkpoint_file = out_dir + os.sep + "checkpoint.chk"
     train_gen = ImageDataGenerator(
         rotation_range=20,
         width_shift_range=0.1,
@@ -242,7 +246,14 @@ def train_the_model(model,
     )
 
     # fit the model
-    checkpoint_filepath = "/tmp/checkpoint"
+    # tf.keras.callbacks.ModelCheckpoint
+    # Callback to save the Keras model or model weights at some frequency.
+    # ModelCheckpoint callback is used in conjunction with training using model.fit() to save a model or weights (in a checkpoint file) at some interval, so the model or weights can be loaded later to continue the training from the state saved.
+    # A few options this callback provides include:
+    # - Whether to only keep the model that has achieved the "best performance" so far, or whether to save the model at the end of every epoch regardless of performance.
+    # - Definition of 'best'; which quantity to monitor and whether it should be maximized or minimized.
+    # - The frequency it should save at. Currently, the callback supports saving at the end of every epoch, or after a fixed number of training batches.
+    # - Whether only weights are saved, or the whole model is saved.
     r = model.fit(
         train_generator,
         validation_data=valid_generator,
@@ -256,7 +267,7 @@ def train_the_model(model,
                 restore_best_weights=True,
             ),
             tf.keras.callbacks.ModelCheckpoint(
-                filepath=checkpoint_filepath,
+                filepath=checkpoint_file,
                 save_weights_only=True,
                 monitor='val_accuracy',
                 mode='max',
@@ -279,7 +290,7 @@ def train_the_model(model,
     plt.legend()
     plt.savefig(out_dir + "accuracy_per_iteration")
 
-    model.load_weights(checkpoint_filepath)
+    model.load_weights(checkpoint_file)
 
     return model, train_gen, val_gen, labels
 
@@ -289,7 +300,7 @@ def main():
     # re-size all the images to this
     image_size = [224, 224]  # feel free to change depending on dataset
     # training config
-    epochs = 1
+    epochs = 16
     # the number of samples to work through before updating the internal model parameters
     batch_size = 128
     #
