@@ -1,0 +1,262 @@
+C:\Users\Usuario\anaconda3\envs\tf\python.exe C:/Users/Usuario/Workspace/Online_Courses/Online-Courses/Udemy/DeepLearning-AdvancedComputerVision/Src/_50_ResnetInCode.py
+TensorFlow version: 2.6.0
+2022-10-14 16:48:59.858172: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-10-14 16:49:00.518521: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2153 MB memory:  -> device: 0, name: NVIDIA GeForce GTX 1650, pci bus id: 0000:01:00.0, compute capability: 7.5
+2022-10-14 16:49:01.040513: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 2153 MB memory:  -> device: 0, name: NVIDIA GeForce GTX 1650, pci bus id: 0000:01:00.0, compute capability: 7.5
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_1 (InputLayer)            [(None, 224, 224, 3) 0
+__________________________________________________________________________________________________
+zero_padding2d (ZeroPadding2D)  (None, 230, 230, 3)  0           input_1[0][0]
+__________________________________________________________________________________________________
+conv2d (Conv2D)                 (None, 112, 112, 64) 9472        zero_padding2d[0][0]
+__________________________________________________________________________________________________
+batch_normalization (BatchNorma (None, 112, 112, 64) 256         conv2d[0][0]
+__________________________________________________________________________________________________
+activation (Activation)         (None, 112, 112, 64) 0           batch_normalization[0][0]
+__________________________________________________________________________________________________
+zero_padding2d_1 (ZeroPadding2D (None, 114, 114, 64) 0           activation[0][0]
+__________________________________________________________________________________________________
+max_pooling2d (MaxPooling2D)    (None, 56, 56, 64)   0           zero_padding2d_1[0][0]
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 56, 56, 64)   4160        max_pooling2d[0][0]
+__________________________________________________________________________________________________
+batch_normalization_1 (BatchNor (None, 56, 56, 64)   256         conv2d_1[0][0]
+__________________________________________________________________________________________________
+activation_1 (Activation)       (None, 56, 56, 64)   0           batch_normalization_1[0][0]
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 56, 56, 64)   36928       activation_1[0][0]
+__________________________________________________________________________________________________
+batch_normalization_2 (BatchNor (None, 56, 56, 64)   256         conv2d_2[0][0]
+__________________________________________________________________________________________________
+activation_2 (Activation)       (None, 56, 56, 64)   0           batch_normalization_2[0][0]
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 56, 56, 256)  16640       activation_2[0][0]
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 56, 56, 256)  16640       max_pooling2d[0][0]
+__________________________________________________________________________________________________
+batch_normalization_3 (BatchNor (None, 56, 56, 256)  1024        conv2d_3[0][0]
+__________________________________________________________________________________________________
+batch_normalization_4 (BatchNor (None, 56, 56, 256)  1024        conv2d_4[0][0]
+__________________________________________________________________________________________________
+add (Add)                       (None, 56, 56, 256)  0           batch_normalization_3[0][0]
+                                                                 batch_normalization_4[0][0]
+__________________________________________________________________________________________________
+activation_3 (Activation)       (None, 56, 56, 256)  0           add[0][0]
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 56, 56, 64)   16448       activation_3[0][0]
+__________________________________________________________________________________________________
+batch_normalization_5 (BatchNor (None, 56, 56, 64)   256         conv2d_5[0][0]
+__________________________________________________________________________________________________
+activation_4 (Activation)       (None, 56, 56, 64)   0           batch_normalization_5[0][0]
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 56, 56, 64)   36928       activation_4[0][0]
+__________________________________________________________________________________________________
+batch_normalization_6 (BatchNor (None, 56, 56, 64)   256         conv2d_6[0][0]
+__________________________________________________________________________________________________
+activation_5 (Activation)       (None, 56, 56, 64)   0           batch_normalization_6[0][0]
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 56, 56, 256)  16640       activation_5[0][0]
+__________________________________________________________________________________________________
+batch_normalization_7 (BatchNor (None, 56, 56, 256)  1024        conv2d_7[0][0]
+__________________________________________________________________________________________________
+add_1 (Add)                     (None, 56, 56, 256)  0           batch_normalization_7[0][0]
+                                                                 activation_3[0][0]
+__________________________________________________________________________________________________
+activation_6 (Activation)       (None, 56, 56, 256)  0           add_1[0][0]
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 56, 56, 64)   16448       activation_6[0][0]
+__________________________________________________________________________________________________
+batch_normalization_8 (BatchNor (None, 56, 56, 64)   256         conv2d_8[0][0]
+__________________________________________________________________________________________________
+activation_7 (Activation)       (None, 56, 56, 64)   0           batch_normalization_8[0][0]
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 56, 56, 64)   36928       activation_7[0][0]
+__________________________________________________________________________________________________
+batch_normalization_9 (BatchNor (None, 56, 56, 64)   256         conv2d_9[0][0]
+__________________________________________________________________________________________________
+activation_8 (Activation)       (None, 56, 56, 64)   0           batch_normalization_9[0][0]
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 56, 56, 256)  16640       activation_8[0][0]
+__________________________________________________________________________________________________
+batch_normalization_10 (BatchNo (None, 56, 56, 256)  1024        conv2d_10[0][0]
+__________________________________________________________________________________________________
+add_2 (Add)                     (None, 56, 56, 256)  0           batch_normalization_10[0][0]
+                                                                 activation_6[0][0]
+__________________________________________________________________________________________________
+activation_9 (Activation)       (None, 56, 56, 256)  0           add_2[0][0]
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 56, 56, 128)  32896       activation_9[0][0]
+__________________________________________________________________________________________________
+batch_normalization_11 (BatchNo (None, 56, 56, 128)  512         conv2d_11[0][0]
+__________________________________________________________________________________________________
+activation_10 (Activation)      (None, 56, 56, 128)  0           batch_normalization_11[0][0]
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 56, 56, 128)  147584      activation_10[0][0]
+__________________________________________________________________________________________________
+batch_normalization_12 (BatchNo (None, 56, 56, 128)  512         conv2d_12[0][0]
+__________________________________________________________________________________________________
+activation_11 (Activation)      (None, 56, 56, 128)  0           batch_normalization_12[0][0]
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 56, 56, 512)  66048       activation_11[0][0]
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 56, 56, 512)  131584      activation_9[0][0]
+__________________________________________________________________________________________________
+batch_normalization_13 (BatchNo (None, 56, 56, 512)  2048        conv2d_13[0][0]
+__________________________________________________________________________________________________
+batch_normalization_14 (BatchNo (None, 56, 56, 512)  2048        conv2d_14[0][0]
+__________________________________________________________________________________________________
+add_3 (Add)                     (None, 56, 56, 512)  0           batch_normalization_13[0][0]
+                                                                 batch_normalization_14[0][0]
+__________________________________________________________________________________________________
+activation_12 (Activation)      (None, 56, 56, 512)  0           add_3[0][0]
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 56, 56, 128)  65664       activation_12[0][0]
+__________________________________________________________________________________________________
+batch_normalization_15 (BatchNo (None, 56, 56, 128)  512         conv2d_15[0][0]
+__________________________________________________________________________________________________
+activation_13 (Activation)      (None, 56, 56, 128)  0           batch_normalization_15[0][0]
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 56, 56, 128)  147584      activation_13[0][0]
+__________________________________________________________________________________________________
+batch_normalization_16 (BatchNo (None, 56, 56, 128)  512         conv2d_16[0][0]
+__________________________________________________________________________________________________
+activation_14 (Activation)      (None, 56, 56, 128)  0           batch_normalization_16[0][0]
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 56, 56, 512)  66048       activation_14[0][0]
+__________________________________________________________________________________________________
+batch_normalization_17 (BatchNo (None, 56, 56, 512)  2048        conv2d_17[0][0]
+__________________________________________________________________________________________________
+add_4 (Add)                     (None, 56, 56, 512)  0           batch_normalization_17[0][0]
+                                                                 activation_12[0][0]
+__________________________________________________________________________________________________
+activation_15 (Activation)      (None, 56, 56, 512)  0           add_4[0][0]
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 56, 56, 128)  65664       activation_15[0][0]
+__________________________________________________________________________________________________
+batch_normalization_18 (BatchNo (None, 56, 56, 128)  512         conv2d_18[0][0]
+__________________________________________________________________________________________________
+activation_16 (Activation)      (None, 56, 56, 128)  0           batch_normalization_18[0][0]
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 56, 56, 128)  147584      activation_16[0][0]
+__________________________________________________________________________________________________
+batch_normalization_19 (BatchNo (None, 56, 56, 128)  512         conv2d_19[0][0]
+__________________________________________________________________________________________________
+activation_17 (Activation)      (None, 56, 56, 128)  0           batch_normalization_19[0][0]
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 56, 56, 512)  66048       activation_17[0][0]
+__________________________________________________________________________________________________
+batch_normalization_20 (BatchNo (None, 56, 56, 512)  2048        conv2d_20[0][0]
+__________________________________________________________________________________________________
+add_5 (Add)                     (None, 56, 56, 512)  0           batch_normalization_20[0][0]
+                                                                 activation_15[0][0]
+__________________________________________________________________________________________________
+activation_18 (Activation)      (None, 56, 56, 512)  0           add_5[0][0]
+__________________________________________________________________________________________________
+conv2d_21 (Conv2D)              (None, 56, 56, 128)  65664       activation_18[0][0]
+__________________________________________________________________________________________________
+batch_normalization_21 (BatchNo (None, 56, 56, 128)  512         conv2d_21[0][0]
+__________________________________________________________________________________________________
+activation_19 (Activation)      (None, 56, 56, 128)  0           batch_normalization_21[0][0]
+__________________________________________________________________________________________________
+conv2d_22 (Conv2D)              (None, 56, 56, 128)  147584      activation_19[0][0]
+__________________________________________________________________________________________________
+batch_normalization_22 (BatchNo (None, 56, 56, 128)  512         conv2d_22[0][0]
+__________________________________________________________________________________________________
+activation_20 (Activation)      (None, 56, 56, 128)  0           batch_normalization_22[0][0]
+__________________________________________________________________________________________________
+conv2d_23 (Conv2D)              (None, 56, 56, 512)  66048       activation_20[0][0]
+__________________________________________________________________________________________________
+batch_normalization_23 (BatchNo (None, 56, 56, 512)  2048        conv2d_23[0][0]
+__________________________________________________________________________________________________
+add_6 (Add)                     (None, 56, 56, 512)  0           batch_normalization_23[0][0]
+                                                                 activation_18[0][0]
+__________________________________________________________________________________________________
+activation_21 (Activation)      (None, 56, 56, 512)  0           add_6[0][0]
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 1605632)      0           activation_21[0][0]
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 4)            6422532     flatten[0][0]
+==================================================================================================
+Total params: 7,882,628
+Trainable params: 7,872,516
+Non-trainable params: 10,112
+__________________________________________________________________________________________________
+Found 2487 images belonging to 4 classes.
+test_ge.class_indices: {'EOSINOPHIL': 0, 'LYMPHOCYTE': 1, 'MONOCYTE': 2, 'NEUTROPHIL': 3}
+min: -1.0 , max: 0.9764706
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Found 9957 images belonging to 4 classes.
+Found 2487 images belonging to 4 classes.
+2022-10-14 16:49:03.389425: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+Epoch 1/16
+2022-10-14 16:49:06.542715: I tensorflow/stream_executor/cuda/cuda_dnn.cc:369] Loaded cuDNN version 8100
+2022-10-14 16:49:08.560323: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1.14GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:08.560614: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1.14GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:08.768791: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.13GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:08.769063: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.13GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:08.819249: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:08.819525: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:09.035573: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:09.035852: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:09.071479: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.15GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-10-14 16:49:09.071762: W tensorflow/core/common_runtime/bfc_allocator.cc:272] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.15GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+827/829 [============================>.] - ETA: 0s - loss: 10.9332 - accuracy: 0.53692022-10-14 16:52:49.639474: W tensorflow/core/common_runtime/bfc_allocator.cc:338] Garbage collection: deallocate free memory regions (i.e., allocations) so that we can re-allocate a larger region to avoid OOM due to memory fragmentation. If you see this message frequently, you are running near the threshold of the available device memory and re-allocation may incur great performance overhead. You may try smaller batch sizes to observe the performance impact. Set TF_ENABLE_GPU_GARBAGE_COLLECTION=false if you'd like to disable this feature.
+829/829 [==============================] - 245s 289ms/step - loss: 10.9151 - accuracy: 0.5372 - val_loss: 4.5673 - val_accuracy: 0.6864
+Epoch 2/16
+829/829 [==============================] - 238s 287ms/step - loss: 2.4425 - accuracy: 0.7654 - val_loss: 2.9915 - val_accuracy: 0.7931
+Epoch 3/16
+829/829 [==============================] - 238s 287ms/step - loss: 1.3673 - accuracy: 0.8295 - val_loss: 1.3980 - val_accuracy: 0.7790
+Epoch 4/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.8836 - accuracy: 0.8616 - val_loss: 1.9873 - val_accuracy: 0.7858
+Epoch 5/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.4887 - accuracy: 0.8984 - val_loss: 1.2263 - val_accuracy: 0.8245
+Epoch 6/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.3246 - accuracy: 0.9171 - val_loss: 0.8729 - val_accuracy: 0.8329
+Epoch 7/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.3203 - accuracy: 0.9176 - val_loss: 1.6730 - val_accuracy: 0.8128
+Epoch 8/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.2218 - accuracy: 0.9309 - val_loss: 2.2336 - val_accuracy: 0.7935
+Epoch 9/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.2040 - accuracy: 0.9355 - val_loss: 0.9675 - val_accuracy: 0.8289
+Epoch 10/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.1542 - accuracy: 0.9469 - val_loss: 0.8790 - val_accuracy: 0.8257
+Epoch 11/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.1523 - accuracy: 0.9474 - val_loss: 1.0244 - val_accuracy: 0.8490
+Epoch 12/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.1787 - accuracy: 0.9436 - val_loss: 0.7356 - val_accuracy: 0.8772
+Epoch 13/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.0995 - accuracy: 0.9661 - val_loss: 0.9901 - val_accuracy: 0.8744
+Epoch 14/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.1304 - accuracy: 0.9571 - val_loss: 1.0271 - val_accuracy: 0.8462
+Epoch 15/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.1402 - accuracy: 0.9561 - val_loss: 0.9012 - val_accuracy: 0.8168
+Epoch 16/16
+829/829 [==============================] - 238s 287ms/step - loss: 0.0815 - accuracy: 0.9702 - val_loss: 0.7902 - val_accuracy: 0.8547
+Generating confusion matrix 9957
+Found 9957 images belonging to 4 classes.
+2022-10-14 17:52:47.812983: W tensorflow/core/common_runtime/bfc_allocator.cc:338] Garbage collection: deallocate free memory regions (i.e., allocations) so that we can re-allocate a larger region to avoid OOM due to memory fragmentation. If you see this message frequently, you are running near the threshold of the available device memory and re-allocation may incur great performance overhead. You may try smaller batch sizes to observe the performance impact. Set TF_ENABLE_GPU_GARBAGE_COLLECTION=false if you'd like to disable this feature.
+50
+100
+150
+200
+250
+300
+350
+400
+Generating confusion matrix 2487
+Found 2487 images belonging to 4 classes.
+50
+100
+Confusion matrix, without normalization
+[[2056    4    1  436]
+ [   0 2482    0    1]
+ [   0    2 2472    4]
+ [  20   30    0 2449]]
+train_accuracy: 0.9499849352214522
+val_accuracy: 0.877362283876156
+
+Process finished with exit code 0
