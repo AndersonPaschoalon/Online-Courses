@@ -18,6 +18,9 @@ import matplotlib.pyplot as plt
 
 from glob import glob
 
+# fix gpu
+from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession
 
 def load_the_data(out_dir, train_path, valid_path, debug=False):
     out_dir += os.sep
@@ -278,14 +281,14 @@ def train_the_model(model,
 
     # loss
     plt.clf()
-    plt.plot(r.histroy['loss'], label='train loss')
+    plt.plot(r.history['loss'], label='train loss')
     plt.plot(r.history['val_loss'], label='val loss')
     plt.legend()
     plt.savefig(out_dir + "loss_per_iteration")
 
     # accuracies
     plt.clf()
-    plt.plot(r.histroy['accuracy'], label='train acc')
+    plt.plot(r.history['accuracy'], label='train acc')
     plt.plot(r.history['val_accuracy'], label='val acc')
     plt.legend()
     plt.savefig(out_dir + "accuracy_per_iteration")
@@ -296,13 +299,17 @@ def train_the_model(model,
 
 
 def main():
+    #config = tf.compat.v1.ConfigProto()
+    #config.gpu_options.allow_growth = True
+    #sess = tf.compat.v1.Session(config=config)
     out_dir = "50"
     # re-size all the images to this
     image_size = [224, 224]  # feel free to change depending on dataset
     # training config
     epochs = 16
     # the number of samples to work through before updating the internal model parameters
-    batch_size = 128
+    #batch_size = 128
+    batch_size = 12
     #
     train_path = "blood_cell_images/TRAIN"
     valid_path = "blood_cell_images/TEST"
@@ -318,34 +325,48 @@ def main():
                             image_files,
                             valid_image_files)
     model, train_gen, val_gen, labels = train_the_model(model,
-                                                valid_path,
-                                                image_size,
-                                                out_dir,
-                                                batch_size,
-                                                epochs,
-                                                train_path,
-                                                image_files,
-                                                valid_image_files)
+                                                        valid_path,
+                                                        image_size,
+                                                        out_dir,
+                                                        batch_size,
+                                                        epochs,
+                                                        train_path,
+                                                        image_files,
+                                                        valid_image_files)
     cm = get_confusion_matrix(data_path=train_path,
                               N=len(image_files),
                               image_size=image_size,
                               batch_size=batch_size,
-                              image_generator=val_gen)
+                              image_generator=val_gen,
+                              model=model)
     valid_cm = get_confusion_matrix(data_path=valid_path,
-                              N=len(valid_image_files),
-                              image_size=image_size,
-                              batch_size=batch_size,
-                              image_generator=val_gen)
+                                    N=len(valid_image_files),
+                                    image_size=image_size,
+                                    batch_size=batch_size,
+                                    image_generator=val_gen,
+                                    model=model)
 
-    Utils.plot_confusion_matrix(cm=cm, classes=labels, normalize=False, title="Confusion Matrix", cmap=plt.cm.Blues)
+    Utils.plot_confusion_matrix(cm=cm,
+                                classes=labels,
+                                normalize=False,
+                                title="Confusion Matrix",
+                                cmap=plt.cm.Blues,
+                                out_file_name=out_dir + "\\" + "confusion_matrix")
     # trace calc the sum of the diagonal
     train_accuracy = np.trace(cm) / cm.sum()
     val_accuracy = np.trace(valid_cm) / valid_cm.sum()
     print("train_accuracy:", train_accuracy)
     print("val_accuracy:", val_accuracy)
 
-
+def fix_gpu():
+    config = ConfigProto()
+    config.gpu_options.allow_growth = True
+    session = InteractiveSession(config=config)
+    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+    # 'TF_GPU_ALLOCATOR=cuda_malloc_async'
+    os.environ['TF_GPU_ALLOCATOR'] = 'cuda_malloc_async'
 
 if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
+    fix_gpu()
     main()
