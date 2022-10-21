@@ -2,4 +2,14 @@ archive.zip
 large_files/*
 fruits-360_dataset/
 blood_cell_images/
+61/ssd_resnet101_model/frozen_inference_graph.pb
+61/ssd_resnet101_model/saved_model/saved_model.pb
+61/ssd_resnet101_model/model.ckpt.data-00000-of-00001
+
+
+
+
+
+
+
 

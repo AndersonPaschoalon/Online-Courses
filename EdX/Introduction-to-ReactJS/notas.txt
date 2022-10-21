@@ -1,5 +1,0 @@
-Module2:
-	- class components
-	- state
-	- life cycle methods
-	- event handlers

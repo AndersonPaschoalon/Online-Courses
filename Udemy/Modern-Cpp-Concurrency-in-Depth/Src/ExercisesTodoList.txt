@@ -1,6 +1,0 @@
-# Section 01
-Exercise 01		ok
-Exercise 02		ok
-Exercise 03		--
-
-

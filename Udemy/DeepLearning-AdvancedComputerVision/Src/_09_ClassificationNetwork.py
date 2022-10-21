@@ -19,6 +19,7 @@ from tensorflow import keras
 #plotter
 import matplotlib.pyplot as plt
 
+
 # Lesson 09
 def test_input_data(data):
     # check the data
@@ -43,6 +44,7 @@ def test_input_data(data):
     print("data.target_names:", data.target_names)
     print("data.feature_names:", data.feature_names)
 
+
 # lesson 09
 def loading_the_data(test_split):
     # load the data
@@ -63,6 +65,7 @@ def loading_the_data(test_split):
     x_train = scaller.fit_transform(x_train)
     x_test = scaller.transform(x_test)
     return x, y, x_train, x_test, y_train, y_test, N, D
+
 
 def creating_and_training_the_model(x_train, x_test, y_train, y_test, N, D, n_epochs):
     # now, it is time for tensor flow work
@@ -115,6 +118,7 @@ def making_predictions(model, X_test, y_test):
     print("Evaluate output:", model.evaluate(X_test, y_test))
     # we get the same result as when wo do model.evaluate()
 
+
 # lesson 15: saving a model
 def saving_the_model_and_evaluate(model_name, model, X_test, y_test):
     model.save(model_name + ".h5")
@@ -122,7 +126,6 @@ def saving_the_model_and_evaluate(model_name, model, X_test, y_test):
     model = tf.keras.models.load_model(model_name + ".h5")
     print("model.layers:", model.layers)
     model.evaluate(X_test, y_test)
-
 
 
 def main():
@@ -135,6 +138,7 @@ def main():
     model = creating_and_training_the_model(x_train, x_test, y_train, y_test, N, D, n_epochs)
     making_predictions(model, x_test, y_test)
     saving_the_model_and_evaluate("09/linearclassifier", model, x_test, y_test)
+
 
 if __name__ == '__main__':
     main()

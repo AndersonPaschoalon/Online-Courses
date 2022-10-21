@@ -129,4 +129,16 @@ class Utils:
                 """
                 print(error_msg)
 
+    @staticmethod
+    def pwd():
+        curr_dir = os.path.abspath(os.getcwd())
+        print(curr_dir)
+        return curr_dir
+
+    # convert image -> numpy array
+    def load_image_into_numpy_array(image):
+        # return np.array(Image.open(image))
+        (im_width, im_height) = image.size
+        return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
+
 
