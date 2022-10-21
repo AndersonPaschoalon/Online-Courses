@@ -1,0 +1,59 @@
+﻿Colab Basics
+TF2.0 Loading Data
+# download the data from a URL
+# source: https://archive.ics.uci.edu/ml/datasets/Arrhythmia
+# alternate URL: https://lazyprogrammer.me/course_files/arrhythmia.data
+#!wget --no-check-certificate https://archive.ics.uci.edu/ml/machine-learning-databases/arrhythmia/arrhythmia.data
+!wget https://lazyprogrammer.me/course_files/arrhythmia.data
+
+
+# use keras get_file to download the auto MPG dataset
+# source: https://archive.ics.uci.edu/ml/datasets/Auto+MPG
+#url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data'
+
+
+### alternate URL
+url = 'https://raw.githubusercontent.com/lazyprogrammer/machine_learning_examples/master/tf2.0/auto-mpg.data'
+
+
+# another method: upload your own file
+
+
+##### PLEASE NOTE: IT DOES NOT MATTER WHICH FILE YOU UPLOAD
+##### YOU CAN UPLOAD ANY FILE YOU WANT
+##### IN FACT, YOU ARE ENCOURAGED TO EXPLORE ON YOUR OWN
+
+
+# if you must, then get the file from here:
+# https://raw.githubusercontent.com/lazyprogrammer/machine_learning_examples/master/tf2.0/daily-minimum-temperatures-in-me.csv
+
+
+Machine Learning Basics
+TF2.0 Linear Regression
+!wget https://raw.githubusercontent.com/lazyprogrammer/machine_learning_examples/master/tf2.0/moore.csv
+
+
+ResNet
+ResNet Fruits
+# https://www.kaggle.com/moltean/fruits
+!wget -nc https://lazyprogrammer.me/course_files/fruits-360.zip
+
+
+Blood Cell Images ResNet-Mini
+!wget -nc https://lazyprogrammer.me/course_files/blood_cell_images.zip
+
+
+SSD Tensorflow 2 Object Detection API
+SSD Tensorflow 2 Object Detection
+https://colab.research.google.com/drive/1Tg_g7uYZBIu1h2JPnuopub1iLAeW8f05?usp=sharing
+
+
+SSD Tensorflow 2 Object Detection Video
+https://colab.research.google.com/drive/1wXSYbAgbpvz1QXjzEH5qCVZkBC2L-n-O?usp=sharing
+
+
+Localization
+!wget -nc https://lazyprogrammer.me/course_files/charmander-tight.png
+!wget -nc https://lazyprogrammer.me/course_files/backgrounds.zip
+!wget -nc https://lazyprogrammer.me/course_files/bulbasaur-tight.png
+!wget -nc https://lazyprogrammer.me/course_files/squirtle-tight.png

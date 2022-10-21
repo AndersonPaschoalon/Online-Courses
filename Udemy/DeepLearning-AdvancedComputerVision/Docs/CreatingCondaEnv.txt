@@ -1,0 +1,9 @@
+(Windows)
+
+Na pasta que está instalado o Conda, executar:
+
+.\_conda.exe  create -n tf_ssd python=3.6
+
+
+
+

@@ -1,0 +1,29 @@
+﻿<Window x:Class="CheckboxDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CheckboxDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel Margin="10">
+            <Label  FontWeight="Bold" >Toppings</Label>
+            <CheckBox>Cheese</CheckBox>
+            <CheckBox>Tuna</CheckBox>
+            <CheckBox>Peperoni</CheckBox>
+        </StackPanel>
+
+        <StackPanel Margin="10">
+            <Label FontSize="25"> Name: </Label>
+            <TextBox></TextBox>
+            <Label FontSize="25">Password:</Label>
+            <PasswordBox FontSize="25"></PasswordBox>
+        </StackPanel>
+
+        <StackPanel Margin="10">
+            
+        </StackPanel>
+
+    </StackPanel>
+</Window>
