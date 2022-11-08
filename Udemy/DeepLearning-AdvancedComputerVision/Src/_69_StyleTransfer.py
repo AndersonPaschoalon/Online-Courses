@@ -27,7 +27,7 @@ import datetime
 
 import tensorflow as tf
 if tf.__version__.startswith('2'):
-  tf.compat.v1.disable_eager_execution()
+    tf.compat.v1.disable_eager_execution()
 
 
 
@@ -129,9 +129,13 @@ if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
     # open an image
     out_dir = "69\\"
-    path = "69\\forest.jpg"
-    # img = image.load_img(path)
-    img = tf.keras.utils.load_img(path)
+    # path = "69\\forest.jpg"
+    #img_name = "gato"
+    #path = "69\\gato.jpg"
+    img_name = "elefante"
+    path = "69\\elefante.jpg"
+    img = image.load_img(path)
+    # img = tf.keras.utils.load_img(path)
 
     # convert the image to array and process for vgg
     # x = image.img_to_array(img)
@@ -191,7 +195,7 @@ if __name__ == '__main__':
     newimg = x.reshape(*batch_shape)
     final_img = unpreprocess(newimg)
     plt.imshow(scale_img(final_img[0]))
-    plt.savefig(out_dir + "final_img" + str(nn_cutoff) + ".jpg")
+    plt.savefig(out_dir + "final_img" + "_" + img_name + "_" + str(nn_cutoff) + ".jpg")
 
 
 
