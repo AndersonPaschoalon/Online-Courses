@@ -199,15 +199,18 @@ if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
     print("Python Version: ", sys.version)
     print("Python Version Info: ", sys.version_info)
-    # open an image
+
+    # load vars
     out_dir = "69"
+    nn_cutoff = 11
+    img_file = "elefante.jpg"
 
     print("* ELEFANTE - 11*")
-    nn_cutoff = 11
+    nn_cutoff = nn_cutoff
     get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
         out_dir=out_dir,
-        image_file="elefante.jpg",
-        nn_cutoff=11)
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
     # generate the images
     t0 = datetime.now()
     losses = []
