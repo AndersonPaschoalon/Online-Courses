@@ -133,7 +133,7 @@ def run_style_transfer_pt1(out_dir, image_file, nn_cutoff):
     # parse vars
     out_dir = out_dir + "\\"
     path = os.path.join(out_dir, image_file)
-    image_name = os.path.basename(os.path.splitext()[0])
+    image_name = os.path.basename(os.path.splitext(image_file)[0])
 
     # load image
     img = None
