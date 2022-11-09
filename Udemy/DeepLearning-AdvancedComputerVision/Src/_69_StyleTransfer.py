@@ -24,7 +24,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.optimize import fmin_l_bfgs_b
-import datetime
+from datetime import datetime
 import os
 
 import tensorflow as tf
