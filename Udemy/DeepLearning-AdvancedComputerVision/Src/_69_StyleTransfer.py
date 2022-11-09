@@ -184,7 +184,7 @@ def save_images_style_transfer_model(out_dir, image_name, nn_cutoff):
     out_dir = out_dir + "\\"
     plt.clf()
     plt.plot(losses)
-    plt.savefig(out_dir + "losses.jpg")
+    plt.savefig(out_dir + "losses_" + image_name + "_" + str(nn_cutoff) + ".jpg")
     plt.clf()
     newimg = x.reshape(*batch_shape)
     final_img = unpreprocess(newimg)
