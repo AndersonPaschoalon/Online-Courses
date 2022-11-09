@@ -126,7 +126,7 @@ def get_loss_and_grads_wrapper(x_vec):
     l, g = get_loss_and_grads([x_vec.reshape(*batch_shape)])
     return l.astype(np.float64), g.flatten().astype(np.float64)
 
-def run_style_transfer_pt1(out_dir, image_file, nn_cutoff):
+def create_style_transfer_model(out_dir, image_file, nn_cutoff):
     # print run information
     print("Running style transfer -> out_dir:", out_dir, ", image_file:", image_file, ", nn_cutoff:", nn_cutoff)
 
@@ -177,6 +177,37 @@ def run_style_transfer_pt1(out_dir, image_file, nn_cutoff):
     get_loss_and_grads = K.function(inputs=[content_model.input],
                                     outputs=[loss] + grads)
 
+    return get_loss_and_grads, batch_shape, x, image_name
+
+
+def save_images_style_transfer_model(out_dir, image_name, nn_cutoff):
+    out_dir = out_dir + "\\"
+    plt.clf()
+    plt.plot(losses)
+    plt.savefig(out_dir + "losses.jpg")
+    plt.clf()
+    newimg = x.reshape(*batch_shape)
+    final_img = unpreprocess(newimg)
+    plt.imshow(scale_img(final_img[0]))
+    plt.savefig(out_dir + "final_img" + "_" + image_name + "_" + str(nn_cutoff) + ".jpg")
+
+
+if __name__ == '__main__':
+    print("* For running on CPU, it is required Python 3.9 and TensorFlow 2.10.0")
+    print("* For running on GPU, it is required Python 3.6 and TensorFlow 2.6")
+    print("")
+    print("TensorFlow version:", tf.__version__)
+    print("Python Version: ", sys.version)
+    print("Python Version Info: ", sys.version_info)
+    # open an image
+    out_dir = "69"
+
+    print("* ELEFANTE - 11*")
+    nn_cutoff = 11
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file="elefante.jpg",
+        nn_cutoff=11)
     # generate the images
     t0 = datetime.now()
     losses = []
@@ -190,21 +221,12 @@ def run_style_transfer_pt1(out_dir, image_file, nn_cutoff):
         # print("min:", x.min(), "max:", x.max())
         print("iter=%s, loss=%s" % (i, l))
         losses.append(l)
-
     print("duration:", datetime.now() - t0)
-
-    plt.clf()
-    plt.plot(losses)
-    plt.savefig(out_dir + "losses.jpg")
-
-    plt.clf()
-    newimg = x.reshape(*batch_shape)
-    final_img = unpreprocess(newimg)
-    plt.imshow(scale_img(final_img[0]))
-    plt.savefig(out_dir + "final_img" + "_" + image_name + "_" + str(nn_cutoff) + ".jpg")
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
 
 
 """
+** original code ** 
 if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
     # open an image
@@ -278,43 +300,6 @@ if __name__ == '__main__':
     plt.savefig(out_dir + "final_img" + "_" + img_name + "_" + str(nn_cutoff) + ".jpg")
 
 """
-
-if __name__ == '__main__':
-    print("* For running on CPU, it is required Python 3.9 and TensorFlow 2.10.0")
-    print("* For running on GPU, it is required Python 3.6 and TensorFlow 2.6")
-    print("")
-    print("TensorFlow version:", tf.__version__)
-    print("Python Version: ", sys.version)
-    print("Python Version Info: ", sys.version_info)
-    # open an image
-
-    print("*ELEFANTE*")
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="elefante.jpg",
-                           nn_cutoff=11)
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="elefante.jpg",
-                           nn_cutoff=13)
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="elefante.jpg",
-                           nn_cutoff=5)
-
-    print("*GATO*")
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="gato.jpg",
-                           nn_cutoff=11)
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="gato.jpg",
-                           nn_cutoff=13)
-    run_style_transfer_pt1(out_dir="69",
-                           image_file="gato.jpg",
-                           nn_cutoff=5)
-
-
-
-
-
-
 
 
 
