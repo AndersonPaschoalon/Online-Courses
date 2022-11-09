@@ -200,6 +200,8 @@ if __name__ == '__main__':
     print("Python Version: ", sys.version)
     print("Python Version Info: ", sys.version_info)
 
+    #########################################################################################
+
     # load vars
     out_dir = "69"
     nn_cutoff = 11
@@ -227,6 +229,146 @@ if __name__ == '__main__':
     print("duration:", datetime.now() - t0)
     save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
 
+    #########################################################################################
+
+    # load vars
+    nn_cutoff = 13
+    img_file = "elefante.jpg"
+
+    print("* ELEFANTE - 13*")
+    nn_cutoff = nn_cutoff
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
+    # generate the images
+    t0 = datetime.now()
+    losses = []
+    x = np.random.randn(np.prod(batch_shape))
+    for i in range(10):
+        x, l, _ = fmin_l_bfgs_b(func=get_loss_and_grads_wrapper,
+                                x0=x,
+                                # bounds = [[-127, 127]]*len(x.flatten()),
+                                maxfun=20)
+        x = np.clip(x, -127, 127)
+        # print("min:", x.min(), "max:", x.max())
+        print("iter=%s, loss=%s" % (i, l))
+        losses.append(l)
+    print("duration:", datetime.now() - t0)
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
+
+    #########################################################################################
+
+    # load vars
+    nn_cutoff = 5
+    img_file = "elefante.jpg"
+
+    print("* ELEFANTE - 5*")
+    nn_cutoff = nn_cutoff
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
+    # generate the images
+    t0 = datetime.now()
+    losses = []
+    x = np.random.randn(np.prod(batch_shape))
+    for i in range(10):
+        x, l, _ = fmin_l_bfgs_b(func=get_loss_and_grads_wrapper,
+                                x0=x,
+                                # bounds = [[-127, 127]]*len(x.flatten()),
+                                maxfun=20)
+        x = np.clip(x, -127, 127)
+        # print("min:", x.min(), "max:", x.max())
+        print("iter=%s, loss=%s" % (i, l))
+        losses.append(l)
+    print("duration:", datetime.now() - t0)
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
+
+    #########################################################################################
+
+    # load vars
+    out_dir = "69"
+    nn_cutoff = 11
+    img_file = "gato.jpg"
+
+    print("* gato - 11*")
+    nn_cutoff = nn_cutoff
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
+    # generate the images
+    t0 = datetime.now()
+    losses = []
+    x = np.random.randn(np.prod(batch_shape))
+    for i in range(10):
+        x, l, _ = fmin_l_bfgs_b(func=get_loss_and_grads_wrapper,
+                                x0=x,
+                                # bounds = [[-127, 127]]*len(x.flatten()),
+                                maxfun=20)
+        x = np.clip(x, -127, 127)
+        # print("min:", x.min(), "max:", x.max())
+        print("iter=%s, loss=%s" % (i, l))
+        losses.append(l)
+    print("duration:", datetime.now() - t0)
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
+
+    #########################################################################################
+
+    # load vars
+    nn_cutoff = 13
+    img_file = "gato.jpg"
+
+    print("* gato - 13*")
+    nn_cutoff = nn_cutoff
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
+    # generate the images
+    t0 = datetime.now()
+    losses = []
+    x = np.random.randn(np.prod(batch_shape))
+    for i in range(10):
+        x, l, _ = fmin_l_bfgs_b(func=get_loss_and_grads_wrapper,
+                                x0=x,
+                                # bounds = [[-127, 127]]*len(x.flatten()),
+                                maxfun=20)
+        x = np.clip(x, -127, 127)
+        # print("min:", x.min(), "max:", x.max())
+        print("iter=%s, loss=%s" % (i, l))
+        losses.append(l)
+    print("duration:", datetime.now() - t0)
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
+
+    #########################################################################################
+
+    # load vars
+    nn_cutoff = 5
+    img_file = "gato.jpg"
+
+    print("* gato - 5*")
+    nn_cutoff = nn_cutoff
+    get_loss_and_grads, batch_shape, x, image_name = create_style_transfer_model(
+        out_dir=out_dir,
+        image_file=img_file,
+        nn_cutoff=nn_cutoff)
+    # generate the images
+    t0 = datetime.now()
+    losses = []
+    x = np.random.randn(np.prod(batch_shape))
+    for i in range(10):
+        x, l, _ = fmin_l_bfgs_b(func=get_loss_and_grads_wrapper,
+                                x0=x,
+                                # bounds = [[-127, 127]]*len(x.flatten()),
+                                maxfun=20)
+        x = np.clip(x, -127, 127)
+        # print("min:", x.min(), "max:", x.max())
+        print("iter=%s, loss=%s" % (i, l))
+        losses.append(l)
+    print("duration:", datetime.now() - t0)
+    save_images_style_transfer_model(out_dir, image_name, nn_cutoff)
 
 """
 ** original code ** 
