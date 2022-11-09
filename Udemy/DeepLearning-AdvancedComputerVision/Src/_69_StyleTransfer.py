@@ -201,7 +201,7 @@ def run_style_transfer_pt1(out_dir, image_file, nn_cutoff):
     newimg = x.reshape(*batch_shape)
     final_img = unpreprocess(newimg)
     plt.imshow(scale_img(final_img[0]))
-    plt.savefig(out_dir + "final_img" + "_" + img_name + "_" + str(nn_cutoff) + ".jpg")
+    plt.savefig(out_dir + "final_img" + "_" + image_name + "_" + str(nn_cutoff) + ".jpg")
 
 
 """
