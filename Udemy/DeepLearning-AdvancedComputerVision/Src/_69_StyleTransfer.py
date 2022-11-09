@@ -161,6 +161,7 @@ def create_style_transfer_model(out_dir, image_file, nn_cutoff):
     content_model = VGG16_AvgPool_CutOff(shape, nn_cutoff)
 
     # make the target
+    # target is the model output, given an x
     target = K.variable(content_model.predict(x))
 
     # try to match the image
