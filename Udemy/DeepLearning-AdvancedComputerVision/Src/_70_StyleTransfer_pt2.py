@@ -180,3 +180,4 @@ if __name__ == '__main__':
     run_style_transfer_pt2("70/skyrim_landscape1.png", out_dir)
     run_style_transfer_pt2("70/skyrim_landscape2.png", out_dir)
     run_style_transfer_pt2("70/skyrim_landscape3.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_landscape3.png", out_dir)
