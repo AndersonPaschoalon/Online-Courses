@@ -20,7 +20,7 @@ from keras.models import Model, Sequential
 from keras.applications.vgg16 import VGG16
 from keras.applications.vgg16 import preprocess_input
 from keras.preprocessing import image
-from skimage.transform import resize
+# from skimage.transform import resize
 
 import tensorflow as tf
 import traceback
@@ -39,10 +39,12 @@ from scipy.optimize import fmin_l_bfgs_b
 
 # load the content image
 def load_img_and_preprocess(path, shape=None):
-    img = image.load_img(path, target_size=shape)
+    # img = image.load_img(path, target_size=shape)
+    img = tf.keras.utils.load_img(path)
 
     # convert image to array and preprocess for vgg
-    x = image.img_to_array(img)
+    # x = image.img_to_array(img)
+    x = tf.keras.utils.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
 
