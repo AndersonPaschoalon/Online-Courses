@@ -4,6 +4,7 @@
 from __future__ import print_function, division
 from builtins import range, input
 
+import traceback
 import sys
 from builtins import range, input
 # Note: you may need to update your version of future
@@ -79,80 +80,84 @@ def minimize(fn, epochs, batch_shape, out_dir, model_name):
 
 
 def run_style_transfer_pt2(path, out_dir):
-    out_dir = out_dir + "\\"
-    image_name = Utils.file_name(path)
+    try:
+        out_dir = out_dir + "\\"
+        image_name = Utils.file_name(path)
 
-    # load the data
-    img = helper_keras_load_image(path)
+        # load the data
+        img = helper_keras_load_image(path)
 
-    # convert image to array and preprocess for vgg
-    # x = image.img_to_array(img)
-    x = tf.keras.utils.img_to_array(img)
+        # convert image to array and preprocess for vgg
+        # x = image.img_to_array(img)
+        x = tf.keras.utils.img_to_array(img)
 
-    # look at the image
-    plt.clf()
-    plt.imshow(x)
-    plt.savefig(out_dir + "vgg_preprocess_" + image_name + ".jpg")
+        # look at the image
+        plt.clf()
+        plt.imshow(x)
+        plt.savefig(out_dir + "vgg_preprocess_" + image_name + ".jpg")
 
-    # make it (1, H, W, C)
-    x = np.expand_dims(x, axis=0)
+        # make it (1, H, W, C)
+        x = np.expand_dims(x, axis=0)
 
-    # preprocess into VGG expected format
-    x = preprocess_input(x)
+        # preprocess into VGG expected format
+        x = preprocess_input(x)
 
-    # Well use this through the rest of the script
-    batch_shape = x.shape
-    shape = x.shape[1:]
+        # Well use this through the rest of the script
+        batch_shape = x.shape
+        shape = x.shape[1:]
 
-    # let's take the first convolution at each block of convolutions
-    # to be our target outputs
-    # remember that you can print out the model summary if you want
-    vgg = VGG16_AvgPool(shape)
-    vgg.summary()
+        # let's take the first convolution at each block of convolutions
+        # to be our target outputs
+        # remember that you can print out the model summary if you want
+        vgg = VGG16_AvgPool(shape)
+        vgg.summary()
 
-    # Note: need to select output at index 1, since outputs at
-    # index 0 correspond to the original vgg with maxpool
-    symbolic_conv_outputs = [
-    layer.get_output_at(1) for layer in vgg.layers \
-        if layer.name.endswith('conv1')
-    ]
+        # Note: need to select output at index 1, since outputs at
+        # index 0 correspond to the original vgg with maxpool
+        symbolic_conv_outputs = [
+        layer.get_output_at(1) for layer in vgg.layers \
+            if layer.name.endswith('conv1')
+        ]
 
-    # pick the earlier layers for
-    # a more "localized" representation
-    # this is opposed to the content model
-    # where the later layers represent a more "global" structure
-    # symbolic_conv_outputs = symbolic_conv_outputs[:2]
+        # pick the earlier layers for
+        # a more "localized" representation
+        # this is opposed to the content model
+        # where the later layers represent a more "global" structure
+        # symbolic_conv_outputs = symbolic_conv_outputs[:2]
 
-    # make a big model that outputs multiple layers' outputs
-    multi_output_model = Model(vgg.input, symbolic_conv_outputs)
+        # make a big model that outputs multiple layers' outputs
+        multi_output_model = Model(vgg.input, symbolic_conv_outputs)
 
-    # calculate the targets that are output at each layer
-    style_layers_outputs = [K.variable(y) for y in multi_output_model.predict(x)]
+        # calculate the targets that are output at each layer
+        style_layers_outputs = [K.variable(y) for y in multi_output_model.predict(x)]
 
-    # calculate the total style loss
-    loss = 0
-    for symbolic, actual in zip(symbolic_conv_outputs, style_layers_outputs):
-        # gram_matrix() expects a (H, W, C) as input
-        loss += style_loss(symbolic[0], actual[0])
+        # calculate the total style loss
+        loss = 0
+        for symbolic, actual in zip(symbolic_conv_outputs, style_layers_outputs):
+            # gram_matrix() expects a (H, W, C) as input
+            loss += style_loss(symbolic[0], actual[0])
 
-    grads = K.gradients(loss, multi_output_model.input)
+        grads = K.gradients(loss, multi_output_model.input)
 
-    # just like theano.function
-    get_loss_and_grads = K.function(
-    inputs=[multi_output_model.input],
-        outputs=[loss] + grads
-    )
+        # just like theano.function
+        get_loss_and_grads = K.function(
+        inputs=[multi_output_model.input],
+            outputs=[loss] + grads
+        )
 
-    def get_loss_and_grads_wrapper(x_vec):
-        l, g = get_loss_and_grads([x_vec.reshape(*batch_shape)])
-        return l.astype(np.float64), g.flatten().astype(np.float64)
+        def get_loss_and_grads_wrapper(x_vec):
+            l, g = get_loss_and_grads([x_vec.reshape(*batch_shape)])
+            return l.astype(np.float64), g.flatten().astype(np.float64)
 
-    final_img = minimize(get_loss_and_grads_wrapper, 10, batch_shape, out_dir, image_name)
+        final_img = minimize(get_loss_and_grads_wrapper, 10, batch_shape, out_dir, image_name)
 
-    # save the image
-    plt.clf()
-    plt.imshow(scale_img(final_img))
-    plt.savefig(out_dir + "styled_image_" + image_name + ".jpg")
+        # save the image
+        plt.clf()
+        plt.imshow(scale_img(final_img))
+        plt.savefig(out_dir + "styled_image_" + image_name + ".jpg")
+    except:
+        print("***EXCEPTION***")
+        traceback.print_exc()
 
 
 if __name__ == '__main__':
