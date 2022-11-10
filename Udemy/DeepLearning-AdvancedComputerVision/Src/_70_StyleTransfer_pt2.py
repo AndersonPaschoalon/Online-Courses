@@ -147,7 +147,7 @@ def run_style_transfer_pt2(path, out_dir):
         l, g = get_loss_and_grads([x_vec.reshape(*batch_shape)])
         return l.astype(np.float64), g.flatten().astype(np.float64)
 
-    final_img = minimize(get_loss_and_grads_wrapper, 10, batch_shape)
+    final_img = minimize(get_loss_and_grads_wrapper, 10, batch_shape, out_dir, image_name)
 
     # save the image
     plt.clf()
