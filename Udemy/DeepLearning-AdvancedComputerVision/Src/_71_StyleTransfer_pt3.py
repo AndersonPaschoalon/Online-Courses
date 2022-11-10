@@ -37,10 +37,11 @@ from _70_StyleTransfer_pt2 import  gram_matrix, style_loss, minimize
 from Utils import Utils
 from scipy.optimize import fmin_l_bfgs_b
 
+
 # load the content image
 def load_img_and_preprocess(path, shape=None):
     # img = image.load_img(path, target_size=shape)
-    img = tf.keras.utils.load_img(path)
+    img = tf.keras.utils.load_img(path, target_size=shape)
 
     # convert image to array and preprocess for vgg
     # x = image.img_to_array(img)
