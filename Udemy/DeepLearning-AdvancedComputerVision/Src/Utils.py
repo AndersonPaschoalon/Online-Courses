@@ -70,7 +70,6 @@ class Utils:
         plt.savefig(out_file_name)
 
 
-
     @staticmethod
     def mkdir(p):
         if not os.path.exists(p):
@@ -136,9 +135,14 @@ class Utils:
         return curr_dir
 
     # convert image -> numpy array
+    @staticmethod
     def load_image_into_numpy_array(image):
         # return np.array(Image.open(image))
         (im_width, im_height) = image.size
         return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
+
+    @staticmethod
+    def file_name(file_path):
+        return os.path.basename(os.path.splitext(file_path)[0])
 
 

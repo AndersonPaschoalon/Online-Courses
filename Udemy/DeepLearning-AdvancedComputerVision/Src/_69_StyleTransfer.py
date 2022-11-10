@@ -28,6 +28,7 @@ from datetime import datetime
 import os
 
 import tensorflow as tf
+
 if tf.__version__.startswith('2'):
     tf.compat.v1.disable_eager_execution()
 
@@ -126,6 +127,20 @@ def get_loss_and_grads_wrapper(x_vec):
     l, g = get_loss_and_grads([x_vec.reshape(*batch_shape)])
     return l.astype(np.float64), g.flatten().astype(np.float64)
 
+
+def helper_keras_load_image(path):
+    # load image
+    img = None
+    tf_version = str(tf.__version__)
+    if tf_version.startswith(GPU_REQUIRED_TF_VERSION):
+        print("Tensorflow version for GPU usage matches... running on GPU mode...")
+        img = image.load_img(path)
+    else:
+        print("Running on CPU mode")
+        img = tf.keras.utils.load_img(path)
+    return img
+
+
 def create_style_transfer_model(out_dir, image_file, nn_cutoff):
     # print run information
     print("Running style transfer -> out_dir:", out_dir, ", image_file:", image_file, ", nn_cutoff:", nn_cutoff)
@@ -136,14 +151,15 @@ def create_style_transfer_model(out_dir, image_file, nn_cutoff):
     image_name = os.path.basename(os.path.splitext(image_file)[0])
 
     # load image
-    img = None
-    tf_version = str(tf.__version__)
-    if tf_version.startswith(GPU_REQUIRED_TF_VERSION):
-        print("Tensorflow version for GPU usage matches... running on GPU mode...")
-        img = image.load_img(path)
-    else:
-        print("Running on CPU mode")
-        img = tf.keras.utils.load_img(path)
+    # img = None
+    # tf_version = str(tf.__version__)
+    # if tf_version.startswith(GPU_REQUIRED_TF_VERSION):
+    #     print("Tensorflow version for GPU usage matches... running on GPU mode...")
+    #     img = image.load_img(path)
+    # else:
+    #     print("Running on CPU mode")
+    #     img = tf.keras.utils.load_img(path)
+    img = helper_keras_load_image(path)
 
     # convert the image to array and process for vgg
     # x = image.img_to_array(img)
