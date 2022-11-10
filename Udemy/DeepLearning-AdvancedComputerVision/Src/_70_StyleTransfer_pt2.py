@@ -162,3 +162,16 @@ if __name__ == '__main__':
     print("TensorFlow version:", tf.__version__)
     print("Python Version: ", sys.version)
     print("Python Version Info: ", sys.version_info)
+
+    out_dir = "70"
+    run_style_transfer_pt2("70/starry_night.jpg", out_dir)
+    run_style_transfer_pt2("70/fantasy_city.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_city2.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_city3.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_city4.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_landscape1.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_landscape2.png", out_dir)
+    run_style_transfer_pt2("70/fantasy_landscape3.png", out_dir)
+    run_style_transfer_pt2("70/skyrim_landscape1.png", out_dir)
+    run_style_transfer_pt2("70/skyrim_landscape2.png", out_dir)
+    run_style_transfer_pt2("70/skyrim_landscape3.png", out_dir)
