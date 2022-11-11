@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix
 import itertools
 import matplotlib.pyplot as plt
 from os.path import exists
+from numba import cuda
 
 
 class Utils:
@@ -145,4 +146,8 @@ class Utils:
     def file_name(file_path):
         return os.path.basename(os.path.splitext(file_path)[0])
 
-
+    @staticmethod
+    def reset_gpu():
+        print("todo")
+        #device = cuda.get_current_device()
+        #device.reset()

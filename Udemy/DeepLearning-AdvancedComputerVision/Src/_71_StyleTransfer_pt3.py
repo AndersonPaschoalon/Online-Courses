@@ -38,6 +38,7 @@ from Utils import Utils
 from scipy.optimize import fmin_l_bfgs_b
 
 
+
 # load the content image
 def load_img_and_preprocess(path, shape=None):
     # img = image.load_img(path, target_size=shape)
@@ -101,6 +102,7 @@ def run_style_transfer_pt3(path_image, path_style, out_dir, n_epochs):
     # we will assume the weight of the content loss is 1
     # and only weight the style losses
     style_weights = [0.2, 0.4, 0.3, 0.5, 0.2]
+    #style_weights = [0.5, 0.4, 0.3, 0.2, 0.1]
 
     # create the total loss which is the sum of content + style loss
     loss = K.mean(K.square(content_model.output - content_target))
@@ -142,6 +144,47 @@ if __name__ == '__main__':
     print("Python Version Info: ", sys.version_info)
     out_dir = "71"
 
-    path_image = "71/cidade1.png"
-    path_style = "70/fantasy_city.png"
+    # path_image = "71/cidade1.png"
+    # path_style = "70/fantasy_city.png"
+    # run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=10)
+
+    #path_image = "71/landscape3-f1.jpg"
+    #path_style = "70/skyrim_landscape3.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=35)
+    #Utils.reset_gpu()
+
+    #path_image = "71/landscape3-f2.jpg"
+    #path_style = "70/skyrim_landscape3.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=35)
+    #Utils.reset_gpu()
+
+    #path_image = "71/landscape3-f2.jpg"
+    #path_style = "70/fantasy_landscape1.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=10)
+    #Utils.reset_gpu()
+
+    #path_image = "71/landscape3-f1.jpg"
+    #path_style = "70/fantasy_landscape2.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=10)
+    #Utils.reset_gpu()
+
+    #path_image = "71/landscape3-f2.jpg"
+    #path_style = "70/fantasy_landscape3.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=10)
+    #Utils.reset_gpu()
+
+    path_image = "71/landscape3-f2.jpg"
+    path_style = "70/skyrim_landscape1.png"
     run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=10)
+    Utils.reset_gpu()
+
+
+    #path_image = "71/landscape3.png"
+    #path_style = "70/skyrim_landscape3.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=35)
+    #Utils.reset_gpu()
+
+    #path_image = "71/landscape3.png"
+    #path_style = "70/skyrim_landscape2.png"
+    #run_style_transfer_pt3(path_image=path_image, path_style=path_style, out_dir=out_dir, n_epochs=15)
+    #Utils.reset_gpu()
