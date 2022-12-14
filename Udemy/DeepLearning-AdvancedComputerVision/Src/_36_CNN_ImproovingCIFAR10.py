@@ -178,11 +178,7 @@ def plot_confusion_matrix(model, x_test, y_test, out_dir, n_miss_examples = 1):
         count += 1
 
 def main():
-<<<<<<< HEAD
-    n_epochs = 50
-=======
     n_epochs = 2
->>>>>>> 5a748b3cf980bfc23ba070449ce618cddc168be9
     out_dir = "36"
     (x_train, y_train), (x_test, y_test), K = load_cifar10(out_dir)
     model = build_the_model(input_shape=x_train[0].shape, number_of_classes=K)

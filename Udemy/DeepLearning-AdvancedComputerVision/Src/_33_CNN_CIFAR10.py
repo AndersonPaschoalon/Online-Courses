@@ -64,6 +64,7 @@ def load_cifar10(out_dir=""):
     print("number of classes of CIFAR:", K)
     return (x_train, y_train), (x_test, y_test), K
 
+
 # build the moel using function API
 def build_the_model(input_shape, number_of_classes):
     # model hyperparameters
@@ -96,9 +97,11 @@ def build_the_model(input_shape, number_of_classes):
                   metrics=['accuracy'])
     return model
 
+
 def train_the_model(model, x_train, y_train, x_test, y_test, n_epochs):
     r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=n_epochs)
     return r
+
 
 def plot_loss_and_accurary_per_iteration(r, out_dir=""):
     out_dir += "\\"
@@ -115,11 +118,12 @@ def plot_loss_and_accurary_per_iteration(r, out_dir=""):
     plt.legend()
     plt.savefig(out_dir + "accuracy_per_iteration")
 
+
 def plot_confusion_matrix(model, x_test, y_test, out_dir, n_miss_examples = 1):
     out_dir += "\\"
     p_test = model.predict(x_test).argmax(axis=1)
     cm = confusion_matrix(y_test, p_test)
-    Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name= out_dir + "CnnFashionMnist_ConfusionMatrix")
+    Utils.plot_confusion_matrix(cm, list(range(10)), out_file_name=out_dir + "CnnFashionMnist_ConfusionMatrix")
     # show some missclassified examples
     the_labels = LABELS.split()
     misclassified_idx = np.where(p_test != y_test)[0]
