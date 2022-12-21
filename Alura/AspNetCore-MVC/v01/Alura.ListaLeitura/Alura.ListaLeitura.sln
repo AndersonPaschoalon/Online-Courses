@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alura.ListaLeitura.App", "Alura.ListaLeitura.App\Alura.ListaLeitura.App.csproj", "{571AB40F-6426-4983-8DE6-BD0037878BDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{2D430A41-C33A-42B4-8CBF-A4EA4006493E}"
+	ProjectSection(SolutionItems) = preProject
+		Notas\TransformandoAplicaçãoEmServidorWeb.md = Notas\TransformandoAplicaçãoEmServidorWeb.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{571AB40F-6426-4983-8DE6-BD0037878BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571AB40F-6426-4983-8DE6-BD0037878BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571AB40F-6426-4983-8DE6-BD0037878BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571AB40F-6426-4983-8DE6-BD0037878BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7B02793-BF9F-4E8E-A094-C335591992BF}
+	EndGlobalSection
+EndGlobal
