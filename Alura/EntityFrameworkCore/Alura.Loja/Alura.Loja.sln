@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alura.Loja.Testes.ConsoleApp", "Alura.Loja.Testes.ConsoleApp\Alura.Loja.Testes.ConsoleApp.csproj", "{D59A32D0-B933-45D7-8922-483BF3C08524}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notas", "Notas", "{F1FF676A-D3ED-447A-B89F-018BA30364DC}"
+	ProjectSection(SolutionItems) = preProject
+		..\Notas.md = ..\Notas.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D59A32D0-B933-45D7-8922-483BF3C08524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59A32D0-B933-45D7-8922-483BF3C08524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59A32D0-B933-45D7-8922-483BF3C08524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59A32D0-B933-45D7-8922-483BF3C08524}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED8236D3-EF08-48FF-A929-2082AF1956C0}
+	EndGlobalSection
+EndGlobal
