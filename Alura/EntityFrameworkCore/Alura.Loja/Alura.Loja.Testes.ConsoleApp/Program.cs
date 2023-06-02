@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Alura.Loja.Testes.ConsoleApp
 {
@@ -10,80 +14,153 @@ namespace Alura.Loja.Testes.ConsoleApp
     {
         static void Main(string[] args)
         {
-            // GravarUsandoAdoNet();
-            GravarUsandoEntity();
-            RecuperarProdutos();
+            bool t1 = false;
+            bool t2 = false;
+            bool t3 = false;
+            bool t4 = true;
 
-            // ExcluirProdutos();
-            //RecuperarProdutos();
 
-            AtualizarProduto();
-            RecuperarProdutos();
+            if (t1) TestSqlAdd();
+            if (t2) TestSqlDelete();
+            if (t3) TestSincronizarModeloDeClasses();
+            if (t4) TestRelacao_1paraN();
+
             Console.WriteLine("Fim");
         }
 
-        private static void AtualizarProduto()
+        private static void TestRelacao_1paraN()
         {
-            using (var repo = new LojaContext())
+            var p1 = new Produto() {
+                Nome = "Suco de Laranja",
+                Categoria = "Bebidas",
+                PrecoUnitario = 8.79,
+                Unidade = "Litros",
+            };
+            var p2 = new Produto()
             {
-                Produto primeiro = repo.Produtos.First();
-                primeiro.Nome = "Cassino Royale - Editado";
-                repo.Produtos.Update(primeiro);
-                repo.SaveChanges();
-            }
-        }
+                Nome = "Café",
+                Categoria = "Bebidas",
+                PrecoUnitario = 12.45,
+                Unidade = "Gramas",
+            };
+            var p3 = new Produto(){
+                Nome = "Macarrão",
+                Categoria = "Alimentos",
+                PrecoUnitario = 4.23,
+                Unidade = "Litros",
+            };
 
-        private static void ExcluirProdutos()
-        {
-            using (var repo = new LojaContext())
-            {
-                IList<Produto> produtos = repo.Produtos.ToList();
-                foreach (var item in produtos)
-                {
-                    repo.Produtos.Remove(item);
-                }
-                repo.SaveChanges();
-            }
-        }
-
-        private static void RecuperarProdutos()
-        {
-            using (var repo = new LojaContext())
-            {
-                IList<Produto> produtos = repo.Produtos.ToList();
-                Console.WriteLine("Foram encontrados {0} produto(s).", produtos.Count);
-                foreach (var item in produtos)
-                {
-                    Console.WriteLine(item.Nome);
-                }
-            }
-        }
-
-        private static void GravarUsandoEntity()
-        {
-            Produto p = new Produto();
-            p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
-            p.Preco = 19.89;
+            var promocaoDePascoa = new Promocao();
+            promocaoDePascoa.Descricao = "Pascoa Feliz";
+            promocaoDePascoa.DataInicio = DateTime.Now;
+            promocaoDePascoa.DataTermino = DateTime.Now.AddMonths(3);
+            promocaoDePascoa.IncluiProduto(p1);
+            promocaoDePascoa.IncluiProduto(p2);
+            promocaoDePascoa.IncluiProduto(p3);
 
             using (var contexto = new LojaContext())
             {
-                contexto.Produtos.Add(p);
+                var serviceProvider = contexto.GetInfrastructure<IServiceProvider>();
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(SqlLoggerProvider.Create())
+;
+                  
+                contexto.Promocoes.Add(promocaoDePascoa);
                 contexto.SaveChanges();
+
+                ExibeEntries(contexto.ChangeTracker.Entries());
             }
+
+
         }
 
-        private static void GravarUsandoAdoNet()
+        private static void TestSincronizarModeloDeClasses()
         {
-            Produto p = new Produto();
-            p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
-            p.Preco = 19.89;
 
-            using (var repo = new ProdutoDAO())
+            var paoFrances = new Produto();
+            paoFrances.Nome = "Pao Frnaces";
+            paoFrances.PrecoUnitario = 0.40;
+            paoFrances.Unidade = "Unidade";
+            paoFrances.Categoria = "Padaria";
+            var compra = new Compra();
+            compra.Quantidade = 6;
+            compra.Produto = paoFrances;
+            compra.Preco = paoFrances.PrecoUnitario * compra.Quantidade;
+
+
+            using (var contexto = new LojaContext())
             {
-                repo.Adicionar(p);
+                var serviceProvider = contexto.GetInfrastructure<IServiceProvider>();
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(SqlLoggerProvider.Create())
+;
+                contexto.Compras.Add(compra);
+                contexto.SaveChanges();
+
+                ExibeEntries(contexto.ChangeTracker.Entries());
+            }
+
+        }
+
+        private static void TestSqlDelete() 
+        {
+            using (var contexto = new LojaContext())
+            {
+                var serviceProvider = contexto.GetInfrastructure<IServiceProvider>();
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(SqlLoggerProvider.Create());
+
+                Console.WriteLine("== ChangeTracker");
+                var produtos = contexto.Produtos.ToList();
+                ExibeEntries(contexto.ChangeTracker.Entries());
+
+                var p1 = produtos.First();
+                contexto.Produtos.Remove(p1);
+                ExibeEntries(contexto.ChangeTracker.Entries());
+                contexto.SaveChanges();
+                ExibeEntries(contexto.ChangeTracker.Entries());
+            }
+
+
+        }
+
+        private static void TestSqlAdd()
+        {
+            using (var contexto = new LojaContext())
+            {
+                var serviceProvider = contexto.GetInfrastructure<IServiceProvider>();
+                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(SqlLoggerProvider.Create());
+
+                Console.WriteLine("== ChangeTracker");
+                var produtos = contexto.Produtos.ToList();
+                ExibeEntries(contexto.ChangeTracker.Entries());
+
+                var novoProduto = new Produto()
+                {
+                    Nome = "Desinfetante",
+                    Categoria = "Limpeza",
+                    PrecoUnitario = 2.99,
+                };
+                contexto.Produtos.Add(novoProduto);
+
+                Console.WriteLine("== ChangeTracker");
+                ExibeEntries(contexto.ChangeTracker.Entries());
+
+                contexto.SaveChanges();
+
             }
         }
+
+        private static void ExibeEntries(IEnumerable<EntityEntry>  entries)
+        {
+            Console.WriteLine("===============================");
+            foreach (var item in entries)
+            {
+                Console.WriteLine(item.Entity.ToString() + " - " + item.State);
+            }
+        }
+
+
     }
 }

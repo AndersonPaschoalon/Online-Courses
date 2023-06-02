@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Alura.Loja.Testes.ConsoleApp
 {
-    internal class ProdutoDAO : IDisposable
+    internal class ProdutoDAO : IDisposable, IProdutoDAO
     {
         private SqlConnection conexao;
 
@@ -19,7 +19,7 @@ namespace Alura.Loja.Testes.ConsoleApp
             this.conexao.Close();
         }
 
-        internal void Adicionar(Produto p)
+        public void Adicionar(Produto p)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Alura.Loja.Testes.ConsoleApp
                 var paramCategoria = new SqlParameter("categoria", p.Categoria);
                 insertCmd.Parameters.Add(paramCategoria);
 
-                var paramPreco = new SqlParameter("preco", p.Preco);
+                var paramPreco = new SqlParameter("preco", p.PrecoUnitario);
                 insertCmd.Parameters.Add(paramPreco);
 
                 insertCmd.ExecuteNonQuery();
@@ -42,7 +42,7 @@ namespace Alura.Loja.Testes.ConsoleApp
             }
         }
 
-        internal void Atualizar(Produto p)
+        public void Atualizar(Produto p)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Alura.Loja.Testes.ConsoleApp
 
                 var paramNome = new SqlParameter("nome", p.Nome);
                 var paramCategoria = new SqlParameter("categoria", p.Categoria);
-                var paramPreco = new SqlParameter("preco", p.Preco);
+                var paramPreco = new SqlParameter("preco", p.PrecoUnitario);
                 var paramId = new SqlParameter("id", p.Id);
                 updateCmd.Parameters.Add(paramNome);
                 updateCmd.Parameters.Add(paramCategoria);
@@ -66,7 +66,7 @@ namespace Alura.Loja.Testes.ConsoleApp
             }
         }
 
-        internal void Remover(Produto p)
+        public void Remover(Produto p)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Alura.Loja.Testes.ConsoleApp
             }
         }
 
-        internal IList<Produto> Produtos()
+        public IList<Produto> Produtos()
         {
             var lista = new List<Produto>();
 
@@ -98,7 +98,7 @@ namespace Alura.Loja.Testes.ConsoleApp
                 p.Id = Convert.ToInt32(resultado["Id"]);
                 p.Nome = Convert.ToString(resultado["Nome"]);
                 p.Categoria = Convert.ToString(resultado["Categoria"]);
-                p.Preco = Convert.ToDouble(resultado["Preco"]);
+                p.PrecoUnitario = Convert.ToDouble(resultado["Preco"]);
                 lista.Add(p);
             }
             resultado.Close();

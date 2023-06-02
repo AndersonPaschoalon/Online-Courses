@@ -1,0 +1,5 @@
+1- Added
+2- Unchanged
+3- Modified
+4- Deleted
+5- Detached
