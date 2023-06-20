@@ -12,11 +12,15 @@ from matplotlib.patches import Rectangle
 from imageio import imread
 
 
-def pokemon_generator(pokemon_img="84/charmander-tight.png", batch_size=64, poke_dim=200):
+OUT_DIR = "84"
+
+
+def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batch_size=64):
     # carregar charmander
     ch = imread(pokemon_img)
     CH_H, CH_W, _, = ch.shape
-    POKE_DIM = poke_dim
+    print(f"- {pokemon_img} shape:{ch.shape}")
+    POKE_DIM = image_dim
     # gerar imagens e targets
     while True:
     # cada epoca ira ter 50 batches, sem nenhuma razao especifica
@@ -41,8 +45,10 @@ def pokemon_generator(pokemon_img="84/charmander-tight.png", batch_size=64, poke
                 Y[i, 1] = col0/POKE_DIM
                 Y[i, 2] = (row1 - row0)/POKE_DIM
                 Y[i, 3] = (col1 - col0)/POKE_DIM
+
             # faz a função operar como um gerador
-            yield X, Y
+            X_yield = X/255.0
+            yield X/255.0, Y
 
 
 def _test_image_generator(save_name=""):
@@ -50,7 +56,7 @@ def _test_image_generator(save_name=""):
     for img in img_batch:
         X, Y = img
         print("X[0]:", X[0, :, :, 0])
-        print("Y[0]:", Y[0])
+        print("Y[0]:", Y[0, :])
         plt.imshow(X[0, :, :, :])
         if save_name == "":
             plt.show()
@@ -121,7 +127,7 @@ def pokemon_prediction(model, out_dir, pred_id, poke_dim, poke_h, poke_w):
     plt.savefig(os.path.join(out_dir, f"test_prediction_{pred_id}"))
 
 
-def main():
+def main(fast=True):
         # load the pokemon
         poke_dim = 200
         pokemon_img = "84/charmander-tight.png"
@@ -131,16 +137,18 @@ def main():
 
         # hyperparameters
         hp_adam_lr = 0.001
-        # hp_steps_epoch = 50
         hp_steps_epoch = 1
         hp_epochs = 5
-        out_dir = "84"
+        if not fast:
+            hp_adam_lr = 0.0005
+            hp_steps_epoch = 100
+            hp_epochs = 10
 
         print("# build the model")
         model = make_model(img_h=poke_dim, img_w=poke_dim, hp_adam_lr=hp_adam_lr)
 
         print("# test generator")
-        _test_image_generator(os.path.join(out_dir, "test_img_generator"))
+        _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
 
         print("# fit the model")
         model.fit_generator(pokemon_generator(),
@@ -149,7 +157,7 @@ def main():
 
         print("# make prediction")
         for i in range(10):
-            pokemon_prediction(model, out_dir, pred_id=i, poke_dim=poke_dim, poke_h=ch_h, poke_w=ch_w)
+            pokemon_prediction(model, OUT_DIR, pred_id=i, poke_dim=poke_dim, poke_h=ch_h, poke_w=ch_w)
 
 
 if __name__ == '__main__':
@@ -162,7 +170,7 @@ if __name__ == '__main__':
     if run_main:
         main()
     if test01:
-        _test_image_generator()
+        _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
 
 
 
