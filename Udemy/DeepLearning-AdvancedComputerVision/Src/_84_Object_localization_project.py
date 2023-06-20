@@ -159,13 +159,24 @@ def main(fast=True):
         for i in range(10):
             pokemon_prediction(model, OUT_DIR, pred_id=i, poke_dim=poke_dim, poke_h=ch_h, poke_w=ch_w)
 
+def config_tf():
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+        # Restrict TensorFlow to only use the first GPU
+        try:
+            tf.config.set_visible_devices(gpus[0], 'GPU')
+            logical_gpus = tf.config.list_logical_devices('GPU')
+            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+        except RuntimeError as e:
+            # Visible devices must be set before GPUs have been initialized
+            print(e)
+    else:
+        print("No GPU used")
+    print(tf.__version__)
 
 if __name__ == '__main__':
-    # tf.config.threading.set_inter_op_parallelism_threads(1)
-    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
-    print(tf.__version__)
+    config_tf()
     run_main = True
     test01 = False
 
