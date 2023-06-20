@@ -164,7 +164,6 @@ if __name__ == '__main__':
     # tf.config.threading.set_inter_op_parallelism_threads(1)
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    config.gpu_options.visible_device_list = "0"
 
     print(tf.__version__)
     run_main = True
