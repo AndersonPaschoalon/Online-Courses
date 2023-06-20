@@ -162,6 +162,7 @@ def main(fast=True):
 def config_tf():
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     gpus = tf.config.list_physical_devices('GPU')
+    """
     if gpus:
         # Restrict TensorFlow to only use the first GPU
         try:
@@ -173,6 +174,14 @@ def config_tf():
             print(e)
     else:
         print("No GPU used")
+    """
+    physical_devices = tf.config.list_physical_devices('GPU')
+    try:
+        tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    except Exception as e:
+        # Invalid device or cannot modify virtual devices once initialized.
+        print(e)
+        pass
     print(tf.__version__)
 
 if __name__ == '__main__':
