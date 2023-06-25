@@ -130,7 +130,7 @@ def pokemon_prediction(model, out_dir, pred_id, poke_dim, poke_h, poke_w):
 def main(fast=True):
         # load the pokemon
         poke_dim = 200
-        pokemon_img = "84/charmander-tight.png"
+        pokemon_img = os.path.join(OUT_DIR, "charmander-tight.png")
         ch = imread(pokemon_img)
         ch_h, ch_w, _, = ch.shape
         print("pokemon shape:", ch.shape)
@@ -138,7 +138,7 @@ def main(fast=True):
         # hyperparameters
         hp_adam_lr = 0.001
         hp_steps_epoch = 1
-        hp_epochs = 5
+        hp_epochs = 2
         if not fast:
             hp_adam_lr = 0.0005
             hp_steps_epoch = 100
@@ -162,19 +162,6 @@ def main(fast=True):
 def config_tf():
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     gpus = tf.config.list_physical_devices('GPU')
-    """
-    if gpus:
-        # Restrict TensorFlow to only use the first GPU
-        try:
-            tf.config.set_visible_devices(gpus[0], 'GPU')
-            logical_gpus = tf.config.list_logical_devices('GPU')
-            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
-        except RuntimeError as e:
-            # Visible devices must be set before GPUs have been initialized
-            print(e)
-    else:
-        print("No GPU used")
-    """
     physical_devices = tf.config.list_physical_devices('GPU')
     try:
         tf.config.experimental.set_memory_growth(physical_devices[0], True)
