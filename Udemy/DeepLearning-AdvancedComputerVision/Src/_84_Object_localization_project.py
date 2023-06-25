@@ -138,7 +138,7 @@ def main(fast=True):
         # hyperparameters
         hp_adam_lr = 0.001
         hp_steps_epoch = 1
-        hp_epochs = 2
+        hp_epochs = 10
         if not fast:
             hp_adam_lr = 0.0005
             hp_steps_epoch = 100
@@ -151,7 +151,7 @@ def main(fast=True):
         _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
 
         print("# fit the model")
-        model.fit_generator(pokemon_generator(),
+        model.fit_generator(pokemon_generator(batch_size=8),
                             steps_per_epoch=hp_steps_epoch,
                             epochs=hp_epochs)
 
