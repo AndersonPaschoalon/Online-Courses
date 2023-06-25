@@ -10,27 +10,25 @@ from tensorflow.keras.optimizers import SGD
 # from tensorflow.keras.processing import image
 from matplotlib.patches import Rectangle
 from imageio import imread
-
+import shutil
 
 OUT_DIR = "84"
 
 
 def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batch_size=64):
     # carregar charmander
-    ch = imread(pokemon_img)
+    ch = np.array(imread(pokemon_img))
     CH_H, CH_W, _, = ch.shape
     print(f"- {pokemon_img} shape:{ch.shape}")
     POKE_DIM = image_dim
     # gerar imagens e targets
     while True:
-    # cada epoca ira ter 50 batches, sem nenhuma razao especifica
+        # cada epoca ira ter 50 batches, sem nenhuma razao especifica
         for _ in range(50):
             # tamanho do batch, altura, lartura, cor
-            img_batch_dimensions = (batch_size, POKE_DIM, POKE_DIM, 3)
+            X = np.zeros((batch_size, POKE_DIM, POKE_DIM, 3))
             # tamanho do batch, coordenadas para se definir a caixa
-            target_dimensions = (batch_size, 4)
-            X = np.zeros(img_batch_dimensions)
-            Y = np.zeros(target_dimensions)
+            Y = np.zeros((batch_size, 4))
             
             for i in range(batch_size):
                 # calcular localização do charmander
@@ -48,7 +46,8 @@ def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batc
 
             # faz a função operar como um gerador
             X_yield = X/255.0
-            yield X/255.0, Y
+            yield X_yield, Y
+        print("** test")
 
 
 def _test_image_generator(save_name=""):
@@ -84,15 +83,19 @@ def make_model(img_h, img_w, hp_adam_lr):
     return model
 
 
-def pokemon_prediction(model, out_dir, pred_id, poke_dim, poke_h, poke_w):
+def pokemon_prediction(model, out_dir, pred_id, pokemon_img, poke_dim):
+    # load the image
+    ch = np.array(imread(pokemon_img))
+    ch_h, ch_w, _, = ch.shape
     # generate random image
     x = np.zeros((poke_dim, poke_dim, 3))
-    row0 = np.random.randint(poke_dim - poke_h)
-    col0 = np.random.randint(poke_dim - poke_w)
-    row1 = row0 - poke_h
-    col1 = col0 - poke_w
-    x[row0:row1, col0:col1, :] = 1
-    print(f"row0:{row0}, col0:{col0}, row1:{row1}, col1:{col1}")
+    row0 = np.random.randint(poke_dim - ch_h)
+    col0 = np.random.randint(poke_dim - ch_w)
+    row1 = row0 + ch_h
+    col1 = col0 + ch_w
+    print(f"poke_dim:{poke_dim}, x.shape:{x.shape}, row0:{row0}, col0:{col0}, row1:{row1}, col1:{col1}")
+    x[row0:row1, col0:col1, :] = ch[:, :, :3]
+
 
     # Predict
     X = np.expand_dims(x, 0) / 255
@@ -127,8 +130,9 @@ def pokemon_prediction(model, out_dir, pred_id, poke_dim, poke_h, poke_w):
     plt.savefig(os.path.join(out_dir, f"test_prediction_{pred_id}"))
 
 
-def main(fast=True):
+def main(fast=True, delete_model=False):
         # load the pokemon
+        model_file = os.path.join(OUT_DIR, "vgg16_pokemon.mod")
         poke_dim = 200
         pokemon_img = os.path.join(OUT_DIR, "charmander-tight.png")
         ch = imread(pokemon_img)
@@ -138,26 +142,33 @@ def main(fast=True):
         # hyperparameters
         hp_adam_lr = 0.001
         hp_steps_epoch = 1
-        hp_epochs = 10
+        hp_epochs = 2
         if not fast:
             hp_adam_lr = 0.0005
             hp_steps_epoch = 100
             hp_epochs = 10
 
-        print("# build the model")
-        model = make_model(img_h=poke_dim, img_w=poke_dim, hp_adam_lr=hp_adam_lr)
+        if delete_model and os.path.exists(model_file):
+            shutil.rmtree(model_file)
 
-        print("# test generator")
-        _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
+        if not os.path.exists(model_file):
+            print("# build the model")
+            model = make_model(img_h=poke_dim, img_w=poke_dim, hp_adam_lr=hp_adam_lr)
 
-        print("# fit the model")
-        model.fit_generator(pokemon_generator(batch_size=8),
-                            steps_per_epoch=hp_steps_epoch,
-                            epochs=hp_epochs)
+            print("# test generator")
+            _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
+
+            print("# fit the model")
+            model.fit_generator(pokemon_generator(pokemon_img=pokemon_img, batch_size=8),
+                                steps_per_epoch=hp_steps_epoch,
+                                epochs=hp_epochs)
+            model.save(model_file)
+        else:
+            model = tf.keras.models.load_model(model_file)
 
         print("# make prediction")
         for i in range(10):
-            pokemon_prediction(model, OUT_DIR, pred_id=i, poke_dim=poke_dim, poke_h=ch_h, poke_w=ch_w)
+            pokemon_prediction(model, OUT_DIR, pred_id=i, pokemon_img=pokemon_img, poke_dim=poke_dim)
 
 def config_tf():
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -177,7 +188,7 @@ if __name__ == '__main__':
     test01 = False
 
     if run_main:
-        main()
+        main(fast=True, delete_model=True)
     if test01:
         _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
 
