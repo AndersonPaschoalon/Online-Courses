@@ -11,7 +11,7 @@ tf.disable_v2_behavior()
 
 from keras.models import Sequential
 from keras.layers import Dense, Activation
-from _93_TensorflowNeuralNetwork import  get_normalized_data
+from _96_TensorflowNeuralNetwork import  get_normalized_data
 from Utils import Utils
 # from util import get_normalized_data, y2indicator
 
