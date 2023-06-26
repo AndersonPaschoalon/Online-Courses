@@ -11,11 +11,12 @@ from tensorflow.keras.optimizers import SGD
 from matplotlib.patches import Rectangle
 from imageio import imread
 import shutil
+from skimage.transform import resize
 
-OUT_DIR = "84"
+OUT_DIR = "86"
 
 
-def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batch_size=64):
+def pokemon_generator(pokemon_img="86/charmander-tight.png", image_dim=200, batch_size=64):
     # carregar charmander
     ch = np.array(imread(pokemon_img))
     CH_H, CH_W, _, = ch.shape
@@ -31,13 +32,23 @@ def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batc
             Y = np.zeros((batch_size, 4))
             
             for i in range(batch_size):
+                # resize charmander
+                scale = 0.5 + np.random.random() # 0.5 - 1.5
+                new_height = int(CH_H * scale)
+                new_width = int(CH_W * scale)
+                obj = resize(ch,
+                             (new_height, new_width),
+                             preserve_range=True).astype(np.uint8) # keep it from 0 - 255
+
                 # calcular localização do charmander
-                row0 = np.random.randint(POKE_DIM - CH_H)
-                col0 = np.random.randint(POKE_DIM - CH_W)
-                row1 = row0 + CH_H
-                col1 = col0 + CH_W
+                row0 = np.random.randint(POKE_DIM - new_height)
+                col0 = np.random.randint(POKE_DIM - new_width)
+                row1 = row0 + new_height
+                col1 = col0 + new_width
+
                 # inserir o charmander na imagem
-                X[i, row0:row1, col0:col1, :] = ch[:, :, :3]
+                X[i, row0:row1, col0:col1, :] = obj[:, :, :3]
+
                 # construir targets
                 Y[i, 0] = row0/POKE_DIM
                 Y[i, 1] = col0/POKE_DIM
@@ -87,15 +98,23 @@ def pokemon_prediction(model, out_dir, pred_id, pokemon_img, poke_dim):
     # load the image
     ch = np.array(imread(pokemon_img))
     ch_h, ch_w, _, = ch.shape
+
+    # resize charmander
+    scale = 0.5 + np.random.random()  # 0.5 - 1.5
+    new_height = int(ch_h * scale)
+    new_width = int(ch_w * scale)
+    obj = resize(ch,
+                 (new_height, new_width),
+                 preserve_range=True).astype(np.uint8)  # keep it from 0 - 255
+
     # generate random image
     x = np.zeros((poke_dim, poke_dim, 3))
-    row0 = np.random.randint(poke_dim - ch_h)
-    col0 = np.random.randint(poke_dim - ch_w)
-    row1 = row0 + ch_h
-    col1 = col0 + ch_w
+    row0 = np.random.randint(poke_dim - new_height)
+    col0 = np.random.randint(poke_dim - new_width)
+    row1 = row0 + new_height
+    col1 = col0 + new_width
     print(f"poke_dim:{poke_dim}, x.shape:{x.shape}, row0:{row0}, col0:{col0}, row1:{row1}, col1:{col1}")
-    x[row0:row1, col0:col1, :] = ch[:, :, :3]
-
+    x[row0:row1, col0:col1, :] = obj[:, :, :3]
 
     # Predict
     X = np.expand_dims(x, 0) / 255
@@ -139,12 +158,12 @@ def main(fast=True, delete_model=False):
         ch_h, ch_w, _, = ch.shape
         print("pokemon shape:", ch.shape)
 
-        # hyperparameters
-        hp_adam_lr = 0.001
+        # hyperparameters - para performar bem, usar uma lr menor
+        hp_adam_lr = 0.0001
         hp_steps_epoch = 1
         hp_epochs = 2
         if not fast:
-            hp_adam_lr = 0.0005
+            hp_adam_lr = 0.0001
             hp_steps_epoch = 100
             hp_epochs = 10
 
@@ -170,6 +189,7 @@ def main(fast=True, delete_model=False):
         for i in range(10):
             pokemon_prediction(model, OUT_DIR, pred_id=i, pokemon_img=pokemon_img, poke_dim=poke_dim)
 
+
 def config_tf():
     os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     gpus = tf.config.list_physical_devices('GPU')
@@ -181,6 +201,7 @@ def config_tf():
         print(e)
         pass
     print(tf.__version__)
+
 
 if __name__ == '__main__':
     config_tf()
