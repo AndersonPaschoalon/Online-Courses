@@ -13,10 +13,10 @@ from imageio import imread
 import shutil
 from skimage.transform import resize
 
-OUT_DIR = "86"
+OUT_DIR = "88"
 
 
-def pokemon_generator(pokemon_img="86/charmander-tight.png", image_dim=200, batch_size=64):
+def pokemon_generator(pokemon_img="88/charmander-tight.png", image_dim=200, batch_size=64):
     # carregar charmander
     ch = np.array(imread(pokemon_img))
     CH_H, CH_W, _, = ch.shape
