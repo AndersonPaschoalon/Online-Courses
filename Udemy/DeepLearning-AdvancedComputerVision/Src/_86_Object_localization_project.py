@@ -178,7 +178,7 @@ def main(fast=True, delete_model=False):
             _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
 
             print("# fit the model")
-            model.fit_generator(pokemon_generator(pokemon_img=pokemon_img, batch_size=32),
+            model.fit_generator(pokemon_generator(pokemon_img=pokemon_img, batch_size=16),
                                 steps_per_epoch=hp_steps_epoch,
                                 epochs=hp_epochs)
             model.save(model_file)
