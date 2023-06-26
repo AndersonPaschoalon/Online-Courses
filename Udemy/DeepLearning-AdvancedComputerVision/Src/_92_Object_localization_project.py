@@ -295,12 +295,12 @@ def main(fast=True, delete_model=False):
 
 if __name__ == '__main__':
     config_tf()
-    run_main = False
-    test01 = True
+    run_main = True
+    test01 = False
     test02 = False
 
     if run_main:
-        main(fast=False, delete_model=False)
+        main(fast=True, delete_model=False)
     if test01:
         _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
     if test02:
