@@ -188,20 +188,11 @@ def pokemon_prediction(model, out_dir, pred_id, pokemon_img, poke_dim):
     X = np.expand_dims(x, 0) / 255
     p = model.predict(X)[0]
 
-    # calculate target/loss
-    y = np.zeros(4)
-    y[0] = row0/poke_dim
-    y[1] = col0 / poke_dim
-    y[2] = (row1 - row0) / poke_dim
-    y[3] = (col1 - col0) / poke_dim
-
     # draw the box
     row0 = int(p[0]*poke_dim)
     col0 = int(p[1]*poke_dim)
     row1 = int(row0 + p[2]*poke_dim)
     col1 = int(col0 + p[3]*poke_dim)
-    print(f"pred: {row0}, {col0}. {row1}. {col1}")
-    print(f"loss: { -np.mean( y*np.log(p) + (1 - y)*np.log(1 - p) )}")
 
     # plot
     fig, ax = plt.subplots(1)
@@ -286,10 +277,11 @@ def main(fast=True, delete_model=False):
                                 epochs=hp_epochs)
             model.save(model_file)
         else:
-            model = tf.keras.models.load_model(model_file)
+            model = tf.keras.models.load_model(model_file,
+                                               custom_objects={'custom_loss': custom_loss})
 
         print("# make prediction")
-        for i in range(10):
+        for i in range(30):
             pokemon_prediction(model, OUT_DIR, pred_id=i, pokemon_img=pokemon_img, poke_dim=poke_dim)
 
 
@@ -300,7 +292,7 @@ if __name__ == '__main__':
     test02 = False
 
     if run_main:
-        main(fast=True, delete_model=False)
+        main(fast=False, delete_model=False)
     if test01:
         _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
     if test02:
