@@ -272,7 +272,7 @@ if __name__ == '__main__':
     test02 = False
 
     if run_main:
-        main(fast=False, delete_model=False)
+        main(fast=True, delete_model=False)
     if test01:
         _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
     if test02:
