@@ -47,7 +47,6 @@ def pokemon_generator(pokemon_img="84/charmander-tight.png", image_dim=200, batc
             # faz a função operar como um gerador
             X_yield = X/255.0
             yield X_yield, Y
-        print("** test")
 
 
 def _test_image_generator(save_name=""):
@@ -144,7 +143,7 @@ def main(fast=True, delete_model=False):
         hp_steps_epoch = 1
         hp_epochs = 2
         if not fast:
-            hp_adam_lr = 0.0005
+            hp_adam_lr = 0.0004
             hp_steps_epoch = 100
             hp_epochs = 10
 
@@ -159,7 +158,7 @@ def main(fast=True, delete_model=False):
             _test_image_generator(os.path.join(OUT_DIR, "test_img_generator"))
 
             print("# fit the model")
-            model.fit_generator(pokemon_generator(pokemon_img=pokemon_img, batch_size=8),
+            model.fit_generator(pokemon_generator(pokemon_img=pokemon_img, batch_size=32),
                                 steps_per_epoch=hp_steps_epoch,
                                 epochs=hp_epochs)
             model.save(model_file)
@@ -188,7 +187,7 @@ if __name__ == '__main__':
     test01 = False
 
     if run_main:
-        main(fast=True, delete_model=True)
+        main(fast=False, delete_model=True)
     if test01:
         _test_image_generator(save_name=os.path.join(OUT_DIR, "test_charmander"))
 
