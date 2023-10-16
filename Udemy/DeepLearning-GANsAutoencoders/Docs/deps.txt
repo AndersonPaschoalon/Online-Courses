@@ -1,0 +1,6 @@
+# Python packages
+
+```
+pip install tqdm
+```
+
