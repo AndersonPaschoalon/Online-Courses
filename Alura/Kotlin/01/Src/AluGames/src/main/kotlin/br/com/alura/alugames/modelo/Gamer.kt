@@ -1,5 +1,7 @@
 package br.com.alura.alugames.modelo
 
+import java.time.LocalDate
+import java.util.Scanner
 import kotlin.random.Random
 
 data class Gamer(var nome: String, var email: String) {
@@ -15,7 +17,11 @@ data class Gamer(var nome: String, var email: String) {
     var idInterno: String? = null
         private set
 
-    val jobosBuscados = mutableListOf<Jogo>()
+    var plano: Plano = PlanoAvulso("BRONZE")
+
+    val jobosBuscados = mutableListOf<Jogo?>()
+
+    val jogosAlugados = mutableListOf<Aluguel>()
 
     constructor(nome: String, email: String, dataNascimento: String, usuario: String):
             this(nome, email){
@@ -25,13 +31,13 @@ data class Gamer(var nome: String, var email: String) {
 
     init {
         if(nome.isNullOrBlank()) {
-            throw IllegalArgumentException("Nome está em branco.")
+             throw IllegalArgumentException("Nome está em branco.")
         }
         this.email = validarEmail()
     }
 
     override fun toString(): String {
-        return "Gamer(nome='$nome', email='$email', dataNascimento=$dataNascimento, usuario=$usuario, idInterno=$idInterno)"
+        return "Gamer(nome='$nome', email='$email', dataNascimento=$dataNascimento, usuario=$usuario, idInterno=$idInterno)\n"
     }
 
     private fun criarIdInterno(){
@@ -40,12 +46,50 @@ data class Gamer(var nome: String, var email: String) {
         this.idInterno = "$usuario#$tag"
     }
 
+    fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel{
+        val aluguel = Aluguel(this, jogo, periodo)
+        jogosAlugados.add(aluguel)
+        return aluguel
+    }
+
     fun validarEmail(): String{
-        val regex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$]")
+        val regex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$")
         if(regex.matches(email)){
             return email
         } else{
             throw  IllegalArgumentException("Email invalido")
+        }
+    }
+
+    fun jogosDoMes(mes:Int): List<Jogo> {
+        return jogosAlugados
+            .filter { aluguel ->  aluguel.periodo.dataInicial.monthValue == mes}
+            .map { aluguel ->  aluguel.jogo}
+    }
+
+
+    companion object{
+        fun criarGamer(leitura: Scanner): Gamer{
+            println("Boas vindas ao AliGames! Vamos fazer seu cadastro.")
+            println("Nome:")
+            val nome = leitura.nextLine()
+            println("Email:")
+            val email = leitura.nextLine()
+            println("Deseja completar o cadastro com usuario e data de nascimento (S/N)")
+            val opcao = leitura.nextLine()
+
+            if (opcao.equals("s", true)) {
+                println("Data de nascimento (DD/MM/AAAA):")
+                val nascimento = leitura.nextLine()
+                println("Usuario:")
+                val usuario = leitura.nextLine()
+
+                return Gamer(nome, email, nascimento, usuario)
+            }
+            else {
+                return Gamer(nome, email)
+            }
+
         }
     }
 
