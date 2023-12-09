@@ -31,9 +31,11 @@ print(f"data.feature_names:{data.feature_names}")
 # test
 index = np.where(data.feature_names == 'mean compactness')[0][0]
 sample = data.data[:, index]
+plt.clf()
 plt.title('mean compactness')
 plt.plot(sample)
-plt.show()
+# plt.show()
+plt.savefig(f"{out_dir}/mean_compactness")
 
 N, D = X_train.shape
 print(f"N:{N}, D:{D}")

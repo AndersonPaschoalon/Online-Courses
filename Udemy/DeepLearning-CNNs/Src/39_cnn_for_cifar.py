@@ -17,6 +17,7 @@ import itertools
 
 print(tf.__version__)
 out_dir = "39"
+params = {"epochs": 15}
 
 def plot_confusion_matrix(cm,
                           classes,
@@ -92,7 +93,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=2)
+r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=params["epochs"])
 
 # plot the loss per iteration
 plt.clf()
@@ -129,9 +130,10 @@ truck
 """.split()
 
 # some misclassified examples
-misclassified_idx = np.where(p_test != y_test)[0]
-i = np.random.choice(misclassified_idx)
-plt.clf()
-plt.imshow(x_test[i], cmap='gray')
-plt.title("True label: %s Predicted: %s" % (labels[y_test[i]], labels[p_test[i]]))
-plt.savefig(f"{out_dir}/sample_prediction")
+for item in range(5):
+    misclassified_idx = np.where(p_test != y_test)[0]
+    i = np.random.choice(misclassified_idx)
+    plt.clf()
+    plt.imshow(x_test[i], cmap='gray')
+    plt.title("True label: %s Predicted: %s" % (labels[y_test[i]], labels[p_test[i]]))
+    plt.savefig(f"{out_dir}/sample_miss_{item}")

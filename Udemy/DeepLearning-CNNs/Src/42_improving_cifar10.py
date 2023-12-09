@@ -122,7 +122,7 @@ model.summary()
 
 data_augumentation = True
 # n_epochs = 50
-n_epochs = 2
+n_epochs = 50
 
 r = None
 if not data_augumentation:
@@ -175,12 +175,13 @@ truck
 """.split()
 
 # some misclassified examples
-plt.clf()
-misclassified_idx = np.where(p_test != y_test)[0]
-i = np.random.choice(misclassified_idx)
-plt.imshow(x_test[i], cmap='gray')
-plt.title("True label: %s Predicted: %s" % (labels[y_test[i]], labels[p_test[i]]))
-plt.savefig(os.path.join(out_dir, "x_test"))
+for item in range(5):
+    plt.clf()
+    misclassified_idx = np.where(p_test != y_test)[0]
+    i = np.random.choice(misclassified_idx)
+    plt.imshow(x_test[i], cmap='gray')
+    plt.title("True label: %s Predicted: %s" % (labels[y_test[i]], labels[p_test[i]]))
+    plt.savefig(os.path.join(out_dir, f"sample_missclassified_{item}"))
 
 
 

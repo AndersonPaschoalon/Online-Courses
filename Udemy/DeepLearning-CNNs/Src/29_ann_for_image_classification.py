@@ -8,6 +8,7 @@ Original file is located at
 """
 
 out_dir = "29"
+params = {"epochs": 15}
 
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
@@ -37,7 +38,7 @@ model.compile(optimizer='adam',
               metrics='accuracy')
 
 # train the model
-r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=10)
+r = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=params["epochs"])
 
 # plot loss per iteration
 plt.clf()
