@@ -1,0 +1,8 @@
+Android Music Player UI Design | Android Studio 
+https://www.youtube.com/watch?v=A2uR94W5Itg
+
+NativeScript Image Builder
+https://nsimage.brosteins.com/
+
+Use ConstraintLayout to design your Android views
+https://developer.android.com/codelabs/constraint-layout#0
