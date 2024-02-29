@@ -1,0 +1,202 @@
+## Repositórios Github:
+- https://github.com/leandrocgsi/RestWithSpringBootUdemy
+- https://github.com/leandrocgsi/RestWithSpringBootUdemyArchetype
+
+
+## O que são Webservices
+
+Webservice: é uma aplicação interoperável que é hospedada e pode ser acessada através do http. 
+Antes do padrão REST: RMI, SOAP, Corba, DCE, DCOM, ...
+
+## REST
+
+"Representational State Transfer (REST) é um estilo de arquitetura de software para sistemas distribuídos de hipermidia, como a World Wide Web". 
+	- Cliente-Servidor: devem ser separados
+	- Stateless server: o servidor não deve guardar estado do cliente. 
+	- Cachable: o cliente deve ser informado sobre as propriedades de cache de um recurso para que possa decidir quando deve utilizar cache.
+	- Interface Uniforme: uris, hateoas, mensagens descritivas.
+	- Sistema em camadas: deve suportar de forma transparente balanceamento de carga, proxies, firewalls
+	- Codigo sob Demanda (javascript por exemplo).
+	
+## Request e Response
+
+Request:
+	<Request-Line>
+	<Request-Headers>
+	<Blank-Line>
+	<Request-Body>
+
+Response: 
+	<Status-Line>
+	<Response-headers>
+	<Blank-Line>
+	<Response-Body>
+
+## Tipos de Parâmetros usados no REST
+
+Path Parameters
+	Parâmetros passados na URL, e são obrigatórios. 
+	Por exemplo: https://your_api/api/books/v1/find-books/asc/10/1
+	endpoint: https://your_api/api/books/v1/find-books
+	parametros: asc, 10, 1
+
+Query Parameters
+	Passados via url, mas não são obrigatórios
+	Por exemplo: https://your_api/api/books/v1/find-books-by-title?firstName=Clean&LastName=Coder, https://your_api/api/books/v1/find-books-by-title?firstName=Clean
+	
+Header Paras
+	Parâmetros enviados pelo header.
+
+Body Params
+	Parâmetros passados no body.
+	{
+		"login":{}
+		"password":{}
+	}
+
+## Status Codes
+
+Ranges de Status:
+	1xx	Informacionais
+	2xx Sucesso
+	3xx	Redirecionamento
+	4xx Erro de client
+	5xx Erro de servidor
+
+Referências
+	- https://docs.oracle.com/en/cloud/iaas/messaging-cloud/csmes/rest-api-http-status-codes-and-error-messages-reference.html#GUID-AAB1EE32-BE4A-4ACC-BEAC-ABA85EB41919
+	- https://www.restapitutorial.com/httpstatuscodes.html
+	- https://dzone.com/refcardz/rest-foundations-restful?chapter=5
+	- http://www.semeru.com.br/blog/http-status-codes-em-servicos-rest/
+		
+	
+Uma boa prática ao se desenvolver serviços REST é retornar status codes adequados a cada operação executada. Isso tem uma importância ainda maior quando se trata de uma exceção, uma vez que diferentementemente de um serviço SOAP uma aplicação verdadeiramente REST não retorna a exception para o usuário. Sendo assim é fortemente recomendado que ao se desenvolver uma API REST se vá além dos status code 200 e 500 OK e falha respectivamente.
+HTTP Status Codes por Grupo
+HTTP Status Codes
+
+200 OK – Request de criação ou deleção executada com sucesso.
+
+201 Created – Criação de uma fila, topico, fila temporária, tópico temporária, session, producer, consumer, listener, queue browser ou menssagem realizada com sucesso.
+
+204 No Content – deleção de uma fila, tópico, sessão, producer ou listener bem sucedida mas sem retorno de conteúdo.
+
+400 Bad Request – O path informado está em umformato incorreto, um parametro ou valor do corpo da requisição não está formatado corretamente ou um parâmetro onbrigatório não foi informado,
+ou está formatado corretamente mas pode estar eventualmente inválido (por exemplo, o ID informado não exite – NullPointerException, o conteúdo retornado é muito grande ou o ID informado já está em uso).
+
+403 Forbidden – O cliente não tem permissão para executar requisições na operação em questão.
+
+404 Not Found – o objeto requisitado pelo path não existe(NullPointerException).
+
+405 Method Not Allowed – O usuário não tem permissão de acesso ao path.
+
+409 Conflict – Um objeto já foi criado com as mesmas informações.
+
+500 Internal Server Error – Ocorreu uma falha no servidor, podendo ser desde uma falha no SQL por exemplo.
+
+A prática de retornar os status code corretos torna seus serviços mais amigáveis ao cliente facilitando a integração com outros sistemas. Nos próximos posts botaremos a mão na massa desenvolvendo a nossa propria API/Serviço REST.
+
+
+## Verbos
+
+Para saber qual usar, pensar como um CRUD. Verbos mais usados:
+- Para criar um recurso, utilizar um POST;
+- Para Ler um recurso, utilizar o GET;
+- Para atualizar, utilizar o PUT;
+- Para remover, utilizar o DELETE;
+
+Verbos menos usados:
+- PATCH: update parcial 
+
+## Niveis de Maturidade REST
+
+Nível 0: Pantano de XML/Json
+Nível 1: API organizada por recursos
+Nível 2: Uso correto dos verbos HTTP
+Level 3: Controle por Hipertexto: através da propria resposta da API é possivel tomar conhecimento de como realizar as operações suportadas pelo webservice. Links junto as respostas. 
+
+
+## HATEOAS
+
+Hypermidia As The Engine of Application State. 
+
+## SWAGGER 
+
+Documentação e muito mais. 
+
+
+## Autenticação
+
+Client                      Server
+
+Login              (1) POST /login
+(user, password) ---------------------------->
+
+Store Token        (2) 200 OK
+                 <----------------------------
+                   erqur0qtn134t13t013t14...	
+
+                   (3) GET /profile
+OpenProfileView  ----------------------------->
+                 Authorization: 
+				 Bearer 82rhshsa94h10...
+                  			   
+## Versionamento
+
+Versionamento por Subdominio: versão é especificada logo no inicio da url. https://v1-myapi/api/books
+
+Versionamento por Path Param: a versão é especificada após a baseUrl. https://my/api/api/books/v1/
+
+Versionamento por queryString: em desuso hoje https://myapi/api/books?version=1.0
+
+Versionamento via header. Adicionar o parametro "Accept" para transferir a versão, ou adicionar um header customizado, por exemplo "api-version". Cada client deveria especificar a versão no header. 
+
+Referências:
+- https://www.linkapi.solutions/blog/tecnico/versionamento-apis-restful/
+- https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/maintain-microservice-apis
+- https://www.infoq.com/news/2016/07/web-api-versioning/
+
+## Indo Além do RESTFull
+
+- Limitação de requests: Planos de assinatura por acesso;
+- Criar SDKs (C#, Java, etc...);
+- Disponibilizar Webservice Sandbox
+
+
+## Boas Práticas
+
+- Paginação
+- Filtros
+- Definir recursos lógicos
+- Tolerância a Falhas
+- Cache
+- Timeouts
+- Documentação
+- Utilizar SSL
+- Versionamento
+- Teste e validação - buscar automatizar os testes
+- Self-service
+- I18n/Globalization
+- Notificações
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
