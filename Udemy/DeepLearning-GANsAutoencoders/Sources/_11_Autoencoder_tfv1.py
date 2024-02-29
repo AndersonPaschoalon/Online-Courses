@@ -6,6 +6,13 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
+from tensorflow.keras import layers, losses
+from tensorflow.keras.datasets import fashion_mnist
+from tensorflow.keras.models import Model
+
+
 params = {
     "learning_rate": 0.001,
     "epochs": 50,
@@ -14,11 +21,17 @@ params = {
 }
 
 class Autoencoder:
+    """
+    1 hidden layer neural network
+    relu activation function
+    sigmoid output
+    """
 
     def __init__(self, D, M, learning_rate=0.001):
         tf.compat.v1.disable_eager_execution()
 
         # represents a batch of training data
+        # placeholder for the input data X.
         self.X = tf.compat.v1.placeholder(tf.compat.v1.float32, shape=(None, D))
 
         # input -> hidden layer
@@ -67,10 +80,22 @@ class Autoencoder:
                 if j % 100 == 0:
                     print("iter:%d, cost: %.3f" % (j, c))
         plt.plot(costs)
-        plt.savefig(os.path.join(out_dir, "costs"))
+        plt.savefig(os.path.join(out_dir, "tfv1_costs"))
 
     def predict(self, X):
         return self.sess.run(self.X_hat, feed_dict={self.X: X})
+
+
+def load_fashion_mnist():
+    (x_train, _), (x_test, _) = fashion_mnist.load_data()
+
+    x_train = x_train.astype('float32') / 255.
+    x_test = x_test.astype('float32') / 255.
+
+    print(x_train.shape)
+    print(x_test.shape)
+
+    return x_train, x_test
 
 
 def main(params):
@@ -88,25 +113,59 @@ def main(params):
         i = np.random.choice(len(X))
         x = X[i]
         im = model.predict([x]).reshape(28, 28)
+        plt.clf()
         plt.subplot(1, 2, 1)
         plt.imshow(x.reshape(28, 28), cmap='gray')
         plt.title("Original")
         plt.subplot(1, 2, 2)
         plt.imshow(im, cmap='gray')
         plt.title("Reconstruction")
-        # plt.show()
         fig_name = os.path.join(params["out_dir"], f"Original_vs_Reconstructed_{count_gens}")
-
-        # ans = input("Generate another?")
-        # if ans and ans[0] in ('n' or 'N'):
-        #     done = True
+        plt.savefig(fig_name)
         count_gens += 1
         if count_gens >= count_gens_max:
             done = True
 
 
-if __name__ == '__main__':
-    main(params)
 
+def main2(params):
+    x_train, x_test = load_fashion_mnist()
+    x_flattened = x_train.reshape(x_train.shape[0], -1)
+    autoencoder = Autoencoder(D=784, M=300, learning_rate=params["learning_rate"])
+    autoencoder.fit(x_flattened, epochs=params["epochs"], batch_sz=params["batch_size"], out_dir=params["out_dir"])
+
+    encoded_imgs = []
+    decoded_imgs = []
+    for i in range(0, 10):
+        encoded_imgs.append(x_train[i])
+        x_flattened_in = np.reshape(x_flattened[i], (1, 784))
+        pred = autoencoder.predict(x_flattened_in).reshape(28, 28)
+        decoded_imgs.append(pred)
+
+    n = 10
+    plt.figure(figsize=(20, 4))
+    for i in range(n):
+        # display original
+        ax = plt.subplot(2, n, i + 1)
+        plt.imshow(x_test[i])
+        plt.title("original")
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
+        # display reconstruction
+        ax = plt.subplot(2, n, i + 1 + n)
+        plt.imshow(decoded_imgs[i])
+        plt.title("reconstructed")
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+    img_result = os.path.join(params['out_dir'], "tfv1_FsshionMnist_original_vs_reconstructed")
+    plt.savefig(img_result)
+
+
+if __name__ == '__main__':
+    # main(params)
+    main2(params)
 
 

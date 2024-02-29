@@ -15,6 +15,7 @@ conda activate tf2_py39
 (3) Rodar o Pycharm através do Anaconda console:
 ```
 "C:\Program Files\JetBrains\PyCharm Community Edition 2021.2.3\bin\"pycharm64.exe
+"C:\Program Files\JetBrains\PyCharm Community Edition 2021.2\bin\"pycharm64.exe
 ```
 A partir daqui, bastou eu abrir o meu projeto, e as dependências foram carregadas 
 corretametne. 
