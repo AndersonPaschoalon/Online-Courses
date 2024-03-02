@@ -1,0 +1,4 @@
+https://github.com/DozerMapper/dozer
+
+https://dozermapper.github.io/gitbook/documentation/gettingstarted.html
+

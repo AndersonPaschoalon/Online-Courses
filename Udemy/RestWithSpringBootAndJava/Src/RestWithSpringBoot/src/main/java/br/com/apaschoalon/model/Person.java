@@ -1,14 +1,37 @@
-package model;
+package br.com.apaschoalon.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="person")
 public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "first_name", nullable = false, length = 80)
 	private String firstName;
+	
+	@Column(name = "last_name", nullable = false, length = 80)
+	private String lastName;
+	
+	@Column(nullable = false, length = 100)
+	private String address;
+	
+	@Column(nullable = false, length = 6)
+	private String gender;
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, firstName, gender, id, lastName);
@@ -35,10 +58,6 @@ public class Person implements Serializable{
 				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
 				&& Objects.equals(lastName, other.lastName);
 	}
-
-	private String lastName;
-	private String address;
-	private String gender;
 
 	public String getFirstName() {
 		return firstName;
@@ -73,7 +92,5 @@ public class Person implements Serializable{
 	}
 
 	public Person() {}
-	
-	
 	
 }
