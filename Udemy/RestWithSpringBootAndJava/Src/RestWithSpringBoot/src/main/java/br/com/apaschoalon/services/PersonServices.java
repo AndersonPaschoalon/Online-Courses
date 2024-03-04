@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.apaschoalon.data.vo.v1.PersonVO;
+import br.com.apaschoalon.data.vo.v2.PersonVOV2;
 import br.com.apaschoalon.mapper.DozerMapper;
+import br.com.apaschoalon.mapper.custom.PersonMapper;
 import br.com.apaschoalon.model.Person;
 import br.com.apaschoalon.repositories.PersonRepository;
 
@@ -21,6 +23,9 @@ public class PersonServices {
 	
 	@Autowired
 	PersonRepository repository;
+	
+	@Autowired
+	PersonMapper mapper;
 	
 	public PersonVO findById(Long id) {
 		logger.info("Finding one person...");
@@ -42,6 +47,16 @@ public class PersonServices {
 		var vo = DozerMapper.parseObject(savedPerson, PersonVO.class);
 		return vo;
 	}	
+	
+	public PersonVOV2 createV2(PersonVOV2 person) {
+		logger.info("Creating one person v2!");
+		var entity = this.mapper.convertVOV2ToEntity(person);
+		
+		var savedPerson  = this.repository.save(entity);
+		var vo = this.mapper.convertEntityToVoV2(savedPerson);
+		return vo;
+	}		
+	
 
 	public PersonVO update(PersonVO person) {
 		logger.info("Creating one person!");

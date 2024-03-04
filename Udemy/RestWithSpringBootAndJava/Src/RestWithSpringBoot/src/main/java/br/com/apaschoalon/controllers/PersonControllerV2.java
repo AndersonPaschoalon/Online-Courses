@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.apaschoalon.data.vo.v1.PersonVO;
+import br.com.apaschoalon.data.vo.v2.PersonVOV2;
 import br.com.apaschoalon.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
-public class PersonController {
+@RequestMapping("/v2/person")
+public class PersonControllerV2 {
 
 	
 	private Logger logger = Logger.getLogger(PersonController.class.getName());
@@ -42,12 +43,15 @@ public class PersonController {
 		return all;
 	}
 	
+	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO create(
-			@RequestBody PersonVO person){
-		return this.service.create(person);
-	}	
+	public PersonVOV2 create(
+			@RequestBody PersonVOV2 person){
+		logger.info("****************************");
+		logger.info(person.toString());
+		return this.service.createV2(person);
+	}		
 	
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
