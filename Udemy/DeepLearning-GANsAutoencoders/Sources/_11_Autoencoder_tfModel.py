@@ -1,3 +1,4 @@
+# https://www.tensorflow.org/tutorials/generative/autoencoder?hl=pt-br
 from keras.backend import learning_phase
 
 import util
@@ -14,6 +15,10 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras import layers, losses
 from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.models import Model
+
+
+OUT_PATH = ".\\Results\\11\\"
+epochs = 50
 
 
 class Autoencoder(Model):
@@ -40,14 +45,23 @@ class Autoencoder(Model):
 
 def load_fashion_mnist():
     (x_train, _), (x_test, _) = fashion_mnist.load_data()
-
     x_train = x_train.astype('float32') / 255.
     x_test = x_test.astype('float32') / 255.
-
     print(x_train.shape)
     print(x_test.shape)
-
     return x_train, x_test
+
+
+def plot_cost_function(history):
+    # Plot cost function over iterations
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.title('Cost Function Over Iterations')
+    plt.legend()
+    plot_file = os.path.join(OUT_PATH, "tf2_ModelApi_FashionMnist_CostFunction")
+    plt.savefig(plot_file)
 
 
 def main():
@@ -56,10 +70,12 @@ def main():
     autoencoder = Autoencoder(latent_dim)
     autoencoder.compile(optimizer='adam', loss=losses.MeanSquaredError())
     # autoencoder.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
-    autoencoder.fit(x_train, x_train,
-                    epochs=10,
-                    shuffle=True,
-                    validation_data=(x_test, x_test))
+    history = autoencoder.fit(x_train,
+                              x_train,
+                              epochs=epochs,
+                              shuffle=True,
+                              validation_data=(x_test, x_test))
+    plot_cost_function(history)
     encoded_imgs = autoencoder.encoder(x_test).numpy()
     decoded_imgs = autoencoder.decoder(encoded_imgs).numpy()
     n = 10
@@ -80,7 +96,8 @@ def main():
         plt.gray()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
-    plt.savefig(".\\Results\\11\\tf2Model_FsshionMnist_original_vs_reconstructed")
+    plot_file = os.path.join(OUT_PATH, "tf2_ModelApi_FashionMnist_OriginalVsReconstructed")
+    plt.savefig(plot_file)
 
 
 if __name__ == '__main__':

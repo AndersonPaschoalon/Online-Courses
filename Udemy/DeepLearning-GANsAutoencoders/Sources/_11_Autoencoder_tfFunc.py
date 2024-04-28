@@ -1,64 +1,78 @@
+# https://www.tensorflow.org/tutorials/generative/autoencoder?hl=pt-br
+
 import os
-import numpy as np
+import matplotlib.pyplot as plt
 import tensorflow as tf
-import matplotlib.pyplot as plt
-
-import matplotlib.pyplot as plt
-import pandas as pd
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
 from tensorflow.keras.datasets import fashion_mnist
-import tensorflow as tf
 from tensorflow.keras import layers
+from tensorflow.keras import layers, losses
+
+OUT_PATH = ".\\Results\\11\\"
+epochs = 50
 
 
-def create_autoencoder(latent_dim):
-    # Define encoder layers
-    encoder_inputs = tf.keras.Input(shape=(28, 28))
-    flatten_layer = layers.Flatten()(encoder_inputs)
-    encoder_outputs = layers.Dense(latent_dim, activation='relu')(flatten_layer)
-    encoder = tf.keras.Model(encoder_inputs, encoder_outputs)
+class AutoencoderFactory:
 
-    # Define decoder layers
-    decoder_inputs = tf.keras.Input(shape=(latent_dim,))
-    decoder_dense_layer = layers.Dense(784, activation='sigmoid')(decoder_inputs)
-    decoder_outputs = layers.Reshape((28, 28))(decoder_dense_layer)
-    decoder = tf.keras.Model(decoder_inputs, decoder_outputs)
+    def __init__(self,
+               input_shape=(28, 28),
+               latent_dim=64,
+               optimizer='adam',
+               loss=losses.MeanSquaredError()):
+        flattened_dim = input_shape[0]*input_shape[1]
+        # Define encoder layers
+        ei = tf.keras.Input(shape=input_shape)
+        ex = layers.Flatten()(ei)
+        ex = layers.Dense(latent_dim, activation='relu')(ex)
+        #encoder = tf.keras.Model(ei, ex)
 
-    # Combine encoder and decoder into autoencoder
-    autoencoder_inputs = tf.keras.Input(shape=(28, 28))
-    encoded = encoder(autoencoder_inputs)
-    decoded = decoder(encoded)
-    autoencoder = tf.keras.Model(autoencoder_inputs, decoded)
+        # Define decoder layers
+        #di = tf.keras.Input(shape=(latent_dim,))
+        dx = layers.Dense(flattened_dim, activation='sigmoid')(ex)
+        dx = layers.Reshape((input_shape[0], input_shape[1]))(dx)
+        #self.decoder = tf.keras.Model(di, dx)
 
-    return autoencoder
+        # Combine encoder and decoder into autoencoder
+        self.autoencoder = tf.keras.Model(ei, dx)
+        self.autoencoder.compile(optimizer=optimizer, loss=loss)
+
 
 def load_fashion_mnist():
     (x_train, _), (x_test, _) = fashion_mnist.load_data()
-
     x_train = x_train.astype('float32') / 255.
     x_test = x_test.astype('float32') / 255.
-
     print(x_train.shape)
     print(x_test.shape)
-
     return x_train, x_test
+
+
+def plot_cost_function(history):
+    # Plot cost function over iterations
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.title('Cost Function Over Iterations')
+    plt.legend()
+    plot_file = os.path.join(OUT_PATH, "tf2_FuncApi_FashionMnist_CostFunction")
+    plt.savefig(plot_file)
 
 
 def main():
     x_train, x_test = load_fashion_mnist()
-    latent_dim = 64
-    autoencoder = create_autoencoder(latent_dim)
-    #autoencoder.compile(optimizer='adam', loss=losses.MeanSquaredError())
-    autoencoder.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
-    autoencoder.fit(x_train, x_train,
-                    epochs=10,
-                    shuffle=True,
-                    validation_data=(x_test, x_test))
-    encoded_imgs = autoencoder.encoder(x_test).numpy()
-    decoded_imgs = autoencoder.decoder(encoded_imgs).numpy()
+    input_shape = x_train[0].shape
+    af = AutoencoderFactory(input_shape=input_shape,
+                            latent_dim=64,
+                            optimizer='adam',
+                            loss=losses.MeanSquaredError())
+    history = af.autoencoder.fit(x_train,
+                                 x_train,
+                                 epochs=50,
+                                 shuffle=True,
+                                 validation_data=(x_test, x_test))
+    plot_cost_function(history)
+    decoded_imgs = af.autoencoder(x_test).numpy()
     n = 10
+    plt.clf()
     plt.figure(figsize=(20, 4))
     for i in range(n):
         # display original
@@ -76,7 +90,9 @@ def main():
         plt.gray()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
-    plt.savefig(".\\Results\\11\\tf2FuncApi_FsshionMnist_original_vs_reconstructed")
+    # plt.show()
+    plot_file = os.path.join(OUT_PATH, "tf2_FuncApi_FashionMnist_OriginalVsReconstructed")
+    plt.savefig(plot_file)
 
 
 if __name__ == '__main__':
