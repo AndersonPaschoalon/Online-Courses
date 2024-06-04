@@ -88,13 +88,10 @@ class Autoencoder:
 
 def load_fashion_mnist():
     (x_train, _), (x_test, _) = fashion_mnist.load_data()
-
     x_train = x_train.astype('float32') / 255.
     x_test = x_test.astype('float32') / 255.
-
     print(x_train.shape)
     print(x_test.shape)
-
     return x_train, x_test
 
 
@@ -127,7 +124,6 @@ def main(params):
             done = True
 
 
-
 def main2(params):
     x_train, x_test = load_fashion_mnist()
     x_flattened = x_train.reshape(x_train.shape[0], -1)
@@ -141,7 +137,6 @@ def main2(params):
         x_flattened_in = np.reshape(x_flattened[i], (1, 784))
         pred = autoencoder.predict(x_flattened_in).reshape(28, 28)
         decoded_imgs.append(pred)
-
     n = 10
     plt.figure(figsize=(20, 4))
     for i in range(n):
@@ -152,7 +147,6 @@ def main2(params):
         plt.gray()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
-
         # display reconstruction
         ax = plt.subplot(2, n, i + 1 + n)
         plt.imshow(decoded_imgs[i])
@@ -160,12 +154,11 @@ def main2(params):
         plt.gray()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
-    img_result = os.path.join(params['out_dir'], "tfv1_FsshionMnist_original_vs_reconstructed")
+    img_result = os.path.join(params['out_dir'], "tfv1_FashionMnist_OriginalVsReconstructed")
     plt.savefig(img_result)
 
 
 if __name__ == '__main__':
     # main(params)
     main2(params)
-
 
