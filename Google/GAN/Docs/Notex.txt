@@ -1,0 +1,12 @@
+# Como usar o Discriminador para treinar o gerador
+
+https://developers.google.com/machine-learning/gan/generator?hl=pt-br
+1. Amostra de ruído aleatório.
+2. Produza a saída do gerador de um ruído aleatório de amostra.
+3. Receba uma classificação de discriminador "Real" ou "Fake" para saída de gerador.
+4. Calcule a perda com base na classificação do discriminador.
+5. Faça o retropropagação pelo discriminador e pelo gerador para conseguir gradientes.
+6. Usar gradientes para alterar somente os pesos do gerador.
+
+
+
