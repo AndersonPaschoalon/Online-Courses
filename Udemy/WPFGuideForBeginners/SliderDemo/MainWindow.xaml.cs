@@ -28,11 +28,14 @@ namespace SliderDemo
         private void mySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
-            //if (this.myTextBlock != null && this.mySlider.FontSize > 0d)
-            //{
-            //    this.myTextBlock.Content = "Slider value is " + this.mySlider.Value.ToString();
-            //    this.myTextBlock.FontSize = this.mySlider.Value;
-            //}
+            if (this.myTextBlock != null)
+            {
+                this.myTextBlock.Text = "Slider value is " + this.mySlider.Value.ToString();
+
+                double fontSizeMod = 8 + 0.05 * this.mySlider.Value;
+
+                this.myTextBlock.FontSize = fontSizeMod;
+            }
         }
     }
 }

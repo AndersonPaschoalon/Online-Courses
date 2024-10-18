@@ -1,0 +1,31 @@
+﻿<Window x:Class="CatYearsXAMLDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatYearsXAMLDemo"
+        mc:Ignorable="d"
+        x:Name="myMainWindow"
+        Title="MainWindow" Height="450" Width="800">
+    <!--
+    <StackPanel  Orientation="Vertical">
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="How old is your cat? (years)" FontSize="18"></TextBlock>
+            <TextBox  x:Name="InputCatAge" 
+                      Width="120" 
+                      Margin="5, 0,0,0" 
+                      TextAlignment="Center" 
+                      FontSize="16"
+                      KeyDown="InputCatAge_KeyDown"
+                      > </TextBox>
+        </StackPanel>
+        <TextBlock Name="ResultTextBlock"
+                   Text="Your Cat is" 
+                   FontSize="18"
+                   > </TextBlock>
+        <Image Source="/Images/A-Cat.jpg" Height="350"></Image>
+        
+    </StackPanel>
+    -->
+</Window>

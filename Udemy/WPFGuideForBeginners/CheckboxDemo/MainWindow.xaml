@@ -7,11 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
+        
         <StackPanel Margin="10">
             <Label  FontWeight="Bold" >Toppings</Label>
-            <CheckBox>Cheese</CheckBox>
-            <CheckBox>Tuna</CheckBox>
-            <CheckBox>Peperoni</CheckBox>
+            <CheckBox x:Name="cbParent" IsThreeState="True"  Checked="CbParentCheckedChanged" Unchecked="CbParentCheckedChanged">Select All</CheckBox>
+            <CheckBox x:Name="cbCheese" Margin="15, 5"  Checked="CbToppingsCheckedChange" Unchecked="CbToppingsCheckedChange" >Cheese</CheckBox>
+            <CheckBox x:Name="cbHam" Margin="15, 5"  Checked="CbToppingsCheckedChange" Unchecked="CbToppingsCheckedChange" >Ham</CheckBox>
+            <CheckBox x:Name="cbTuna" Margin="15, 5"  Checked="CbToppingsCheckedChange" Unchecked="CbToppingsCheckedChange" >Tuna</CheckBox>
+            <CheckBox x:Name="cbPeperoni" Margin="15, 5"  Checked="CbToppingsCheckedChange" Unchecked="CbToppingsCheckedChange" >Peperoni</CheckBox>
         </StackPanel>
 
         <StackPanel Margin="10">

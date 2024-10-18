@@ -17,7 +17,19 @@
                 IsSnapToTickEnabled="True"
                 ValueChanged="mySlider_ValueChanged"></Slider>
         <TextBlock x:Name="myTextBlock" FontSize="{Binding ElementName=mySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"  >
-            Hello World
+            Slider 01
+        </TextBlock>
+
+        <Slider x:Name="mySlider2" 
+                TickPlacement="BottomRight" 
+                TickFrequency="2" 
+                Maximum="1500" 
+                Minimum="1"
+                Value="15"
+                IsSnapToTickEnabled="True"
+                ValueChanged="mySlider_ValueChanged"></Slider>
+        <TextBlock x:Name="myTextBlock2" FontSize="{Binding ElementName=mySlider2, Path=Value, UpdateSourceTrigger=PropertyChanged}"  >
+            Slider 02
         </TextBlock>
         
     </StackPanel>

@@ -11,7 +11,7 @@
         <StackPanel Margin="10">
             <Label>Hello World</Label>
             <Button x:Name="myButton"
-		            Content="hello world">
+		            Content="Click Me">
             </Button>
         </StackPanel>
         

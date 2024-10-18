@@ -25,6 +25,14 @@ namespace RadioButtonDemo
             InitializeComponent();
         }
 
+        private void rbTrump_Checked(object sender, RoutedEventArgs e)
+        {
+            lbTrump.Background = Brushes.Red;
+        }
 
+        private void rbTrump_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lbTrump.Background = Brushes.White;
+        }
     }
 }

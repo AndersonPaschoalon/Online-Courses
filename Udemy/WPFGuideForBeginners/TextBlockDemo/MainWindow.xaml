@@ -12,12 +12,14 @@
             <TextBlock> 
                 Hello <Bold>World!</Bold>
                 <LineBreak/>
-                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="www.google.com">Go to Google!</Hyperlink>
+                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://www.google.com">Go to Google!</Hyperlink>
             </TextBlock>
 
             <TextBlock x:Name="myTextBlock">
-                
             </TextBlock>
+
+            <StackPanel x:Name="RuntimeStack">
+            </StackPanel>
             
             <TextBlock TextWrapping="Wrap" Foreground="Aqua">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis erat nec eros porttitor ullamcorper ut nec eros. Donec tempor ipsum et nunc feugiat ornare. Duis eu sagittis metus. Mauris quis eleifend urna. Suspendisse eu tempor elit, id accumsan ligula. Curabitur accumsan lectus non ex commodo elementum. Mauris molestie sed nibh a viverra.

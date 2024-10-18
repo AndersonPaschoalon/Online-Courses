@@ -29,7 +29,21 @@ namespace TextBlockDemo
             // add textbloxk without xaml
             TextBlock runtimeTextBlock = new TextBlock();
             runtimeTextBlock.Text = "Runtime Hello World!";
-            // this.Content = runtimeTextBlock;
+
+            this.RuntimeStack.Children.Insert(0, runtimeTextBlock);
+
+            runtimeTextBlock.Inlines.Add(
+                new Run("Foi adicionado usando inlines")
+                {
+                    Foreground = Brushes.Red,
+                    TextDecorations = TextDecorations.Underline,
+                }
+            );
+            
+            runtimeTextBlock.Foreground = Brushes.DeepSkyBlue;
+
+
+
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

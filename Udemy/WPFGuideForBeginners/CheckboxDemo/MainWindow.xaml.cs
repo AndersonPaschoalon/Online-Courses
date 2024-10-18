@@ -24,5 +24,28 @@ namespace CheckboxDemo
         {
             InitializeComponent();
         }
+
+        private void CbParentCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            bool newVal = (cbParent.IsChecked == true);
+            cbCheese.IsChecked = newVal;
+            cbHam.IsChecked = newVal;
+            cbTuna.IsChecked = newVal;
+            cbPeperoni.IsChecked = newVal;
+        }
+
+        private void CbToppingsCheckedChange(object sender, RoutedEventArgs e)
+        {
+            cbParent.IsChecked = null;
+            if ((cbCheese.IsChecked == true) && (cbTuna.IsChecked == true) && (cbHam.IsChecked == true) && (cbHam.IsChecked == true) && (cbPeperoni.IsChecked == true))
+            {
+                cbParent.IsChecked = true;
+            }
+            else if ((cbCheese.IsChecked == false) && (cbTuna.IsChecked == false) && (cbHam.IsChecked == false) && (cbHam.IsChecked == false) && (cbPeperoni.IsChecked == false))
+            {
+                cbParent.IsChecked = false;
+            }
+        }
+
     }
 }

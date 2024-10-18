@@ -11,7 +11,7 @@
         <ToolBarTray  DockPanel.Dock="Top">
             <ToolBar>
                 <Button Click="Button_Click" ToolTip="delete text">
-                    <Image Width="100"  Source="https://raw.githubusercontent.com/AndersonPaschoalon/Wallpapers/master/Wilderness/mix1/2bfe9a4e72c787f17812dc49bb926f38ba3d20ccaad47c7422198e97fbdeaade.jpg"/>
+                    <Image Width="20"  Source="Images/delete.jpg"/>
                 </Button>
                 <Separator/>
                 <Label>Font Size:</Label>

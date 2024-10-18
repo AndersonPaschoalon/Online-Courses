@@ -9,13 +9,18 @@
     <StackPanel>
         
         <Label> Who do you vote for?</Label>
+        
         <RadioButton GroupName="Presidents" FontSize="30" VerticalContentAlignment="Center">
             <WrapPanel>
                 <Image Height="70"  Source="https://i.kym-cdn.com/entries/icons/original/000/030/873/Screenshot_20.jpg"/>
                 <Label>Obama</Label>
             </WrapPanel>
         </RadioButton>
-        <RadioButton GroupName="Presidents" >Trumpium</RadioButton>
+        <RadioButton x:Name="rbTrump" Checked="rbTrump_Checked" Unchecked="rbTrump_Unchecked" GroupName="Presidents" >
+            <WrapPanel>
+                <Label x:Name="lbTrump" >Trump</Label>
+            </WrapPanel>
+        </RadioButton>
         <RadioButton GroupName="Presidents">McCain</RadioButton>
         <RadioButton GroupName="Presidents">Biden</RadioButton>
 
