@@ -18,6 +18,10 @@
                 >Click Me!</Button>
         <Label Name="MyLabel"  Foreground="Black" > Hello World</Label>
 
+        <Button x:Name="SkyButton"  
+                Width="100" 
+                Height="30" 
+                Click="SkyrimSavePngExtractor"  >Extract Skyrim Tumbnail</Button>
 
     </StackPanel>
 </Window>

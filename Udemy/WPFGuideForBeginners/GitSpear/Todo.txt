@@ -1,0 +1,40 @@
+﻿# Arquivos de configuração:
+
+- Um por jogo
+- Configurações:
+	- Game > ID
+	- Game > Name
+	- Game > Exe
+	- General > Backup Dir
+	- General > Date Format
+	- General > DirList > Dir > "Dir", "FilesToCheck" # arquivos que devem estar presentes no diretorio para garantir a integridade
+	<config>
+		<game id = "Skyrim"
+		      name = "Skyrim"
+			  exe="Skyrim.exe"
+			  ></game>
+		<general backupDir="${Documents}/SkyrimBackups"
+		         dateFormat="yyyy/MM/dd"
+		></general>
+		<dirs>
+			<dir dirName="Game Installation Folder" 
+			     dirPath="C:\Program Files (x86)\Steam\steamapps\common\Skyrim"
+				 backupFolderName="SkyrimBackups"
+				 backupFolderDir=".." // this will be the parent of the folder dirPath, in the backup will be Skyrim
+				 filesToCheck="TESV.exe,SkyrimLauncher.exe" 
+				 isOptional="false"></dir>
+			<dir dirName="App Data Local" 
+			     dirPath="C:\Users\Usuario\AppData\Local\Skyrim" 
+				 backupFoldern="AppData\Local" // in the backup will be AppData\Local\Skyrim
+				 filesToCheck="loadorder.txt" 
+				 isOptional="false"></dir>
+			<dir dirName="Documents" 
+			     dirPath="C:\Users\Usuario\Documents\My Games\Skyrim" 
+				 backupFolder="Documents\My Games\" // in the backup will be Documents\My Games\Skyrim
+				 filesToCheck="Skyrim.ini,SkyrimPrefs.ini" 
+				 isOptional="false"></dir>
+
+		</dirs>
+	</config>
+
+# Tela de configuração inicial

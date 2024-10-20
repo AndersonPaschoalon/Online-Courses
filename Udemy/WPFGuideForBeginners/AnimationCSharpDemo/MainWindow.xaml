@@ -1,0 +1,17 @@
+﻿<Window x:Class="AnimationCSharpDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimationCSharpDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+
+        <Grid Name="MainGrid" Loaded="MainGrid_Loaded">
+            <Label FontSize="40">Hello Animation</Label>
+        </Grid>
+        <Label FontSize="40">Hello World</Label>
+        
+    </StackPanel>
+</Window>

@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -76,6 +76,16 @@ namespace ButtonDemo
         private void myButton_MouseLeave(object sender, MouseEventArgs e)
         {
             this.MyLabel.Foreground = Brushes.Black;
+        }
+
+        private void SkyrimSavePngExtractor(object sender, RoutedEventArgs e)
+        {
+            // Path to the Skyrim save file (.ess)
+            string saveFilePath = "Save 874 - Kasin  Solitude  350.28.21.ess";
+
+
+            SkyrimSaveExtractor.ExtractThumbnail(saveFilePath);
+
         }
     }
 }
