@@ -24,9 +24,9 @@ Each folder represents an Online Courses platform.
 * [Introduction to ReactJS](Coursera/Introduction-to-ReactJS/)
 
 
-## Testes & Tutoriais
+## Google for Developers
 
-* [Sottelli](Testes/Sottelli/)
+* TODO
 
 
 ## [Udemy](https://www.udemy.com/)
