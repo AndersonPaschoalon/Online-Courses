@@ -1,0 +1,48 @@
+﻿<Window x:Class="DependencyPropertiesDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DependencyPropertiesDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="180" Width="200">
+    <StackPanel>
+        <!-- Default DependencyProperty -->
+        <TextBlock x:Name="myTb" Text="Hello World!" Width="110" FontSize="20">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Blue">
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                    
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <Button Name="ChangeAwsomeness" Margin="5" Width="120" Click="ChangeAwsomeness_Click" Content="Increase Awsomeness"></Button>
+        
+        <local:MyUC x:Name="MyUCinMain" Awsomeness="4000" >
+            <local:MyUC.Style>
+                <Style TargetType="local:MyUC">
+                    <Style.Triggers>
+                        <Trigger Property="Awsomeness" Value="10000">
+                            <Setter Property="Background" Value="Red">
+
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </local:MyUC.Style>
+        </local:MyUC>
+        
+        <Label Name="AwsomenessLabel"
+               Content="{Binding ElementName=MyUCinMain, Path=Awsomeness}"
+               FontSize="30"
+               HorizontalAlignment="Center">
+        </Label>
+        
+    </StackPanel>
+</Window>
