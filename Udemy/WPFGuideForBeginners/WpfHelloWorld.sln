@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramUserControlDemo", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyPropertiesDemo", "DependencyPropertiesDemo\DependencyPropertiesDemo.csproj", "{15FB796D-06AA-4696-A503-C45A8F083A32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsStoreClone", "WindowsStoreClone\WindowsStoreClone.csproj", "{5D526315-2871-4FDE-BC4A-5DBABC392AE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +227,10 @@ Global
 		{15FB796D-06AA-4696-A503-C45A8F083A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15FB796D-06AA-4696-A503-C45A8F083A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15FB796D-06AA-4696-A503-C45A8F083A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D526315-2871-4FDE-BC4A-5DBABC392AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D526315-2871-4FDE-BC4A-5DBABC392AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D526315-2871-4FDE-BC4A-5DBABC392AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D526315-2871-4FDE-BC4A-5DBABC392AE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
