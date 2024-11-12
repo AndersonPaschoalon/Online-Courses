@@ -8,33 +8,87 @@
 	- General > Backup Dir
 	- General > Date Format
 	- General > DirList > Dir > "Dir", "FilesToCheck" # arquivos que devem estar presentes no diretorio para garantir a integridade
-	<config>
-		<game id = "Skyrim"
-		      name = "Skyrim"
-			  exe="Skyrim.exe"
-			  ></game>
-		<general backupDir="${Documents}/SkyrimBackups"
-		         dateFormat="yyyy/MM/dd"
-		></general>
-		<dirs>
-			<dir dirName="Game Installation Folder" 
-			     dirPath="C:\Program Files (x86)\Steam\steamapps\common\Skyrim"
-				 backupFolderName="SkyrimBackups"
-				 backupFolderDir=".." // this will be the parent of the folder dirPath, in the backup will be Skyrim
-				 filesToCheck="TESV.exe,SkyrimLauncher.exe" 
-				 isOptional="false"></dir>
-			<dir dirName="App Data Local" 
-			     dirPath="C:\Users\Usuario\AppData\Local\Skyrim" 
-				 backupFoldern="AppData\Local" // in the backup will be AppData\Local\Skyrim
-				 filesToCheck="loadorder.txt" 
-				 isOptional="false"></dir>
-			<dir dirName="Documents" 
-			     dirPath="C:\Users\Usuario\Documents\My Games\Skyrim" 
-				 backupFolder="Documents\My Games\" // in the backup will be Documents\My Games\Skyrim
-				 filesToCheck="Skyrim.ini,SkyrimPrefs.ini" 
-				 isOptional="false"></dir>
+<config>
+	<game id = "Skyrim"
+		    name = "Skyrim"
+			exe="Skyrim.exe"
+			></game>
+	<general dateFormat="yyyy/MM/dd"
+             startup="home|profiles|git|config"
+	></general>
+	<dirs>
+		<dir dirName="Game Installation Folder" 
+			    dirPath="C:\Program Files (x86)\Steam\steamapps\common\Skyrim"
+				backupFolderName="SkyrimBackups"
+				backupFolderDir=".." // this will be the parent of the folder dirPath, in the backup will be Skyrim
+				filesToCheck="TESV.exe,SkyrimLauncher.exe" 
+				isOptional="false"></dir>
+		<dir dirName="App Data Local" 
+			    dirPath="C:\Users\Usuario\AppData\Local\Skyrim" 
+				backupFolderName="SkyrimBackups"
+				backupFolderDir=".." // retative to dirPath
+				filesToCheck="loadorder.txt" // file inside  dirPath
+				isOptional="false"></dir>
+		<dir dirName="Documents" 
+			    dirPath="C:\Users\Usuario\Documents\My Games\Skyrim" 
+				backupFolderDir=".." // retative to dirPath
+				backupFolderName="SkyrimBackups"
+				filesToCheck="Skyrim.ini,SkyrimPrefs.ini" 
+				isOptional="false"></dir>
+	</dirs>
+	<git>
+		<gitignore>
+			<extToInclude>exe, dll</extToInclude>
+			<dirsToExclude>Data</dirsToExclude>
+		</gitignore>
+	</git>
+</config>
+# Barra Superior
+- Open Folder
+	- Lista de diretorios
+- Logs
+	- Open Spear Logs
+	- Clean Old logs
+- About
+	- Github
 
-		</dirs>
-	</config>
+# Tela Home
+Tutorial com botões para as telas de Steam, Git e Config
 
-# Tela de configuração inicial
+# Steam
+Tela gerenciador de profiles.
+
+# Tela de configuração
+Telinha para editar as configurações dos XML de cada jogo. 
+
+
+# Tela Git Tools
+
+- Torne a pasta de instalação do jogo em um Repositorio Git
+
+	(1) Crie um Gitignore
+		Abre uma janela para selecionar as pastas que devem ser adicionadas no gitignore.
+		Por padrão, todas são adicionadas exeto dirsToExclude
+		Botão de "Preview"
+		Sempre Ativo
+	(2) Revisar Gitignore (botão de edit e delete)
+		Ativo sempre que o gitignore existir
+	(3) Create git Repo
+		Basicamente tenho que colocar o link ai, dai ele vai fazer: 
+			- init
+			- setup upstream
+			- pull
+			- add gitignore
+			- push
+		Ativo se:
+			- Git estiver instalado
+			- Gitignore existir
+			- Não possuir um repositorio upstream
+		Initivo não ok se:
+			- gitignore não existir
+		Iniativo Ok se:
+			- gitignore existir
+			- tiver upstream
+
+
+		
