@@ -15,6 +15,27 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="0.02"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+        <Button Width="40" Height="40" Margin="4" Grid.Column="0" VerticalAlignment="Center" Name="ScrollLeftButton" Click="ScrollLeftButton_Click" Content="&lt;"></Button>
+        <Button Width="40" Height="40" Margin="4" Grid.Column="2" VerticalAlignment="Center" Name="ScrollRightButton" Click="ScrollRightButton_Click" Content="&gt;"></Button>
+        <ScrollViewer Grid.Column="1" x:Name="AppsScrollView" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" >
+            <ScrollViewer.Resources>
+                <!-- Cria um template de tados para ser utilizado pelo scrowviewer -->
+                <DataTemplate x:Key="AppListTemplate">
+                    <StackPanel></StackPanel>
+                </DataTemplate>
+            </ScrollViewer.Resources>
+            <ItemsControl x:Name="AppsList" ItemTemplate="{StaticResource AppListTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+        
     </Grid>
 </UserControl>

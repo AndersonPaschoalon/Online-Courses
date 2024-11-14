@@ -8,6 +8,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!--
         <uc:AnApp></uc:AnApp>
+        <uc:AppsViewer></uc:AppsViewer>
+        <uc:TopApps></uc:TopApps>
+        -->
+        <uc:ProductivityTopApps></uc:ProductivityTopApps>
+        
+        
+        
     </Grid>
 </Window>
