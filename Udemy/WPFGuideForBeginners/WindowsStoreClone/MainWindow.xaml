@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:WindowsStoreClone"
         xmlns:uc="clr-namespace:WindowsStoreClone.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Name="MainWindowMetro"
+        Title="MainWindow" Height="800" Width="1300">
     <Grid>
         <!--
         <uc:AnApp></uc:AnApp>
         <uc:AppsViewer></uc:AppsViewer>
         <uc:TopApps></uc:TopApps>
-        -->
         <uc:ProductivityTopApps></uc:ProductivityTopApps>
-        
+        -->
+        <Frame Name="MainWindowFrame" Loaded="MainWindowFrame_Loaded" NavigationUIVisibility="Hidden" 
+               Width="{Binding ElementName=MainWindowMetro, Path=ActualWidth}"
+               Height="{Binding ElementName=MainWindowMetro, Path=ActualHeight}" ></Frame>
         
         
     </Grid>

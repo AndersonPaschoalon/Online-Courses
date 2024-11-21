@@ -5,16 +5,21 @@
 #include <cmath>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+//#include <glm/mat4x4.hpp>
 #include <glm/mat4x4.hpp>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 const GLint WIDTH = 800;
 const GLint HEIGHT = 600;
+const float toRadians = 3.14159265f / 180.0f;
 
 GLuint VAO;
 GLuint VBO;
 GLuint shader;
-GLuint uniformXMove;
+GLuint uniformModel;
 bool direction = true;
 float triOffset = 0.0f;
 float triMaxOffset = 0.7f;
@@ -27,11 +32,11 @@ static const char* vShader = "\n\
 \n\
 layout (location = 0) in vec3 pos;\n\
 \n\
-uniform float xMove;\n\
+uniform mat4 model;\n\
 \n\
 void main()\n\
 {\n\
-	gl_Position = vec4(0.4 * pos.x + xMove, 0.4 * pos.y + xMove, pos.z, 1.0);\n\
+	gl_Position = model * vec4(0.4 * pos.x, 0.4 * pos.y, pos.z, 1.0);\n\
 }";
 
 // fragment shader
@@ -110,7 +115,7 @@ void CompileShaders() {
 		return;
 	}
 
-	uniformXMove = glGetUniformLocation(shader, "xMove");
+	uniformModel = glGetUniformLocation(shader, "model");
 
 }
 
@@ -211,12 +216,19 @@ int main()
 		}
 
 		// clear window
+		// black
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		// dark gray
+		// glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shader);
 
-		glUniform1f(uniformXMove, triOffset);
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(triOffset, 0.0f, 0.0f));
+		model = glm::rotate(model, 45*toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
 
 		glBindVertexArray(VAO);
@@ -234,13 +246,3 @@ int main()
 
 }
 
-// Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
-// Depurar programa: F5 ou menu Depurar > Iniciar Depuração
-
-// Dicas para Começar: 
-//   1. Use a janela do Gerenciador de Soluções para adicionar/gerenciar arquivos
-//   2. Use a janela do Team Explorer para conectar-se ao controle do código-fonte
-//   3. Use a janela de Saída para ver mensagens de saída do build e outras mensagens
-//   4. Use a janela Lista de Erros para exibir erros
-//   5. Ir Para o Projeto > Adicionar Novo Item para criar novos arquivos de código, ou Projeto > Adicionar Item Existente para adicionar arquivos de código existentes ao projeto
-//   6. No futuro, para abrir este projeto novamente, vá para Arquivo > Abrir > Projeto e selecione o arquivo. sln
