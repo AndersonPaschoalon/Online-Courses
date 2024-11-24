@@ -21,7 +21,7 @@
 
         <Button Width="40" Height="40" Margin="4" Grid.Column="0" VerticalAlignment="Center" Name="ScrollLeftButton" Click="ScrollLeftButton_Click" Content="&lt;"></Button>
         <Button Width="40" Height="40" Margin="4" Grid.Column="2" VerticalAlignment="Center" Name="ScrollRightButton" Click="ScrollRightButton_Click" Content="&gt;"></Button>
-        <ScrollViewer Grid.Column="1" x:Name="AppsScrollView" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" >
+        <ScrollViewer Grid.Column="1" x:Name="AppsScrollView" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" PreviewMouseWheel="AppsScrollView_PreviewMouseWheel">
             <ScrollViewer.Resources>
                 <!-- Cria um template de tados para ser utilizado pelo scrowviewer -->
                 <DataTemplate x:Key="AppListTemplate">

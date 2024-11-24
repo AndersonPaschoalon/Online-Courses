@@ -91,4 +91,5 @@ Telinha para editar as configurações dos XML de cada jogo.
 			- tiver upstream
 
 
-		
+	- Somente adicionar as operações do git abaixo das operações de profile, vai simplificar bastante a aplicação. 
+	- Ou então adicionar as operações numa segunda aba, com a listagem dos arquivos. 

@@ -47,5 +47,21 @@ namespace WindowsStoreClone.UserControls
             int widthOfOneApp = (int)PresentedApps.First().ActualWidth + 2 * (int)PresentedApps.First().Margin.Left;
             AppsScrollView.ScrollToHorizontalOffset(AppsScrollView.HorizontalOffset + 1 * widthOfOneApp);
         }
+
+        private void AppsScrollView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+            // "cria" o evento
+            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+            eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+            eventArg.Source = sender;
+            // envia o evento para seu paren, uma vez que o scroll no escopo desse element não faz sentido, quem tem que fazer o scroll
+            // é o parent, onde o AppsViewer está contido
+            var parent = ((Control)sender).Parent as UIElement;
+            parent.RaiseEvent(eventArg);
+
+
+
+        }
     }
 }

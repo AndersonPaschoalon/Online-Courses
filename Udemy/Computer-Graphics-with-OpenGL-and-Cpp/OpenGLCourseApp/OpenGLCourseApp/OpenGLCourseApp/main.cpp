@@ -18,13 +18,18 @@ const float toRadians = 3.14159265f / 180.0f;
 
 GLuint VAO;
 GLuint VBO;
+GLuint IBO; // index buffer object
 GLuint shader;
 GLuint uniformModel;
 bool direction = true;
 float triOffset = 0.0f;
 float triMaxOffset = 0.7f;
-float triIncrement = 0.005f;
-
+float triIncrement = 0.015f;
+float currAngle = 0.0f;
+float sizeDirection = true;
+float currSize = 0.4;
+float maxSize = 0.8f;
+float minSize = 0.1f;
 
 // vertex shader
 static const char* vShader = "\n\
@@ -32,22 +37,27 @@ static const char* vShader = "\n\
 \n\
 layout (location = 0) in vec3 pos;\n\
 \n\
+out vec4 vColor;\n\
+\n\
 uniform mat4 model;\n\
 \n\
 void main()\n\
 {\n\
-	gl_Position = model * vec4(0.4 * pos.x, 0.4 * pos.y, pos.z, 1.0);\n\
+	gl_Position = model * vec4(pos, 1.0);\n\
+	vColor = vec4(clamp(pos, 0.0f, 1.0f), 1.0f);\n\
 }";
 
 // fragment shader
 static const char* fShader = "\n\
 #version 330\n\
 \n\
+in vec4 vColor;\n\
+\n\
 out vec4 colour;\n\
 \n\
 void main()\n\
 {\n\
-	colour = vec4(1.0, 0.0, 0.0, 1.0);\n\
+	colour = vColor;\n\
 }";
 
 void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) {
@@ -121,10 +131,13 @@ void CompileShaders() {
 
 
 void CreateTriangle() {
+	unsigned int indices[] = {};
+
 	GLfloat vertices[] = {
-		-1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f
+		-1.0f, -1.0f, 0.0f, // bottom left
+		0.0f, -1.0f, 1.0f, // background
+		1.0f, -1.0f, 0.0f, // bottom right
+		0.0f, 1.0f, 0.0f // top
 	};
 
 	// Creates the VAO into the GPU
@@ -215,6 +228,23 @@ int main()
 			direction = !direction;
 		}
 
+		currAngle += 0.5f;
+		if (currAngle >= 360) {
+			currAngle -= 360; // just to avoid overflow
+		}
+
+		if (sizeDirection) {
+			currSize += 0.001f;
+		}
+		else {
+			currSize -= 0.001f;
+		}
+
+		if (currSize >= maxSize || currSize <= minSize) {
+			sizeDirection = !sizeDirection;
+		}
+
+
 		// clear window
 		// black
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -225,8 +255,9 @@ int main()
 		glUseProgram(shader);
 
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(triOffset, 0.0f, 0.0f));
-		model = glm::rotate(model, 45*toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::translate(model, glm::vec3(triOffset, 0.0f, 0.0f));
+		//model = glm::rotate(model, currAngle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
