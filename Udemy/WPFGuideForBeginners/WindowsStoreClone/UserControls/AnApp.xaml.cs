@@ -29,6 +29,8 @@ namespace WindowsStoreClone.UserControls
 
         public string AppName;
         public ImageSource AppImageSource;
+        public delegate void OnAppClicked(AnApp sender, RoutedEventArgs e);
+        public event OnAppClicked AppClicked;
 
 
         public AnApp()
@@ -45,7 +47,11 @@ namespace WindowsStoreClone.UserControls
 
         private void ProductImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
+            Image senderApp = (System.Windows.Controls.Image)sender;
+            Console.WriteLine("Image from App Was Clicked! Now Set the Click event in AnApp too.");
+            Console.WriteLine($"---- senderApp (sender):{senderApp.Name}");
+            Console.WriteLine($"---- this.Name:{Name}");
+            AppClicked(this, e);
         }
     }
 }

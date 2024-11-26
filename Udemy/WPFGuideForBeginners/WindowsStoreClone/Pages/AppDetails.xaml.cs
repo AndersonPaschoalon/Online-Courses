@@ -12,24 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WindowsStoreClone.UserControls;
 
-namespace WindowsStoreClone.UserControls
+namespace WindowsStoreClone.Pages
 {
     /// <summary>
-    /// Interação lógica para AppDetailsTitleAndBackground.xam
+    /// Interação lógica para AppDetails.xam
     /// </summary>
-    public partial class AppDetailsTitleAndBackground : UserControl
+    public partial class AppDetails : Page
     {
 
         public delegate void OnBackButtonClicked(object sender, RoutedEventArgs e);
         public event OnBackButtonClicked BackButtonClicked;
 
-        public AppDetailsTitleAndBackground()
+        public AppDetails(AnApp anApp)
         {
             InitializeComponent();
+
+            AppDetailsAndBackgroundUC.AppNameLabel.Content = anApp.AppName;
+            AppDetailsAndBackgroundUC.AppImage.Source = anApp.AppImageSource;
+            AppDetailsAndBackgroundUC.BackButtonClicked += AppDetailsTitleAndBackgroundUC_BackButtonClicked;
+
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void AppDetailsTitleAndBackgroundUC_BackButtonClicked(object sender, RoutedEventArgs e)
         {
             BackButtonClicked(sender, e);
         }
