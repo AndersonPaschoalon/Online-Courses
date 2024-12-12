@@ -1,0 +1,47 @@
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace APICatalogo.Model;
+
+[Table("Produtos")]
+public class Produto
+{
+    public Produto()
+    {
+    }
+
+    [Key]
+    public int ProdutoId { get; set; }
+
+    [Required]
+    [StringLength(80)]
+    [MaxLength(80)]
+    public string Nome { get; set; }
+
+    [Required]
+    [StringLength(300)]
+    [MaxLength(300)]
+    public string Descricao { get; set; }
+
+    [Required]
+    [Column(TypeName = "decimal(10,2)")]
+    public decimal Preco { get; set; }
+
+    [Required]
+    [StringLength(300)]
+    [MaxLength(300)]
+    public string ImagemUrl { get; set; }
+    public float Estoque { get; set; }
+    public DateTime DataCadastro { get; set; }
+
+    // foreign keys
+    public int CategoriaId { get; set; }
+
+
+    // navigation properties
+    [JsonIgnore]
+    public Categoria? Categoria { get; set; }
+
+}

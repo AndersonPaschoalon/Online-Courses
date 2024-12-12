@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
+#include <vector>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 //#include <glm/mat4x4.hpp>
@@ -12,15 +14,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Mesh.h"
+
+
 const GLint WIDTH = 800;
 const GLint HEIGHT = 600;
 const float toRadians = 3.14159265f / 180.0f;
+std::vector<Mesh*> meshList;
 
-GLuint VAO;
-GLuint VBO;
-GLuint IBO; // index buffer object
 GLuint shader;
 GLuint uniformModel;
+GLuint uniformProjection;
 bool direction = true;
 float triOffset = 0.0f;
 float triMaxOffset = 0.7f;
@@ -40,10 +44,11 @@ layout (location = 0) in vec3 pos;\n\
 out vec4 vColor;\n\
 \n\
 uniform mat4 model;\n\
+uniform mat4 projection;\n\
 \n\
 void main()\n\
 {\n\
-	gl_Position = model * vec4(pos, 1.0);\n\
+	gl_Position = projection * model * vec4(pos, 1.0);\n\
 	vColor = vec4(clamp(pos, 0.0f, 1.0f), 1.0f);\n\
 }";
 
@@ -126,12 +131,18 @@ void CompileShaders() {
 	}
 
 	uniformModel = glGetUniformLocation(shader, "model");
+	uniformProjection = glGetUniformLocation(shader, "projection");
 
 }
 
 
 void CreateTriangle() {
-	unsigned int indices[] = {};
+	unsigned int indices[] = {
+		0, 3, 1,
+		1, 2, 3,
+		2, 3, 0,
+		0, 1, 2 // base
+	};
 
 	GLfloat vertices[] = {
 		-1.0f, -1.0f, 0.0f, // bottom left
@@ -140,25 +151,13 @@ void CreateTriangle() {
 		0.0f, 1.0f, 0.0f // top
 	};
 
-	// Creates the VAO into the GPU
-	glGenVertexArrays(1, &VAO);
-	// Bind the vio to the ID
-	glBindVertexArray(VAO);
+	Mesh* obj1 = new Mesh();
+	obj1->createMesh(vertices, indices, 12, 12);
+	meshList.push_back(obj1);
 
-	// Generate the buffer VBO
-	glGenBuffers(1, &VBO);
-	// bind the buffer created to the ID
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	// attach the vertex daa to that VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	// 3 - the dimensions
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	Mesh* obj2 = new Mesh();
+	obj2->createMesh(vertices, indices, 12, 12);
+	meshList.push_back(obj2);
 
 }
 
@@ -206,11 +205,16 @@ int main()
 		return 1;
 	}
 
+	// garantir que os triangulos sejam renderizados na profundidade correta
+	glEnable(GL_DEPTH_TEST);
+
 	// Setup Viewport size
 	glViewport(0, 0, bufferWidth, bufferHeight);
 
 	CreateTriangle();
 	CompileShaders();
+
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)bufferWidth/(GLfloat)bufferHeight, 0.1f, 100.0f);
 
 
 	// Loop until window closed
@@ -247,33 +251,36 @@ int main()
 
 		// clear window
 		// black
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		// dark gray
 		// glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glUseProgram(shader);
 
 		glm::mat4 model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(triOffset, 0.0f, 0.0f));
-		//model = glm::rotate(model, currAngle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(triOffset, 0.0f, -2.5f));
+		// model = glm::rotate(model, currAngle * toRadians, glm::vec3(0.0f, 1.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 
+		meshList[0]->renderMesh();
+		
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-triOffset, 1.0f, -2.5f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
+		meshList[1]->renderMesh();
 
-		glBindVertexArray(VAO);
-		// 3 - points we want to  draw
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glBindVertexArray(0);
-		
 
 		glUseProgram(0);
 
 		glfwSwapBuffers(mainWindow);
 	}
 
-
+	meshList[0]->clearMesh();
 
 }
 

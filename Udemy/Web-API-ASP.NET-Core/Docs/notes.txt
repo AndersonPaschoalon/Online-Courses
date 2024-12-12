@@ -1,0 +1,100 @@
+# REST
+
+É um estilo de arquitetura para concepção de sistemas distribuídos. Trata-se de um conjunto de restriçõe regras. 
+As principais são:
+- Ter um relacionamento cliente/servidor
+- Não possuir monitoração de estado (stateless)
+- Ter umja interface uniforme (URIs, representação, mensagens auto-descritivas, hipermidia (hiperlink, hipertexto)
+- Suportar o cache de dados e respostas
+- Suportar um sistema de camadas
+
+- Recurso: é uma abstr~ção sobre um tipo de informação que uma aplicação gerencia que possui uma identificação unica (uri)
+- Representação - é um instantaneo do estado de um recurso em um ponto no tempo. Uma sequencia de byptes associado com metadados
+- Interação sem estado (Stateless) - A comunicação entre o cliente e o servidor sempre contém todas as informações necessárias para executar a solicitação
+- Mensagens - As mensagem devem ser autodescritivas. No HTTP usa-se os verbos Get, Post, Put, e Delete, e o header, body, location, media-type.
+
+A primeira coisa a fazer ao criar um saerviço RESTful é determinar quais recursos vamos expor. Após definir os recursos que o serviço expõe, mapeamos os recursos para URIs. 
+
+# Códigos de respostas
+
+## GET
+200 ok - Se o recurso exisitr
+404 not found - se o recurso não existir
+500 Internal Server Error - para outros erros
+
+## POST
+201 CREATED - se um recurso novo foi criado
+200 OK se o recurso foi atualizado
+500 Internal server error - para outros erros
+
+## PUT 
+201 CREATED - se um novo recurso foi criado
+200 OK - se o recurso foi atualizado com sucesso
+402 Not Found - se o recurso a ser atualizado não existir
+500 Internal Server Error - para outros erros
+
+## DELETE 
+200 OK ou 204 No Content - se o recurso foi deletado com sucesso
+404 Not Found - se o recursos a ser deletado não existir500 Internal Server Error para outros erros 
+
+
+# Modelo de Maturidade de Richardson
+
+Nível 0: POX - Plain Old XML
+Nível 1: Recursos
+Nível 2: Verbos HTTPNível 3: HATEOAS
+
+# Injeção de dependências
+
+- IoC (Inversão de controle): visa fazer as classes dependerem de interfaces, e não das implementações, de forma a obter um acoplamento fraco entre as classes. 
+- DIP: principio da inversão de dependência
+- DI: Injeção de Dependência
+- IoC COntainer: Conteiner de Injeção de dependência 
+
+Princípio	:	IoC, DIP
+Padrão		:	DI
+Framework	:	IoC Container
+
+# Tempos de vidas dos objetos na DI 
+1. Transient: cada vez que você injetar o serviço em uma classe, será criada uma nova instancia do serviço. Indicado para serviços levels sem estado. Método AddTransient().
+2. Scoped: São criados em cada solicitação (uma vez por solicitação do cliente). É indicado para aplicações Web. Se durante uma request você usar a mesma injeção de dependência em mitod lugares, você vai usar a mesma instancia dos objetos, e ele fará referencia à mesma alocação de memória. São registrados usando o método AddScoped().
+3. Singleton: São criados uma vez dufrante a vida útil do aplicativo que usa a mesam instaância para todo o aplicativo. São registrados usando o métodos AddSengleton().
+
+# Migrations
+
+Serve para que as mudanças no modelo de dados sejam refletidas no banco de dados, sem que dados sejam perdidos no processo. Para isso, utilizamos o recurso de migrations. 
+
+Comandos: 
+usando o dotnet ef:
+```
+# verifica a instalação da ferramenta
+dotnet ef
+# cria o script de migração
+dotnet ef migrations add <nome>
+# remove o script de migração criado
+dotnet ef migrations remove <nome>
+# gera o banco de dados e as tabelas com base no script
+dotnet ef database update
+```
+usando o package manager console:
+```
+# cria o script de migração
+add-migration  <nome>
+# remove o script de migração criado
+remove-migration <nome>
+# gera o banco de dados e as tabelas com base no script
+update-database update
+```
+
+# Atributos
+
+Key: identifica ca propriedade como chave primária
+Table("nome"): nome da tabela para qual a classe será mapeada
+Comumn: define a coluna na tabela para a qual a propriedade será mapeada
+DataType: associa um tipo de dados adicional a uma propriedade
+ForeignKey: especifica que a propriedade é usada como uma chave estrangeira
+NotMapped: exclui a propriedade do mapeamento
+StringLenght: define o tamanho minimo e maximo permitido para o tipoRequireds: especifica que o valor do campo é obritatório (not null)
+
+
+
