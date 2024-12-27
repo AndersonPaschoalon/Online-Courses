@@ -23,7 +23,18 @@ namespace APICatalogo.Controllers
             return await _context.Produtos.AsNoTracking().ToListAsync();
         }
 
-        [HttpGet("id:int", Name = "ObterProduto")]
+        [HttpGet("primeiro")]
+        public ActionResult<Produto> GetPrimeiro()
+        {
+            var produto = _context.Produtos.FirstOrDefault();
+            if (produto is null)
+            {
+                return NotFound();
+            }
+            return produto;
+        }
+
+        [HttpGet("{id:int}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)
         {
             var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
