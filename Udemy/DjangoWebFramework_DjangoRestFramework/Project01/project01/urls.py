@@ -1,5 +1,5 @@
 """
-URL configuration for Projeto01 project.
+URL configuration for project01 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -26,7 +26,6 @@ def hello_world(request):
     return HttpResponse("Olá, mundo!")
 
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('hello_world/', hello_world),
@@ -36,4 +35,3 @@ urlpatterns = [
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

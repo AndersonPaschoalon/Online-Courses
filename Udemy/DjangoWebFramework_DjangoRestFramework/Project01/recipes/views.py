@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponse
 from utils.recipes.DummyRecipes import DummyRecipes
 from recipes.models import Recipe
@@ -16,11 +17,17 @@ def home(request):
 
 
 def category(request, category_id):
-    recipes = Recipe.objects.filter(is_published=True, category__id=category_id).order_by('-id')
+    recipes = get_list_or_404(
+        Recipe.objects.filter(
+            category__id=category_id,
+            is_published=True,
+        ).order_by('-id')
+    )
     return render(request, 'recipes/pages/category.html', context={
         'recipes': recipes,
-        'title': f'{recipes.first().category.name}' 
+        'title': f'{recipes[0].category.name}',
     })
+
 
 
 #def recipe(request, id):
@@ -29,7 +36,8 @@ def category(request, category_id):
 #        'is_detail_page': True,
 #    })
 def recipe(request, id):
+    recipe = get_object_or_404(Recipe, pk=id, is_published=True,)
     return render(request, 'recipes/pages/recipe-view.html', context={
-        'recipe': DummyRecipes().make_recipe(),
+        'recipe': recipe,
         'is_detail_page': True,
     })
