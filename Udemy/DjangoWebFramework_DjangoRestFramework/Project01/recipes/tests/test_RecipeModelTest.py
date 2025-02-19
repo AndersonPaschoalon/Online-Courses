@@ -2,6 +2,9 @@ from django.core.exceptions import ValidationError
 from parameterized import parameterized
 from recipes.tests.RecipeTestBase import RecipeTestBase
 from recipes.models import Recipe
+from slugify import slugify as sl
+from random import randint
+
 
 class RecipeModelTest(RecipeTestBase):
 
@@ -15,7 +18,7 @@ class RecipeModelTest(RecipeTestBase):
             author=self.make_author(username='newuser'),
             title='Recipe Title',
             description='Recipe Description',
-            slug='recipe-slug',
+            slug=f"{sl('Recipe Title')}-{randint(0, 999999)}",
             preparation_time=10,
             preparation_time_unit='Minutos',
             servings=5,
