@@ -166,4 +166,6 @@ class RecipeViewsTest(RecipeTestBase):
             response.content.decode('utf-8')
         )
 
+        
+
 
