@@ -12,7 +12,6 @@
             "program": "${workspaceFolder}\\main.py",
             "args": [
             ],
-            // "django": true
         }
     ]
 }
