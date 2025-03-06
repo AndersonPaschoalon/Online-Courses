@@ -44,7 +44,7 @@ class Picole(ModelBase):
     id: int = sa.Column(sa.BigInteger, primary_key=True, autoincrement=True)
     data_criacao: datetime = sa.Column(sa.DateTime, default=datetime.now, index=True)
     
-    preco: float = sa.Column(sa.DECIMAL(8,2), nullable=False)
+    preco: float = sa.Column(sa.DECIMAL(8, 2), nullable=False)
 
     id_sabor: int = sa.Column(sa.Integer, sa.ForeignKey('sabores.id'))
     sabor: Sabor = orm.relationship('Sabor', lazy='joined')
