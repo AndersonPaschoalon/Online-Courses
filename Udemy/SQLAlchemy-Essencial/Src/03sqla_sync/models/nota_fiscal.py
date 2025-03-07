@@ -1,20 +1,14 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 
+from sqlalchemy.orm import Mapped
 from datetime import datetime
 from typing import List
 
 from models.model_base import ModelBase
 from models.revendedor import Revendedor
 from models.lote import Lote
-
-# Nota Fiscal pode ter vários lotes
-lotes_nota_fiscal = sa.Table(
-    'lotes_nota_fiscal',
-    ModelBase.metadata,
-    sa.Column('id_nota_fiscal', sa.Integer, sa.ForeignKey('notas_fiscais.id')),
-    sa.Column('id_lote', sa.Integer, sa.ForeignKey('lotes.id'))
-)
+from models.join_tables import lotes_nota_fiscal
 
 
 class NotaFiscal(ModelBase):
@@ -28,10 +22,10 @@ class NotaFiscal(ModelBase):
     descricao: str = sa.Column(sa.String(200), nullable=False)
 
     id_revendedor: int = sa.Column(sa.Integer, sa.ForeignKey('revendedores.id'))
-    revendedor: Revendedor = orm.relationship('Revendedor', lazy='joined')
+    revendedor: Mapped["Revendedor"] = orm.relationship('Revendedor', lazy='joined')
 
     # Uma nota fiscal pode ter vários lotes e um lote está ligado a uma nota fiscal
-    lotes: List[Lote] = orm.relationship('Lote', secondary=lotes_nota_fiscal, backref='lote', lazy='dynamic')
+    lotes: Mapped[List["Lote"]] = orm.relationship('Lote', secondary=lotes_nota_fiscal, backref='lote', lazy='dynamic')
 
     def __repr__(self) -> int:
         return f'<Nota Fiscal: {self.numero_serie}>'
