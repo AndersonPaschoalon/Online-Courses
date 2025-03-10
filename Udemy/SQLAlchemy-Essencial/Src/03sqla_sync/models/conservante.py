@@ -1,29 +1,29 @@
-import sqlalchemy as sa
-
-from sqlalchemy import orm
-from typing import List
-from sqlalchemy.orm import Mapped
 from datetime import datetime
+from typing import List
 
-from models.model_base import ModelBase
+import sqlalchemy as sa
+from sqlalchemy import orm
+from sqlalchemy.orm import Mapped
+
 from models.join_tables import conservantes_picole
+from models.model_base import ModelBase
 
 
 class Conservante(ModelBase):
-    __tablename__: str = 'conservantes'
+    __tablename__: str = "conservantes"
 
-    id: int = sa.Column(sa.BigInteger, primary_key=True, autoincrement=True)
+    id: int = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     data_criacao: datetime = sa.Column(sa.DateTime, default=datetime.now, index=True)
-    
+
     nome: str = sa.Column(sa.String(45), unique=True, nullable=False)
     descricao: str = sa.Column(sa.String(45), nullable=False)
 
-    #picoles: Mapped[List["Picole"]] = orm.relationship(
-    #    'Picole',
-    #    secondary=conservantes_picole,
-    #    back_populates='conservantes'
-    #)
-
     def __repr__(self) -> str:
-        return f'<Conservante: {self.nome}>'
-
+        return (
+            f"Conservante("
+            f"id={self.id}, "
+            f"data_criacao={self.data_criacao}, "
+            f"nome={self.nome}, "
+            f"descricao={self.descricao}, "
+            f")"
+        )
