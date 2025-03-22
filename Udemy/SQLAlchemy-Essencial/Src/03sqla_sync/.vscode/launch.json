@@ -17,6 +17,20 @@
             "request": "launch",
             "program": "${workspaceFolder}\\insert_main.py",
             "args": [],
+        },
+        {
+            "name": "Select",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\select_main.py",
+            "args": [],
+        },
+        {
+            "name": "Update",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\update_main.py",
+            "args": [],
         }
     ]
 }
