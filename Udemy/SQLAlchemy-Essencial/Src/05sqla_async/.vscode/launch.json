@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Main",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\main.py",
+            "args": [],
+        },
+        {
+            "name": "Insert",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\insert_main.py",
+            "args": [],
+        },
+        {
+            "name": "Select",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\select_main.py",
+            "args": [],
+        },
+        {
+            "name": "Update",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\update_main.py",
+            "args": [],
+        },
+        {
+            "name": "Delete",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\delete_main.py",
+            "args": [],
+        }
+    ]
+}

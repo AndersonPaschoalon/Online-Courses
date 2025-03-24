@@ -1,0 +1,3 @@
+
+* criar ambiente virtual usando mkvirtualenv
+mkvirtualenv  proj_name -p python3.10
