@@ -11,7 +11,8 @@ def select_filtro_picole(id_picole: int) -> None:
             session.query(Picole).where(Picole.id == id_picole).one_or_none()
         )
         print(picole)
-        print(f"\t{picole.sabor}")
+        if picole:
+            print(f"\t{picole.sabor}")
         print("----")
 
 

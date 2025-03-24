@@ -31,6 +31,13 @@
             "request": "launch",
             "program": "${workspaceFolder}\\update_main.py",
             "args": [],
+        },
+        {
+            "name": "Delete",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\delete_main.py",
+            "args": [],
         }
     ]
 }
