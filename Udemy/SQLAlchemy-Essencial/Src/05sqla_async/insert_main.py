@@ -1,3 +1,5 @@
+import asyncio
+
 from conf.db_session import create_session
 from models.aditivo_nutritivo import AditivoNutritivo
 from models.conservante import Conservante
@@ -16,10 +18,12 @@ from models.sabor import Sabor
 from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
 
-use_sqlite = True
+# use_sqlite = True
+
+use_sqlite = False
 
 
-def insert_aditivo_nutritivo() -> AditivoNutritivo:
+async def insert_aditivo_nutritivo() -> AditivoNutritivo:
     print("Cadastro Aditivo Nutritivo")
 
     nome: str = input("Informe o nome do Aditivo Nutritivo: ")
@@ -27,95 +31,95 @@ def insert_aditivo_nutritivo() -> AditivoNutritivo:
 
     an: AditivoNutritivo = AditivoNutritivo(nome=nome, formula_quimica=formula_quimica)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(an)
-        session.commit()
+        await session.commit()
 
     print("Aditivo Nutritivo cadastrado com sucesso")
     print(f"{an}")
     return an
 
 
-def insert_sabor() -> Sabor:
+async def insert_sabor() -> Sabor:
     print("Cadastrando Sabor")
 
     nome: str = input("Informe o nome do sabor: ")
 
     sabor: Sabor = Sabor(nome=nome)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(sabor)
-        session.commit()
+        await session.commit()
 
     print("Sabor cadastrado com sucesso")
     print(sabor)
     return sabor
 
 
-def insert_tipo_embalagem() -> TipoEmbalagem:
+async def insert_tipo_embalagem() -> TipoEmbalagem:
     print("Cadastrando Tipo Embalagem")
 
     nome: str = input("Informe o nome do Tipo Embalagem: ")
 
     te: TipoEmbalagem = TipoEmbalagem(nome=nome)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(te)
-        session.commit()
+        await session.commit()
 
     print("Tipo Embalagem cadastrado com sucesso")
     print(te)
     return te
 
 
-def insert_tipo_picole() -> TipoPicole:
+async def insert_tipo_picole() -> TipoPicole:
     print("Cadastrando Tipo Picole")
 
     nome: str = input("Informe o nome do Tipo Picole: ")
 
     tp: TipoPicole = TipoPicole(nome=nome)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(tp)
-        session.commit()
+        await session.commit()
 
     print("Tipo Picole cadastrado com sucesso")
     print(tp)
     return tp
 
 
-def insert_ingrediente() -> Ingrediente:
+async def insert_ingrediente() -> Ingrediente:
     print("Cadastrando Ingrediente")
 
     nome: str = input("Informe o nome do Ingrediente: ")
     ing: Ingrediente = Ingrediente(nome=nome)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(ing)
-        session.commit()
+        await session.commit()
 
     print("Ingrediente cadastrado com sucesso")
     print(ing)
     return ing
 
 
-def insert_conservante() -> Conservante:
+async def insert_conservante() -> Conservante:
     print("Cadastrando Conservante")
 
     nome: str = input("Informe o nome do Conservante: ")
     descricao: str = input("Informe a descrição do Conservante: ")
     conservante: Conservante = Conservante(nome=nome, descricao=descricao)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(conservante)
-        session.commit()
+        await session.commit()
 
     print("Conservante cadastrado com sucesso")
     print(conservante)
     return conservante
 
 
-def insert_revendedor() -> Revendedor:
+async def insert_revendedor() -> Revendedor:
     print("Cadastrando Revendedor")
 
     cnpj: str = input("Informe o CNPJ do Revendedor: ")
@@ -123,32 +127,32 @@ def insert_revendedor() -> Revendedor:
     contato: str = input("Informe Contato do Revendedor: ")
     rev: Revendedor = Revendedor(cnpj=cnpj, razao_social=razao_social, contato=contato)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(rev)
-        session.commit()
+        await session.commit()
 
     print("Revendedor cadastrado com sucesso")
     print(rev)
     return rev
 
 
-def insert_lote() -> Lote:
+async def insert_lote() -> Lote:
     print("Cadastrando Revendedor")
 
     id_tipo_picole: str = input("Informe o ID do tipo de Picole: ")
     quantidade: int = input("Informe a Quantidade: ")
     lt = Lote(id_tipo_picole=id_tipo_picole, quantidade=quantidade)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(lt)
-        session.commit()
+        await session.commit()
 
     print("Lote cadastrado com sucesso")
     print(lt)
     return lt
 
 
-def insert_nota_fical() -> NotaFiscal:
+async def insert_nota_fical() -> NotaFiscal:
     print("Cadastrando Nota Fiscal")
 
     valor: float = input("Informe o valor da nota fiscal: ")
@@ -171,16 +175,16 @@ def insert_nota_fical() -> NotaFiscal:
         lote1 = insert_lote()
         nf.lotes.append(lote1)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(nf)
-        session.commit()
+        await session.commit()
 
     print("Nota Fiscal cadastrada com sucesso")
     print(nf)
     return NotaFiscal
 
 
-def insert_picole() -> Picole:
+async def insert_picole() -> Picole:
     print("Cadastrando Picole")
 
     preco: float = input("Informe o preço do picole: ")
@@ -198,7 +202,7 @@ def insert_picole() -> Picole:
     n_ingredientes: int = int(input("Numero de ingredientes:"))
     for i in range(n_ingredientes):
         id_ingrediente: int = input(f"Id do ingrediente {i}: ")
-        with create_session(use_sqlite) as session:
+        async with create_session(use_sqlite) as session:
             ing = session.get(Ingrediente, id_ingrediente)
             print(ing)
             picole.ingredientes.append(ing)
@@ -206,7 +210,7 @@ def insert_picole() -> Picole:
     n_con: int = int(input("Numero de conservantes:"))
     for i in range(n_con):
         id_con: int = input(f"Id do conservante {i}: ")
-        with create_session(use_sqlite) as session:
+        async with create_session(use_sqlite) as session:
             c = session.get(Conservante, id_con)
             print(c)
             picole.conservantes.append(c)
@@ -214,14 +218,14 @@ def insert_picole() -> Picole:
     n_add: int = int(input("Numero de aditivos nutritivos:"))
     for i in range(n_add):
         id_con: int = input(f"Id do conservante {i}: ")
-        with create_session(use_sqlite) as session:
+        async with create_session(use_sqlite) as session:
             a = session.get(AditivoNutritivo, id_con)
             print(a)
             picole.aditivos_nutritivos.append(a)
 
-    with create_session(use_sqlite) as session:
+    async with create_session(use_sqlite) as session:
         session.add(picole)
-        session.commit()
+        await session.commit()
         print("Picole cadastrado com sucesso")
 
     print(picole)
@@ -248,25 +252,25 @@ def main():
         opt: int = int(input("Escolha uma opção: "))
 
         if opt == 1:
-            insert_aditivo_nutritivo()
+            asyncio.run(insert_aditivo_nutritivo())
         elif opt == 2:
-            insert_sabor()
+            asyncio.run(insert_sabor())
         elif opt == 3:
-            insert_tipo_embalagem()
+            asyncio.run(insert_tipo_embalagem())
         elif opt == 4:
-            insert_tipo_picole()
+            asyncio.run(insert_tipo_picole())
         elif opt == 5:
-            insert_ingrediente()
+            asyncio.run(insert_ingrediente())
         elif opt == 6:
-            insert_conservante()
+            asyncio.run(insert_conservante())
         elif opt == 7:
-            insert_revendedor()
+            asyncio.run(insert_revendedor())
         elif opt == 8:
-            insert_lote()
+            asyncio.run(insert_lote())
         elif opt == 9:
-            insert_nota_fical()
+            asyncio.run(insert_nota_fical())
         elif opt == 10:
-            insert_picole()
+            asyncio.run(insert_picole())
         elif opt == 99:
             print("Saindo...")
             break

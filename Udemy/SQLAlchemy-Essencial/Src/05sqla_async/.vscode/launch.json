@@ -12,7 +12,7 @@
             "args": [],
         },
         {
-            "name": "Insert",
+            "name": "InsertAsync",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}\\insert_main.py",
