@@ -1,0 +1,211 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de um nó da árvore
+typedef struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+} Node;
+
+void wait_for_enter() {
+    printf("Pressione Enter para continuar...\n");
+    while (getchar() != '\n');  // Aguarda até que Enter seja pressionado
+}
+
+// Função para criar um novo nó
+Node* create_node(int data) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node->data = data;
+    new_node->left = NULL;
+    new_node->right = NULL;
+    return new_node;
+}
+
+// Função auxiliar para encontrar o menor valor em uma subárvore
+Node* find_suc_null_prev(Node* node) {
+    Node* t = node->right; 
+    Node* p = NULL;
+    while (t->left != NULL) {
+        p = t;
+        t = t->left;  // Continua descendo à esquerda até encontrar o menor valor
+    }
+    if(p != NULL)
+    {
+        p->left = NULL;
+    } else {
+        node->right = NULL;
+    }
+    return t;
+}
+
+/*
+// Função auxiliar para encontrar o menor valor em uma subárvore
+Node* find_min(Node* node) {
+    while (node->left != NULL) {
+        node = node->left;  // Continua descendo à esquerda até encontrar o menor valor
+    }
+    return node;
+}
+*/
+
+
+// Função para remover um nó da BST
+Node* remove_node(Node* root, int data) {
+    if (root == NULL) {
+        return NULL;  // Caso base: se a árvore estiver vazia, retorna NULL
+    }
+
+    // Se o valor a ser removido for menor, está na subárvore esquerda
+    if (data < root->data) {
+        root->left = remove_node(root->left, data);
+    }
+    // Se o valor a ser removido for maior, está na subárvore direita
+    else if (data > root->data) {
+        root->right = remove_node(root->right, data);
+    }
+    // Encontrou o nó a ser removido
+    else {
+        // Caso 1: O nó não tem filhos (nó folha)
+        if (root->left == NULL && root->right == NULL) {
+            free(root);  // Libera o nó
+            return NULL; // Retorna NULL para desconectar o nó da árvore
+        }
+        // Caso 2: O nó tem apenas um filho (direito ou esquerdo)
+        else if (root->left == NULL) {
+            Node* temp = root->right; // Guarda o nó direito
+            free(root);               // Libera o nó atual
+            return temp;              // Retorna o nó direito para ligar ao pai
+        }
+        else if (root->right == NULL) {
+            Node* temp = root->left; // Guarda o nó esquerdo
+            free(root);              // Libera o nó atual
+            return temp;             // Retorna o nó esquerdo para ligar ao pai
+        }
+        // Caso 3: O nó tem dois filhos
+        else {
+            // Encontra o menor nó da subárvore direita (sucessor)
+            Node* t = find_suc_null_prev(root);
+            
+            t->right = root->right;
+            t->left = root->left;
+            
+            free(root);
+            return t;
+        }
+    }
+
+    return root;  // Retorna a raiz atualizada da árvore
+}
+
+
+/*
+// Função para remover um nó da BST
+Node* remove_node(Node* root, int data) {
+    if (root == NULL) {
+        return NULL;  // Caso base: se a árvore estiver vazia, retorna NULL
+    }
+
+    // Se o valor a ser removido for menor, está na subárvore esquerda
+    if (data < root->data) {
+        root->left = remove_node(root->left, data);
+    }
+    // Se o valor a ser removido for maior, está na subárvore direita
+    else if (data > root->data) {
+        root->right = remove_node(root->right, data);
+    }
+    // Encontrou o nó a ser removido
+    else {
+        // Caso 1: O nó não tem filhos (nó folha)
+        if (root->left == NULL && root->right == NULL) {
+            free(root);  // Libera o nó
+            return NULL; // Retorna NULL para desconectar o nó da árvore
+        }
+        // Caso 2: O nó tem apenas um filho (direito ou esquerdo)
+        else if (root->left == NULL) {
+            Node* temp = root->right; // Guarda o nó direito
+            free(root);               // Libera o nó atual
+            return temp;              // Retorna o nó direito para ligar ao pai
+        }
+        else if (root->right == NULL) {
+            Node* temp = root->left; // Guarda o nó esquerdo
+            free(root);              // Libera o nó atual
+            return temp;             // Retorna o nó esquerdo para ligar ao pai
+        }
+        // Caso 3: O nó tem dois filhos
+        else {
+            // Encontra o menor nó da subárvore direita (sucessor)
+            Node* temp = find_min(root->right);
+
+            // Substitui o valor do nó atual pelo valor do sucessor
+            root->data = temp->data;
+
+            // Remove o sucessor da subárvore direita
+            root->right = remove_node(root->right, temp->data);
+        }
+    }
+
+    return root;  // Retorna a raiz atualizada da árvore
+}
+*/
+
+// Função para inserir um nó na BST (auxiliar para montar a árvore)
+Node* insert_node(Node* root, int data) {
+    if (root == NULL) {
+        return create_node(data);  // Se a árvore estiver vazia, cria o primeiro nó
+    }
+    if (data < root->data) {
+        root->left = insert_node(root->left, data);  // Inserção à esquerda
+    } else {
+        root->right = insert_node(root->right, data); // Inserção à direita
+    }
+    return root;
+}
+
+// Função para percorrer a árvore em ordem (in-order traversal)
+void in_order_traversal(Node* root) {
+    if (root == NULL) return;
+    in_order_traversal(root->left);   // Visita a subárvore esquerda
+    printf("%d ", root->data);        // Imprime o valor do nó
+    in_order_traversal(root->right);  // Visita a subárvore direita
+}
+
+void test_remove_node_tree(const char* testMsg, int* treeNodes, int nNodes, int* nodesToRemove, int nNodesToRemove){
+    Node* root = NULL;
+    printf("%s\n", testMsg);
+    for(int i = 0; i < nNodes; i++){
+        root = insert_node(root, treeNodes[i]);
+    }
+    printf("Arvore antes de remover nós (count:%d)\n", nNodesToRemove);
+    in_order_traversal(root);
+    for(int i = 0; i < nNodesToRemove; i++){
+        root = remove_node(root, nodesToRemove[i]);
+    }
+    printf("\nArvore depois de remover nós\n");
+    in_order_traversal(root);
+    printf("\n------------\n");
+    wait_for_enter();
+}
+
+
+// Função principal para testar a remoção de nós
+int main() {
+    int rm1[] = {10};
+    int t2[] = {50, 30, 70, 20, 40, 60, 80};
+    int rm2[] = {20};
+    int rm3[] = {30};
+    int rm4[] = {70};
+    int rm5[] = {50};
+    test_remove_node_tree("CASO 1: Árvore vazia", NULL, 0, rm1, sizeof(rm1)/sizeof(int));
+    test_remove_node_tree("CASO 2: Inserir nós e remover nó folha (sem filhos) -- nó 20", t2, sizeof(t2)/sizeof(int), rm2, sizeof(rm2)/sizeof(int));
+    test_remove_node_tree("CASO 3: Remover nó com um único filho -- Remover 30 (que tem um único filho: 40)", t2, sizeof(t2)/sizeof(int), rm3, sizeof(rm3)/sizeof(int));
+    test_remove_node_tree("CASO 4: Remover nó com dois filhos -- Remover 70, que tem dois filhos (60, 80)", t2, sizeof(t2)/sizeof(int), rm4, sizeof(rm4)/sizeof(int));
+    test_remove_node_tree("CASO 5: Remover a raiz com dois filhos -- Remover a raiz (50) que tem dois filhos (30, 70)", t2, sizeof(t2)/sizeof(int), rm5, sizeof(rm5)/sizeof(int));
+
+    int t6[] = {70};
+    int rm6[] = {70};
+    test_remove_node_tree("CASO 6: Remover a raiz sem filhos (árvore com um único nó)", t6, sizeof(t6)/sizeof(int), rm6, sizeof(rm6)/sizeof(int));
+
+    
+    return 0;
+}

@@ -1,0 +1,36 @@
+
+- Stack Data Structure 
+	https://www.geeksforgeeks.org/stack-data-structure/
+	https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/
+
+- Introduction to Tree Data Structure
+	https://www.geeksforgeeks.org/introduction-to-tree-data-structure/
+
+- Binary Trees
+	https://www.geeksforgeeks.org/introduction-to-binary-tree/
+	https://www.geeksforgeeks.org/introduction-to-binary-search-tree/
+	https://www.geeksforgeeks.org/deletion-in-binary-search-tree/
+	https://www.geeksforgeeks.org/balanced-binary-tree/
+
+- AVL Tree Data Structure
+	https://www.geeksforgeeks.org/introduction-to-avl-tree/
+	https://www.geeksforgeeks.org/insertion-in-an-avl-tree/
+
+- Introduction to Red-Black Tree
+	https://www.geeksforgeeks.org/introduction-to-red-black-tree/
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
