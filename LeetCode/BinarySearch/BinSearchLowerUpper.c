@@ -41,8 +41,6 @@ int bin_search_lower(int* array, int len, int target){
         if (array[mid] == target){
             result = mid;
             right = mid - 1;
-            //result = mid;
-            //break;
         }
         else if (array[mid] < target){
             left = mid + 1;
