@@ -1,0 +1,108 @@
+Aqui está uma lista com sintaxes e recursos do Python que fogem bastante do padrão de C/C++/C#, com uma breve explicação de cada um:
+
+1. List Comprehensions
+Sintaxe compacta para criar listas:
+```
+squares = [x**2 for x in range(10)]  # Cria uma lista dos quadrados de 0 a 9
+```
+
+2. Generator Expressions
+Parecido com list comprehension, mas cria um gerador (não armazena todos os valores na memória):
+```
+gen = (x**2 for x in range(10))  # Gera valores sob demanda
+```
+
+3. Enumerate
+Retorna um iterador que gera pares de índice e valor, muito útil em loops:
+```
+items = ['a', 'b', 'c']
+for index, value in enumerate(items):
+    print(index, value)  # Imprime o índice e o valor
+```
+
+4. Unpacking e uso de * e **
+Desempacotamento em funções e listas:
+```
+# Desempacotamento de listas
+a, b, *rest = [1, 2, 3, 4]  # a = 1, b = 2, rest = [3, 4]
+# Passando listas/dicionários como argumentos com *
+def func(x, y):
+    return x + y
+args = [1, 2]
+func(*args)  # Equivalente a func(1, 2)
+```
+
+5. Funções lambda
+Definição concisa de funções anônimas:
+```
+f = lambda x: x**2
+print(f(3))  # Saída: 9
+```
+
+6. Map, Filter, e Reduce
+Operadores funcionais que aplicam funções a listas:
+```
+numbers = [1, 2, 3, 4]
+doubled = list(map(lambda x: x * 2, numbers))  # [2, 4, 6, 8]
+```
+
+7. Decorators
+Funções que modificam outras funções:
+```
+def decorator(func):
+    def wrapper():
+        print("Algo antes")
+        func()
+    return wrapper
+@decorator
+def say_hello():
+    print("Olá")
+say_hello()  # Executa o wrapper com a função decorada
+```
+
+8. Context Managers (with statement)
+Garante o fechamento de recursos:
+```
+with open('file.txt', 'r') as f:
+    data = f.read()  # Fecha automaticamente o arquivo após o bloco
+
+```
+
+9. Dicionário por Compreensão
+Sintaxe curta para criar dicionários:
+```
+squares = {x: x**2 for x in range(5)}  # Cria um dicionário {0: 0, 1: 1, ..., 4: 16}
+```
+
+10. Funções de Ordem Superior (Higher-order functions)
+Funções que aceitam ou retornam outras funções:
+```
+def make_multiplier(n):
+    return lambda x: x * n
+times3 = make_multiplier(3)
+print(times3(5))  # Saída: 15
+```
+
+11. Compreensão de Set
+Constrói conjuntos de maneira semelhante a list comprehension:
+```
+unique_squares = {x**2 for x in range(5)}  # Conjunto de {0, 1, 4, 9, 16}
+```
+
+12. Funções Geradoras (yield)
+Funções que mantêm o estado e retornam um valor a cada yield:
+```
+def count_up_to(n):
+    count = 1
+    while count <= n:
+        yield count  # Pausa a execução e retorna o valor
+        count += 1
+```
+
+
+
+
+
+
+
+
