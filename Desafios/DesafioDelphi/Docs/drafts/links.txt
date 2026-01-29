@@ -1,0 +1,6 @@
+https://www.danieleteti.it/post/crud-web-api-with-delphi-part-1/
+
+https://www.youtube.com/watch?v=X1-2m7rpjKA&list=PLDAVGpp7w5fR3iiNDuX_T2_PjdA80npCN
+
+https://github.com/danieleteti/delphimvcframework?tab=readme-ov-file#delphimvcframework-installation
+
