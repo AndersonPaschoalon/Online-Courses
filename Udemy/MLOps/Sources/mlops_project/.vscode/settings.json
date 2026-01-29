@@ -1,0 +1,27 @@
+{
+  // "python.defaultInterpreterPath": "~/Workspace/venv_tf/bin/python",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.sortImports.path": "isort",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none"
+  },
+  "editor.semanticHighlighting.enabled": true,
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "*": {
+        "underline": false
+      }
+    }
+  }
+}
