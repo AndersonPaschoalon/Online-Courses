@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B1307799-3C5D-48B5-BC30-A565B8D820E0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Backend\ProductManagerApi.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProductManagerApi">
+        <MSBuild Projects="Backend\ProductManagerApi.dproj"/>
+    </Target>
+    <Target Name="ProductManagerApi:Clean">
+        <MSBuild Projects="Backend\ProductManagerApi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProductManagerApi:Make">
+        <MSBuild Projects="Backend\ProductManagerApi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProductManagerApi"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProductManagerApi:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProductManagerApi:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

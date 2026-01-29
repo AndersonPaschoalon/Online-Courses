@@ -1,0 +1,16 @@
+O que falta fazer
+
+- Implementar DTOs
+- Cobertura de 80% nos testes de unidade
+- Revisar a documentação criada, incluindo informações a respeito da cobertuda de código.
+- Limpar o código e melhorar comentários
+- Avaliar o que eu preciso fazer para consegui conectar na base de dados locais pelo docker
+- Adicionar configurações dos loggers
+
+
+
+
+
+
+
+
