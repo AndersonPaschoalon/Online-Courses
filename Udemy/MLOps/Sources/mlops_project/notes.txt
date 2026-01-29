@@ -1,0 +1,22 @@
+* Rodando uma parte avulsa da pipeline
+    python -m src.model_training.train_model
+
+
+* Build da imagem docker
+    docker build -t ml-classifier .
+    docker run -p 5001:5001 ml-classifier
+
+* Comandos úteis
+    # lista processos docker
+    docker ps 
+    # lista containers docker
+    docker container ls 
+    # para um container 
+    docker container stop 01f6 # inicio do id, que pode ser lido com comandos acima
+
+* Instalar dependencias no projeto usando o pyproject.toml 
+    pip install -e .
+    
+
+
+
