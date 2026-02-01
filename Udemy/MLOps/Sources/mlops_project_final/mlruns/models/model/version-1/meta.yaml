@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1769789755239
+current_stage: None
+description: ''
+last_updated_timestamp: 1769789755239
+name: model
+run_id: e6e954201af942c6bfe692285772aae6
+run_link: ''
+source: runs:/e6e954201af942c6bfe692285772aae6/model
+status: READY
+status_message: null
+storage_location: runs:/e6e954201af942c6bfe692285772aae6/model
+user_id: null
+version: 1

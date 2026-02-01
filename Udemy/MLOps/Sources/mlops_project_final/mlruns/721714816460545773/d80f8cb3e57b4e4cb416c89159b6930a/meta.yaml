@@ -1,0 +1,15 @@
+artifact_uri: file:///home/anderson/Workspace/Online-Courses_Udemy_MLOPs/mlruns/721714816460545773/d80f8cb3e57b4e4cb416c89159b6930a/artifacts
+end_time: 1769784447469
+entry_point_name: ''
+experiment_id: '721714816460545773'
+lifecycle_stage: active
+run_id: d80f8cb3e57b4e4cb416c89159b6930a
+run_name: blushing-calf-183
+run_uuid: d80f8cb3e57b4e4cb416c89159b6930a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769784404926
+status: 3
+tags: []
+user_id: anderson
