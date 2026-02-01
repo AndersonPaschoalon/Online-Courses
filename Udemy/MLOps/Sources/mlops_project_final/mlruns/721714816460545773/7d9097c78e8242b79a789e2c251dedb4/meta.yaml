@@ -1,0 +1,15 @@
+artifact_uri: file:///home/anderson/Workspace/Online-Courses_Udemy_MLOPs/mlruns/721714816460545773/7d9097c78e8242b79a789e2c251dedb4/artifacts
+end_time: 1769786176341
+entry_point_name: ''
+experiment_id: '721714816460545773'
+lifecycle_stage: active
+run_id: 7d9097c78e8242b79a789e2c251dedb4
+run_name: pious-auks
+run_uuid: 7d9097c78e8242b79a789e2c251dedb4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769786138270
+status: 3
+tags: []
+user_id: anderson

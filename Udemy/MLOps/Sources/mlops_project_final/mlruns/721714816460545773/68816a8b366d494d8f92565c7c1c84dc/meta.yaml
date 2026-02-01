@@ -1,0 +1,15 @@
+artifact_uri: file:///home/anderson/Workspace/Online-Courses_Udemy_MLOPs/mlruns/721714816460545773/68816a8b366d494d8f92565c7c1c84dc/artifacts
+end_time: 1769780297019
+entry_point_name: ''
+experiment_id: '721714816460545773'
+lifecycle_stage: active
+run_id: 68816a8b366d494d8f92565c7c1c84dc
+run_name: skillful-fish-214
+run_uuid: 68816a8b366d494d8f92565c7c1c84dc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769780174711
+status: 3
+tags: []
+user_id: anderson

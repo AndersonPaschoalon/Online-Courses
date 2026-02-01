@@ -1,0 +1,15 @@
+artifact_uri: file:///home/anderson/Workspace/Online-Courses_Udemy_MLOPs/mlruns/721714816460545773/99276bf6b7f444ccbd3f7f7c5f798ce2/artifacts
+end_time: 1769784383999
+entry_point_name: ''
+experiment_id: '721714816460545773'
+lifecycle_stage: active
+run_id: 99276bf6b7f444ccbd3f7f7c5f798ce2
+run_name: angry-skink-357
+run_uuid: 99276bf6b7f444ccbd3f7f7c5f798ce2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769784347752
+status: 3
+tags: []
+user_id: anderson

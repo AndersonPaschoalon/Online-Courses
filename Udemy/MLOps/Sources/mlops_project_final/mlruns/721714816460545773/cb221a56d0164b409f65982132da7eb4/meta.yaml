@@ -1,0 +1,15 @@
+artifact_uri: file:///home/anderson/Workspace/Online-Courses_Udemy_MLOPs/mlruns/721714816460545773/cb221a56d0164b409f65982132da7eb4/artifacts
+end_time: 1769786061868
+entry_point_name: ''
+experiment_id: '721714816460545773'
+lifecycle_stage: active
+run_id: cb221a56d0164b409f65982132da7eb4
+run_name: sassy-cow-945
+run_uuid: cb221a56d0164b409f65982132da7eb4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1769786061838
+status: 3
+tags: []
+user_id: anderson
