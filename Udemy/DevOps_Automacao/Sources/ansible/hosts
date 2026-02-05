@@ -1,0 +1,6 @@
+[targets]
+target1 ansible_host=ansible-target ansible_user=devops ansible_password=Devops123! ansible_python_interpreter=/usr/bin/python3
+
+
+
+

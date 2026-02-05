@@ -1,0 +1,18 @@
+# Ignorar arquivos sensíveis e temporários dentro de docker/app
+/docker/app/node_modules/
+/docker/app/dist/
+/docker/app/*.log
+/docker/app/.env
+/docker/app/.env*
+
+# Pycache, logs e arquivos temporários em geral
+**/__pycache__/
+**/*.pyc
+.DS_Store
+*.tgz
+
+
+
+
+
+

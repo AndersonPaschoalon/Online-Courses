@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  ansible-controller:
+    build: .
+    container_name: ansible-controller
+    hostname: ansible-controller
+    ports:
+      - "2222:22"
+    networks:
+      - ansible-net
+
+  ansible-target:
+    build: .
+    container_name: ansible-target
+    hostname: ansible-target
+    ports:
+      - "2223:22"
+    networks:
+      - ansible-net
+
+networks:
+  ansible-net:
+    driver: bridge
+
+
+
+
+
