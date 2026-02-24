@@ -1,0 +1,29 @@
+{
+  "python.analysis.diagnosticMode": "off",
+  "python.linting.enabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.defaultInterpreterPath": "D:\\venv_torch\\Scripts\\python.exe",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.sortImports.path": "isort",
+
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none"
+  },
+  "editor.semanticHighlighting.enabled": true,
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "*": {
+        "underline": false
+      }
+    }
+  }
+}
