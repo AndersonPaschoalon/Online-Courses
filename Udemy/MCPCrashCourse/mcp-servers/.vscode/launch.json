@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Server Backend",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\shellserver\\main.py",
+            "args": [],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+
+    ]
+}
