@@ -7,7 +7,7 @@ name = "ml_classifier"
 version = "0.4"
 requires-python = ">=3.12"
 dependencies = [
-    "apache-airflow==3.2.1rc1",
+    "apache-airflow==3.3.0",
     "dagshub==0.5.9",
     "dvc==3.59.1",
     "pathspec<1.0",
